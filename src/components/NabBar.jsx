@@ -13,7 +13,8 @@ import React from 'react'
     //     </ul>
     //   </div>
     // </div>
-      <nav className='w-full bg-sky-700 mb-3'>
+      <nav className='w-full bg-[#F0F7FF] mb-3'>
+        
       <ul className='h-full flex justify-center items-center'>
         <li className='px-4 py-2 text-white hover:bg-sky-600'>Home</li>
         <li className='px-4 py-2 text-white hover:bg-sky-600'>Announcement</li>
