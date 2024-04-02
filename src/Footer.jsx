@@ -31,7 +31,7 @@ const Footer = () => {
         <div className="flex items-center">
           <div className="mr-2"><FaCopyright /></div>
           <div>2024, SmartEthioParent</div>
-          <div className='flex ml-auto'><a href='#'><FaFacebook className='mr-3'/></a> <a href="#"><FaInstagram className='mr-3'/></a> <a href="#"><FaTiktok className='mr-3'/></a> <a href="#"><FaTwitter className='mr-3'/></a> <a href="#"><FaYoutube className='mr-3'/></a></div>
+          <div className='flex ml-auto'><a href='#'><FaFacebook className='mr-5 hover:text-gray-400'/></a> <a href="#"><FaInstagram className='mr-5 hover:text-gray-400'/></a> <a href="#"><FaTiktok className='mr-5 hover:text-gray-400'/></a> <a href="#"><FaTwitter className='mr-5 hover:text-gray-400'/></a> <a href="#"><FaYoutube className='mr-5 hover:text-gray-400'/></a></div>
         </div>
       </div>
     </footer>
