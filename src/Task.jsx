@@ -1,7 +1,19 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import {
+  Route,
+  Routes,
+  useNavigate,
+  useParams,
+  useLocation,
+} from "react-router-dom";
+import TaskDetail from "./TaskDetail";
+import TaskList from "./TaskList";
 
 const Task = () => {
   const [filter, setFilter] = useState("All");
+  const { taskId } = useParams();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const tasks = [
     {
@@ -18,63 +30,57 @@ const Task = () => {
       dueDate: "2024-04-15",
       description: "Write a 2-page paper on the causes of World War II",
     },
+    {
+      id: 3,
+      subject: "Geography",
+      type: "Homework",
+      dueDate: "2024-04-17",
+      description: "Draw the map of Ethiopia",
+    },
   ];
 
   const filteredTasks =
     filter === "All" ? tasks : tasks.filter((task) => task.type === filter);
 
+  const task = tasks.find((task) => Number(task.id) === Number(taskId));
+
+  useEffect(() => {
+    if (!task && taskId) {
+      navigate("/tasks");
+    }
+  }, [task, navigate, taskId]);
+
   return (
-    <div className="container h-96 mx-auto my-10">
-      <h1 className="text-3xl font-bold mb-8 text-[#B85B05]">Tasks</h1>
-      <div className="flex space-x-4 mb-8">
-        <h2
-          className={`cursor-pointer ${filter === "All" ? "underline" : ""} text-[#333366]`}
-          onClick={() => setFilter("All")}
-        >
-          All
-        </h2>
-        <h2
-          className={`cursor-pointer ${filter === "Homework" ? "underline" : ""} text-[#333366]`}
-          onClick={() => setFilter("Homework")}
-        >
-          Homeworks
-        </h2>
-        <h2
-          className={`cursor-pointer ${filter === "Assignment" ? "underline" : ""} text-[#333366]`}
-          onClick={() => setFilter("Assignment")}
-        >
-          Assignments
-        </h2>
-      </div>
-      <table className="table-fixed w-full">
-        <thead className="border-t-2 border-b-4 border-gray-300">
-          <tr>
-            <th className="w-1/4 px-4 py-2 text-[#0F6CBF] text-left">
-              Subject
-            </th>
-            <th className="w-1/4 px-4 py-2 text-[#0F6CBF] text-left">Type</th>
-            <th className="w-1/4 px-4 py-2 text-[#0F6CBF] text-left">
-              Due Date
-            </th>
-            <th className="w-1/2 px-4 py-2 text-[#0F6CBF] text-left">
-              Description
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {filteredTasks.map((task, index) => (
-            <tr
-              key={task.id}
-              className={`${index % 2 === 0 ? "bg-gray-100" : "bg-white"} hover:bg-gray-200 border-gray-300 border-t-2`}
+    <div className="container h-screen mx-auto my-10">
+      {location.pathname === "/tasks" && (
+        <>
+          <h1 className="text-3xl font-bold mb-8 text-[#B85B05]">Tasks</h1>
+          <div className="flex space-x-4 mb-8">
+            <h2
+              className={`cursor-pointer ${filter === "All" ? "underline" : ""} text-[#333366] hover:text-blue-700`}
+              onClick={() => setFilter("All")}
             >
-              <td className="px-4 py-2">{task.subject}</td>
-              <td className="px-4 py-2">{task.type}</td>
-              <td className="px-4 py-2">{task.dueDate}</td>
-              <td className="px-4 py-2">{task.description}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+              All
+            </h2>
+            <h2
+              className={`cursor-pointer ${filter === "Homework" ? "underline" : ""} text-[#333366] hover:text-blue-700`}
+              onClick={() => setFilter("Homework")}
+            >
+              Homeworks
+            </h2>
+            <h2
+              className={`cursor-pointer ${filter === "Assignment" ? "underline" : ""} text-[#333366] hover:text-blue-700`}
+              onClick={() => setFilter("Assignment")}
+            >
+              Assignments
+            </h2>
+          </div>
+        </>
+      )}
+      <Routes>
+        <Route path="/" element={<TaskList tasks={filteredTasks} />} />
+        <Route path=":taskId" element={<TaskDetail task={task} />} />
+      </Routes>
     </div>
   );
 };
