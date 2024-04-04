@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 const TaskList = ({ tasks }) => {
   const navigate = useNavigate();
 
-  return (
+  return tasks.length > 0 ? (
     <table className="table-fixed w-full">
       <thead className="border-t-2 border-b-4 border-gray-300">
         <tr>
@@ -31,6 +31,8 @@ const TaskList = ({ tasks }) => {
         ))}
       </tbody>
     </table>
+  ) : (
+    <div>No tasks available</div>
   );
 };
 
