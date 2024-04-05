@@ -79,7 +79,7 @@ const Task = () => {
       )}
       <Routes>
         <Route path="/" element={<TaskList tasks={filteredTasks} />} />
-        <Route path=":taskId" element={<TaskDetail task={task} />} />
+        <Route path=":taskId" element={<TaskDetail tasks={tasks} />} />
       </Routes>
     </div>
   );
