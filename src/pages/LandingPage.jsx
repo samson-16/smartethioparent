@@ -20,7 +20,7 @@ import { Link } from "react-router-dom";
 // import 'swiper/css/scrollbar';
 import NavBar from "../components/NabBar";
 import Footer from "../Footer";
-
+import Testimony from './tesimony'
 
 const LandingPage = () => {
   return (
@@ -168,7 +168,10 @@ const LandingPage = () => {
 
         <section>
           <div className="h-[500px] bg-sky-600">
-            <h1>Testimonies</h1>
+            <h1 className="text-lg">Testimonies</h1>
+            <div>
+            <Testimony/>
+            </div>
           </div>
         </section>
 
