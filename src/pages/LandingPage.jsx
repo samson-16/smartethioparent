@@ -19,6 +19,7 @@ import { Link } from "react-router-dom";
 // import 'swiper/css/pagination';
 // import 'swiper/css/scrollbar';
 import NavBar from "../components/NabBar";
+import Footer from "../Footer";
 
 
 const LandingPage = () => {
@@ -172,7 +173,7 @@ const LandingPage = () => {
         </section>
 
         <footer>
-          <div className="h-[300px] bg-blue-300">Footer</div>
+         <Footer />
         </footer>
           </>
         );
