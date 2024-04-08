@@ -12,6 +12,9 @@ const TaskList = ({ tasks, filter }) => {
           {filter === "All" && (
             <th className="w-1/2 px-4 py-2 text-[#0F6CBF] text-left">Type</th>
           )}
+          <th className="w-1/2 px-4 py-2 text-[#0F6CBF] text-left">
+            Given Date
+          </th>
           <th className="w-1/2 px-4 py-2 text-[#0F6CBF] text-left">Due Date</th>
         </tr>
       </thead>
@@ -24,6 +27,7 @@ const TaskList = ({ tasks, filter }) => {
           >
             <td className="px-4 py-2">{task.subject}</td>
             {filter === "All" && <td className="px-4 py-2">{task.type}</td>}
+            <td className="px-4 py-2">{task.givenDate}</td>
             <td className="px-4 py-2">{task.dueDate}</td>
           </tr>
         ))}
@@ -39,7 +43,11 @@ TaskList.propTypes = {
       subject: PropTypes.string.isRequired,
       type: PropTypes.string.isRequired,
       dueDate: PropTypes.string.isRequired,
+      givenDate: PropTypes.string.isRequired,
       description: PropTypes.string.isRequired,
+      teacher: PropTypes.string.isRequired,
+      status: PropTypes.string.isRequired,
+      priority: PropTypes.string.isRequired,
     }),
   ).isRequired,
   filter: PropTypes.string.isRequired,

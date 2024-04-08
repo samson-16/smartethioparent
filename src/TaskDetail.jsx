@@ -18,8 +18,24 @@ const TaskDetail = ({ tasks }) => {
           <span className="ml-2 text-gray-700">{task.type}</span>
         </p>
         <p className="mb-4">
+          <span className="font-semibold">Given Date:</span>
+          <span className="ml-2 text-gray-700">{task.givenDate}</span>
+        </p>
+        <p className="mb-4">
           <span className="font-semibold">Due Date:</span>
           <span className="ml-2 text-gray-700">{task.dueDate}</span>
+        </p>
+        <p className="mb-4">
+          <span className="font-semibold">Teacher:</span>
+          <span className="ml-2 text-gray-700">{task.teacher}</span>
+        </p>
+        <p className="mb-4">
+          <span className="font-semibold">Status:</span>
+          <span className="ml-2 text-gray-700">{task.status}</span>
+        </p>
+        <p className="mb-4">
+          <span className="font-semibold">Priority:</span>
+          <span className="ml-2 text-gray-700">{task.priority}</span>
         </p>
         <p className="mb-4">
           <span className="font-semibold">Description:</span>
@@ -37,7 +53,11 @@ TaskDetail.propTypes = {
       subject: PropTypes.string.isRequired,
       type: PropTypes.string.isRequired,
       dueDate: PropTypes.string.isRequired,
+      givenDate: PropTypes.string.isRequired,
       description: PropTypes.string.isRequired,
+      teacher: PropTypes.string.isRequired,
+      status: PropTypes.string.isRequired,
+      priority: PropTypes.string.isRequired,
     }),
   ).isRequired,
 };
