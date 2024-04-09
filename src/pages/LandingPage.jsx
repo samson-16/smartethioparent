@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "@mui/material/Button";
 import landingphoto from "../assets/parent-stud.jpg";
 import homework from "../assets/Homework.jpg";
@@ -7,176 +7,160 @@ import logo from "../assets/Logo.jpg";
 import p1 from "../assets/p1.png";
 import stud1 from "../assets/stud1.jpg";
 import connect from "../assets/connect.png";
-import resource from '../assets/resource.png'
+import resource from "../assets/resource.png";
 import { Link } from "react-router-dom";
-// import { Navigation, Pagination, Scrollbar, A11y } from 'swiper/modules';
-
-// import { Swiper, SwiperSlide } from 'swiper/react';
-
-// // Import Swiper styles
-// import 'swiper/css';
-// import 'swiper/css/navigation';
-// import 'swiper/css/pagination';
-// import 'swiper/css/scrollbar';
 import NavBar from "../components/NabBar";
-import Footer from "../Footer";
-
-
+import Footer from "../components/Footer/Footer";  
+import ScrollAppearImage from "./ScrollAppearImage";
+import AnimateText from "./AnimateText";
+import AnimateFeature from '../components/Animate/AnimateFeature'
 const LandingPage = () => {
   return (
     <>
-      
-        <nav className="bg-[#F0F7FF]  w-[99%] ml-1 rounded-md">
-          <ul className="flex justify-between mx-3 mb-3 items-center h-12">
-            <li>
-          <img src={logo} alt="logo" className="w-8 h-10 rounded-3xl" />
-            </li>
-            <Link to={'/logging'}>
-            <button className="rounded-xl bg-blue-300 hover:bg-blue-400  w-28 h-8 text-center text-white bold">
-          Join now
-            </button>
+      <div></div>
+      <nav className="bg-[#F0F7FF] w-full sm:w-[99%] ml-1 rounded-md">
+        <ul className="flex justify-between mx-3 sm:mx-0 mb-3 items-center h-12">
+          <li>
+            <img
+              src={logo}
+              alt="logo"
+              className="w-8 h-10 sm:w-4 sm:h-6 rounded-full"
+            />
+          </li>
+          <li>
+            <Link to={"/logging"}>
+              <button className="rounded-xl bg-blue-300 hover:bg-blue-400 w-28 h-8 text-center text-white font-bold">
+                Join now
+              </button>
             </Link>
-           
-          </ul>
-        </nav>
-        <header className="h-[600px] bg-[#F0F7FF] w-[98%] flex justify-center ml-[10px] rounded-2xl">
-          <div className="flex  ">
-            <div className="flex flex-col justify-center ml-8 text-center">
-          <h1 className="text-4xl font-bold mb-2">
+          </li>
+        </ul>
+      </nav>
+
+      <header className="flex flex-col w-full bg-[#d8e6f6] justify-center items-center md:flex-row md:justify-start h-[520px]">
+        <div
+          className="flex flex-col justify-center text-center sm:text-left sm:ml-8
+        md:w-1/2 md:text-3xl"
+        >
+          <h1
+            className="font-bold text-center mb-1 md:text-center md:font-extrabold md:
+          text-2xl shadow-md md:mb-1"
+          >
             BETTER FUTURE FOR YOUR CHILDREN
           </h1>
-          <p className="text-gray-600 mb-4">
+          <p className="text-zinc-700 mb-4 md:text-start md:text-4xl ">
             Stay Connected with Your Child's Education
           </p>
-          <div className="flex items-center justify-center mt-4">
-          <Link to="/logging">
-                <Button variant="contained" color="primary">
-                  Join now
-                </Button>
-              </Link>
-            <span className="text-gray-500 ml-2 flex ">
-              {" "}
-              <span className="mr-3">
-            <FaPlayCircle size={24} />{" "}
-              </span>{" "}
+          <div className="flex flex-col justify-center">
+            <Link to="/logging">
+              <Button
+                variant="contained"
+                color="primary"
+                sx={{ display: "block", margin: "auto" }}
+              >
+                Join now
+              </Button>
+            </Link>
+            <span class="inline-flex justify-center sm:mt-4">
+              <FaPlayCircle class="text-lg sm:text-xl lg:text-2xl" />
               Watch our welcome video
             </span>
           </div>
-            </div>
-            <div className=" overflow-hidden ml-4 mr-5 h-full flex items-center border-none ">
+        </div>
+        <div
+          className="overflow-hidden w-[50%] flex justify-center transition duration-200 ease-in-out rounded hover:scale-105 shadow-transparent mt-2
+        md:w-1/2"
+        >
           <img
             src={landingphoto}
             alt="landing photo"
-            className="mx-auto rounded-3xl "
+            className="w-[500px] rounded-3xl"
           />
-            </div>
-          </div>
-        </header>
-
-        <section className="mt-7">
-          <div className=" flex justify-evenly mx-5">
-            <div>
-          <img src={p1} alt="" className="w-[500px] rounded-2xl" />
-            </div>
-           <div className="flex justify-center items-center w-[480px]">
-           <div className="mx-6 font-bold text-center">
-          <h2>Your child's digital guardian</h2>
-          <p  className="font-thin">
-            Our illustration depicts the heartwarming scene of parents and
-            children engaged in educational activities together, symbolizing
-            the strong bond fostered through shared learning experiences.
-          </p>
-            </div>
-           </div>
-          </div>
-        </section>
-        <section className="mt-7">
-  <div className="flex justify-around">
-    <div className="flex justify-center items-center">
-      <div className="mx-6 h-full flex justify-center items-center text-center font-bold w-[480px]">
-        <div>
-          <h2>Your child's digital guardian</h2>
-          <p className="font-thin">
-            Parents are empowered to take an active role in their child's
-            education, moving beyond traditional roles to become influential
-            contributors to their academic development.
-          </p>
         </div>
-      </div>
-    </div>
-    <div>
-      <img src={stud1} alt="" className="w-[500px] rounded-lg" />
-    </div>
-  </div>
-</section>
+      </header>
+
+      <section className="mt-7 flex flex-col sm:flex-row h-[400px]">
+        <div className="flex justify-center items-center mx-5 sm:w-1/2">
+          <img src={p1} alt="" className="w-full max-w-[500px] rounded-2xl" />
+        </div>
+
+        <div className="flex justify-center items-center mx-5 mt-5 sm:mt-0 sm:w-1/2">
+          <div className="mx-6 font-bold text-center max-w-[480px]">
+            <h2 className="text-lg sm:text-2xl">
+              Your child's digital guardian
+            </h2>
+            <p className="text-sm font-normal md:font-medium md:text-lg md:w-full">
+              Our illustration depicts the heartwarming scene of parents and
+              children engaged in educational activities together, symbolizing
+              the strong bond fostered through shared learning experiences.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div></div>
+      </section>
+      <section className="mt-7 flex flex-col sm:flex-row">
+        <div className="flex justify-center items-center mx-5 mt-5 sm:mt-0 sm:w-1/2">
+          <AnimateText />
+        </div>
+        <div className="flex justify-center items-center mx-5 sm:w-1/2">
+          {/* <img src={stud1} alt="" className="w-full rounded-lg" /> */}
+          <ScrollAppearImage />
+        </div>
+      </section>
+
+      {/*  ************ key Features************* */}
+
+      <section className="mt-7 ">
+        <div className="h-[400px] bg-[#F0F7FF]">
+          <div className="text-center font-semibold mt-3">
+            <h1 className="my-2">Key features</h1>
+            <p>
+              Our platform is designed to provide parents with the tools and
+              resources needed to support their child's academic journey.
+            </p>
+            
+            {/* <div className="flex">
+              <div>
+              {scroll.map((item) => (
+               <AnimateFeature item={item} />
+              ))}
+              </div>
+            </div> */}
+
+         <div>
+            <div className="flex flex-col sm:flex-row justify-center items-center">
+              <AnimateFeature item="homework" />
+              <AnimateFeature item="connect" />
+              <AnimateFeature item="resource" />
+            </div>
+         </div>
+
+            
+          </div>
+        </div>
+      </section>
 
 
-        <section className="mt-7 ">
-          <div className="h-[400px] bg-[#F0F7FF]">
-            <div className="text-center font-semibold mt-3">
-          <h1 className="my-2">Key features</h1>
-          <p>
-            Our platform is designed to provide parents with the tools and
-            resources needed to support their child's academic journey.
-          </p>
-          <div className="flex flex-wrap justify-evenly">
-            <div className="w-[250px] text-center">
-              <img
-            src={homework}
-            alt=""
-            className="w-[250px] h-[300px] ml-5 shadow-md rounded-xl mt-3
-            opacity-60 hover:opacity-100 hover:scale-105"
-              />
-              <p className="mt-1">Homework</p>
-            </div>
-            <div className="w-[250px] text-center">
-              <img
-            src={connect}
-            alt=""
-            className="w-[250px] h-[300px] ml-5 shadow-md rounded-xl mt-3
-            opacity-60 hover:opacity-100 hover:scale-105"
-              />
-              <p className="mt-1">Connect with Educators</p>
-            </div>{" "}
-            <div className="w-[250px] text-center">
-              <img
-            src={resource}
-            alt=""
-            className="w-[250px] h-[300px] ml-5 shadow-md rounded-xl mt-3
-            opacity-60 hover:opacity-100 hover:scale-105"
-              />
-              <p className="mt-1">Access Resources</p>
-            </div>
-            <div className="w-[250px] text-center">
-              <img
-            src={homework}
-            alt=""
-            className="w-[250px] h-[300px] ml-5 shadow-md rounded-xl mt-3
-            opacity-60 hover:opacity-100 hover:scale-105"
-              />
-              <p className="mt-1">Track Progress</p>
-            </div>
-          </div>
-            </div>
-          </div>
-        </section>
-        <section>
-          <div className="h-[500px] my-4">
-            <h1 className="text-center font-semibold">Our welcoming video</h1>
-          </div>
-        </section>
+      <section>
+        <div className="h-[500px] my-4">
+          <h1 className="text-center font-semibold">Our welcoming video</h1>
+        </div>
+      </section>
 
-        <section>
-          <div className="h-[500px] bg-sky-600">
-            <h1>Testimonies</h1>
-          </div>
-        </section>
+      <section>
+        <div className="h-[500px] bg-sky-600">
+          <h1>Testimonies</h1>
+        </div>
+      </section>
 
-        <footer>
-         <Footer />
-        </footer>
-          </>
-        );
+      <footer>
+        <Footer />
+      </footer>
+    </>
+  );
 };
 
 export default LandingPage;

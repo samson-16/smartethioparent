@@ -1,23 +1,28 @@
-import './App.css'
-// import LandingPage from './pages/LandingPage'
-// import Logging from './pages/Logging.jsx'
-// import Login from './pages/Login.jsx'
-
-import { RouterProvider} from 'react-router-dom';
-import router from './router';
+import "./App.css";
+import LandingPage from './pages/LandingPage'
+import ResponsiveAppBar from "./components/NabBar.jsx";
+import { Routes, Route } from "react-router-dom";
+import Result from "./pages/Teacher/Result/Result.jsx";
+import ResultDetail from "./pages/Teacher/Result/ResultDetail/ResultDetail.jsx";
+import ManageTeachers from "./pages/Admin/ManageTeacher/ManageTeachers.jsx";
+import ManageData from "./pages/Admin/ManageGrade/ManageGrade";
+import ManageStudents from "./pages/Admin/ManageStudent/ManageStudents.jsx";
 
 function App() {
-
   return (
-   <>
-    {/* <Logging /> */}
-   {/* <LandingPage /> */}
-   {/* <Login /> */}
-   <RouterProvider router={router} /> 
-
-   </>
-  
-  )
+    <>
+      <ResponsiveAppBar />
+     
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/Result" element={<Result/>} />
+        <Route path="/:Id" element={<ResultDetail/>} />
+        <Route path="/ManageGrade" element={<ManageData />} />
+        <Route path="/ManageStudents" element={<ManageStudents />} />
+        <Route path="/ManageTeachers" element={<ManageTeachers />} />
+        </Routes>
+    </>
+  );
 }
 
-export default App
+export default App;
