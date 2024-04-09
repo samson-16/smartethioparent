@@ -14,6 +14,7 @@ import Footer from "../components/Footer/Footer";
 import ScrollAppearImage from "./ScrollAppearImage";
 import AnimateText from "./AnimateText";
 import AnimateFeature from '../components/Animate/AnimateFeature'
+import Testimony from "./tesimony";
 const LandingPage = () => {
   return (
     <>
@@ -151,10 +152,13 @@ const LandingPage = () => {
       </section>
 
       <section>
-        <div className="h-[500px] bg-sky-600">
-          <h1>Testimonies</h1>
-        </div>
-      </section>
+          <div className="h-[500px] bg-sky-600">
+            <h1 className="text-lg">Testimonies</h1>
+            <div>
+            <Testimony/>
+            </div>
+          </div>
+        </section>
 
       <footer>
         <Footer />
