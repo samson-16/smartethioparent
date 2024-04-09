@@ -20,7 +20,7 @@ import { Link } from "react-router-dom";
 // import 'swiper/css/scrollbar';
 import NavBar from "../components/NabBar";
 import Footer from "../Footer";
-import Testimony from './tesimony'
+import Testimony from "./tesimony";
 
 const LandingPage = () => {
   return (

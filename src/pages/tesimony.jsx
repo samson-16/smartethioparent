@@ -18,7 +18,7 @@ import profil4 from '../assets/ava4.jpg'
 import profil5 from '../assets/ava5.jpg'
 import profil6 from '../assets/ava6.jpg'
 
-import './testimony.css'
+
 export default function Testimony() {
   return (
     <>
