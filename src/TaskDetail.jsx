@@ -26,6 +26,10 @@ const TaskDetail = ({ tasks }) => {
           <span className="ml-2 text-gray-700">{task.dueDate}</span>
         </p>
         <p className="mb-4">
+          <span className="font-semibold">Description:</span>
+          <span className="ml-2 text-gray-700">{task.description}</span>
+        </p>
+        <p className="mb-4">
           <span className="font-semibold">Teacher:</span>
           <span className="ml-2 text-gray-700">{task.teacher}</span>
         </p>
@@ -36,10 +40,6 @@ const TaskDetail = ({ tasks }) => {
         <p className="mb-4">
           <span className="font-semibold">Priority:</span>
           <span className="ml-2 text-gray-700">{task.priority}</span>
-        </p>
-        <p className="mb-4">
-          <span className="font-semibold">Description:</span>
-          <span className="ml-2 text-gray-700">{task.description}</span>
         </p>
       </div>
     </div>

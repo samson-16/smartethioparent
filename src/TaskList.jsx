@@ -4,6 +4,10 @@ import { useNavigate } from "react-router-dom";
 const TaskList = ({ tasks, filter }) => {
   const navigate = useNavigate();
 
+  if (tasks.length === 0) {
+    return <p>No tasks to display</p>;
+  }
+
   return (
     <table className="table-fixed w-full">
       <thead className="border-t-2 border-b-4 border-gray-300">
