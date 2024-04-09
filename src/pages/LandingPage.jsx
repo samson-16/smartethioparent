@@ -114,8 +114,8 @@ const LandingPage = () => {
 
       {/*  ************ key Features************* */}
 
-      <section className="mt-7 ">
-        <div className="h-[400px] bg-[#F0F7FF]">
+      <section className="mt-7 mb-auto ">
+        <div >
           <div className="text-center font-semibold mt-3">
             <h1 className="my-2">Key features</h1>
             <p>
@@ -123,37 +123,30 @@ const LandingPage = () => {
               resources needed to support their child's academic journey.
             </p>
             
-            {/* <div className="flex">
-              <div>
-              {scroll.map((item) => (
-               <AnimateFeature item={item} />
-              ))}
-              </div>
-            </div> */}
+          
+            <div className="flex flex-col sm:flex-row w-full justify-center items-center h">
+  <div className="flex flex-col sm:flex-row justify-center items-center">
+    <AnimateFeature item="homework" />
+    <AnimateFeature item="connect" />
+    <AnimateFeature item="resource" />
+    <AnimateFeature item="resource" />
 
-         <div>
-            <div className="flex flex-col sm:flex-row justify-center items-center">
-              <AnimateFeature item="homework" />
-              <AnimateFeature item="connect" />
-              <AnimateFeature item="resource" />
-            </div>
-         </div>
-
-            
+  </div>
+</div> 
           </div>
         </div>
       </section>
 
 
-      <section>
+      <section className="block">
         <div className="h-[500px] my-4">
           <h1 className="text-center font-semibold">Our welcoming video</h1>
         </div>
       </section>
 
       <section>
-          <div className="h-[500px] bg-sky-600">
-            <h1 className="text-lg">Testimonies</h1>
+          <div className=" bg-sky-600">
+            <h1 className="text-lg text-center">Testimonies</h1>
             <div>
             <Testimony/>
             </div>
