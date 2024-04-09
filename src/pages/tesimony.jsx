@@ -23,12 +23,17 @@ export default function Testimony() {
   return (
     <>
       <Swiper
-        slidesPerView={3}
+        slidesPerView={1}
         spaceBetween={30}
         pagination={{
           clickable: true,
         }}
         modules={[Pagination]}
+        breakpoints={{
+          768: {
+            slidesPerView: 3,
+          },
+        }}
         className="mySwiper"
       >
         <SwiperSlide><div className='main'><img src={profil1} alt=""  /><h3>Aiyne Abebe

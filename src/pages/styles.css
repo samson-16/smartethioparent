@@ -60,3 +60,19 @@
     color: grey;
     font-size: small;
   }
+  @media (max-width: 768px) {
+    .swiper {
+      margin-left: 20px;
+      margin-right: 5px;
+      width: 90%;
+      height: auto;
+    }
+    
+    h2 {
+      padding-left: 20px;
+    }
+    
+    p {
+      padding: 10px;
+    }
+  }
