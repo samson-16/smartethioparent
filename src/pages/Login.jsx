@@ -1,22 +1,69 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import api from "../api"
+import { useNavigate } from 'react-router-dom';
+import { ACCESS_TOKEN , REFRESH_TOKEN } from '../constants';
+
 
 function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-
+    const [loading , setLoading] = useState(false)
+    const navigate = useNavigate()
+    
     const handleEmailChange = (e) => {
         setEmail(e.target.value);
     };
-
+    
     const handlePasswordChange = (e) => {
         setPassword(e.target.value);
     };
 
-    const handleSubmit = (e) => {
+    function getUserDataFromToken(accessToken) {
+        const tokenParts = accessToken.split('.');
+        const encodedPayload = tokenParts[1];
+        const decodedPayload = JSON.parse(atob(encodedPayload));
+        return decodedPayload;
+    }
+    
+    const handleSubmit = async (e) => {
+        setLoading(true); 
         e.preventDefault();
-        // Perform login logic here
-        console.log('Email:', email);
-        console.log('Password:', password);
+
+        try {
+            const res = await api.post("api/token/" , { email , password })
+
+            localStorage.setItem(ACCESS_TOKEN , res.data.access);
+            localStorage.setItem(REFRESH_TOKEN , res.data.refresh);
+            
+            const accessToken = localStorage.getItem(ACCESS_TOKEN);
+            const userData = getUserDataFromToken(accessToken);
+            console.log(userData);
+            console.log(userData.user_id);
+            const id = userData.user_id
+            const user = await api.get(`api/user/?id=${id}`)
+            const role = user.data[0].role;
+            
+            switch (role) {
+                case 'parent':
+                    navigate("/parent");
+                    break;
+                case 'teacher':
+                    navigate("/teacher");
+                    break;
+                case 'admin':
+                    navigate("/admin");
+                    break;
+                default:
+                    navigate("/");
+                    break;
+            }
+        } catch(error){
+            alert(error)
+        }
+        finally {
+            setLoading(false)
+        }
+        
     };
 
     return (
