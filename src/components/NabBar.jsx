@@ -155,7 +155,6 @@ function ResponsiveAppBar() {
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>
                   <Typography
                     textAlign="center"
-                    fontWeight="bold"
                     className="font-medium md:font-bold lg:font-semibold"
                   >
                     <Link to={`/${setting}`} className="font-bold md:font-medium lg:font-semibold">

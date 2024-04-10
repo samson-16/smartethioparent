@@ -35,7 +35,7 @@ const AnimateFeature = ({ item }) => {
     <div className='animation' ref={ref} data-aos="zoom-in">
     <div className="flex flex-col sm:flex-row items-center">
        <div className="flex flex-col ">
-       <img src={imageSrc} alt={item} className="rounded-lg mb-4 sm:mb-0 sm:mr-4 w-52 h-56 md:w-[200px]" />
+       <img src={imageSrc} alt={item} className="rounded-lg mb-4 sm:mb-0 sm:mr-4 w-52 h-56 md:w-[300px]" />
       <span>{item}</span>
        </div>
     </div>

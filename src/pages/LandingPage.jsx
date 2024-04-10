@@ -11,8 +11,8 @@ import resource from "../assets/resource.png";
 import { Link } from "react-router-dom";
 import NavBar from "../components/NabBar";
 import Footer from "../components/Footer/Footer";  
-import ScrollAppearImage from "./ScrollAppearImage";
-import AnimateText from "./AnimateText";
+import ScrollAppearImage from "../components/ScrollImage/ScrollAppearImage";
+import AnimateText from "../components/AnimateText/AnimateText";
 import AnimateFeature from '../components/Animate/AnimateFeature'
 import Testimony from "./tesimony";
 const LandingPage = () => {
@@ -30,7 +30,7 @@ const LandingPage = () => {
           </li>
           <li>
             <Link to={"/logging"}>
-              <button className="rounded-xl bg-blue-300 hover:bg-blue-400 w-28 h-8 text-center text-white font-bold">
+              <button className="rounded-xl bg-blue-800 hover:bg-white hover:text-blue-600 w-28 h-8 text-center text-white font-bold">
                 Join now
               </button>
             </Link>

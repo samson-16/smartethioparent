@@ -14,12 +14,13 @@ function App() {
       <ResponsiveAppBar />
      
       <Routes>
+        
         <Route path="/" element={<LandingPage />} />
         <Route path="/Result" element={<Result/>} />
         <Route path="/:Id" element={<ResultDetail/>} />
-        <Route path="/ManageGrade" element={<ManageData />} />
-        <Route path="/ManageStudents" element={<ManageStudents />} />
-        <Route path="/ManageTeachers" element={<ManageTeachers />} />
+        <Route path="/GradeData" element={<ManageData />} />
+        <Route path="/StudentData" element={<ManageStudents />} />
+        <Route path="/TeacherData" element={<ManageTeachers />} />
         </Routes>
     </>
   );

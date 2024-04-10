@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
-import stud1 from '../assets/stud1.jpg';
+import stud1 from '../../assets/stud1.jpg';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
