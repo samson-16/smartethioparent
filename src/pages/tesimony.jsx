@@ -18,17 +18,22 @@ import profil4 from '../assets/ava4.jpg'
 import profil5 from '../assets/ava5.jpg'
 import profil6 from '../assets/ava6.jpg'
 
-import './testimony.css'
+
 export default function Testimony() {
   return (
     <>
       <Swiper
-        slidesPerView={3}
+        slidesPerView={1}
         spaceBetween={30}
         pagination={{
           clickable: true,
         }}
         modules={[Pagination]}
+        breakpoints={{
+          768: {
+            slidesPerView: 3,
+          },
+        }}
         className="mySwiper"
       >
         <SwiperSlide><div className='main'><img src={profil1} alt=""  /><h3>Aiyne Abebe
