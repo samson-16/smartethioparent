@@ -17,6 +17,7 @@ import Teacher from './components/Teacher.jsx';
 import Admin from './components/Admin.jsx';
 import Resources from './pages/Admin/Resource/Resources.jsx'
 import TeacherData from "./pages/Admin/TeacherData/TeacherData.jsx";
+import Students from "./pages/Admin/Students/Students.jsx";
 
 function Logout() {
   localStorage.clear();
