@@ -15,7 +15,7 @@ import Register from './components/Register.jsx';
 import Parent from './components/Parent.jsx';
 import Teacher from './components/Teacher.jsx';
 import Admin from './components/Admin.jsx';
-import Resources from "./components/Resources.jsx";
+import Resources from './pages/Admin/Resource/Resources.jsx'
 import TeacherData from "./pages/Admin/TeacherData/TeacherData.jsx";
 
 function Logout() {
