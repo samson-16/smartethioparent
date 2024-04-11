@@ -16,7 +16,7 @@ import Register from './components/Register.jsx';
 import Parent from './components/Parent.jsx';
 import Teacher from './components/Teacher.jsx';
 import Admin from './components/Admin.jsx';
-
+import Resources from "./components/Resources.jsx";
 function Logout() {
   localStorage.clear();
   return <Navigate to="/login" />;
@@ -78,6 +78,7 @@ function App() {
         <Route path="/GradeData" element={<ManageData />} />
         <Route path="/StudentData" element={<ManageStudents />} />
         <Route path="/TeacherData" element={<ManageTeachers />} />
+        <Route path="/resources" element={<Resources/>} />
         </Routes>
     </>
   );
