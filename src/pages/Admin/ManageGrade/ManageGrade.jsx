@@ -20,6 +20,7 @@ const columns = [
 ];
 
 export default function ManageData() {
+
   const [data, setData] = React.useState([
     {
       id: 1,
@@ -34,6 +35,8 @@ export default function ManageData() {
       subjects: ["Social Studies", "Art"],
     },
   ]);
+
+  
   const [open, setOpen] = React.useState(false);
   const [newData, setNewData] = React.useState({
     grade: "",
@@ -69,7 +72,7 @@ export default function ManageData() {
           margin="10px"
           height="calc(100vh - 40px)"
           style={{
-            backgroundColor: "#5c7ff7",
+            // backgroundColor: "#5c7ff7",
             color: "#494f63",
             fontWeight: "bold",
             fontSize: "15px",
