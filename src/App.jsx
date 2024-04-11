@@ -8,7 +8,6 @@ import ResultDetail from "./pages/Teacher/Result/ResultDetail/ResultDetail.jsx";
 import ManageTeachers from "./pages/Admin/ManageTeacher/ManageTeachers.jsx";
 import ManageData from "./pages/Admin/ManageGrade/ManageGrade";
 import ManageStudents from "./pages/Admin/ManageStudent/ManageStudents.jsx";
-
 import NotFound from './components/NotFound.jsx';
 import ProtectedRoute from './components/ProtectedRoute.jsx';
 import Home from './components/Home.jsx';
@@ -16,6 +15,7 @@ import Register from './components/Register.jsx';
 import Parent from './components/Parent.jsx';
 import Teacher from './components/Teacher.jsx';
 import Admin from './components/Admin.jsx';
+import TeacherData from "./pages/Admin/TeacherData/TeacherData.jsx";
 
 function Logout() {
   localStorage.clear();
@@ -71,13 +71,14 @@ function App() {
       <Route path="/logout" element={<Logout />} />
       <Route path="/register" element={<RegisterAndLogout />} />
       <Route path="*" element={<NotFound />} />
-
         <Route path="/landingpage" element={<LandingPage />} />
         <Route path="/Result" element={<Result/>} />
         <Route path="/:Id" element={<ResultDetail/>} />
         <Route path="/GradeData" element={<ManageData />} />
         <Route path="/StudentData" element={<ManageStudents />} />
-        <Route path="/TeacherData" element={<ManageTeachers />} />
+        <Route path="/ManageTeacher" element={<ManageTeachers />} />
+        {/* <Route path="/teachers" element={<TeacherData />} /> */}
+
         </Routes>
     </>
   );
