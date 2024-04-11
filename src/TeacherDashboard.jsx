@@ -17,7 +17,71 @@ const TeacherDashboard = ({ tasks, setTasks }) => {
   const [error, setError] = useState("");
 
   const handleInputChange = (event) => {
-    setNewTask({ ...newTask, [event.target.name]: event.target.value });
+    const { name, value } = event.target;
+    let formattedDate = value;
+
+    if (name === "subject") {
+      if (value.length > 50) {
+        setError("Subject cannot be more than 50 characters.");
+        return;
+      }
+
+      if (value.length > 0 && !value.match(/^[A-Z][a-zA-Z\s]*$/)) {
+        setError(
+          "Subject must start with an uppercase letter and can only contain alphabet letters and spaces.",
+        );
+        return;
+      }
+    }
+
+    if (name === "givenDate" || name === "dueDate") {
+      const dateRegex = /^\d{2}-\d{2}-\d{4}$/;
+      console.log(`Entered date: ${value}`);
+      console.log(`Does it match the regex? ${dateRegex.test(value)}`);
+
+      if (!value.match(dateRegex)) {
+        setError("Please enter a valid date in the format MM-DD-YYYY.");
+        return;
+      }
+
+      const [month, day, year] = value.split("-");
+      formattedDate = new Date(year, month - 1, day);
+
+      if (formattedDate < new Date()) {
+        setError("Date cannot be in the past.");
+        return;
+      }
+
+      const oneYearFromNow = new Date();
+      oneYearFromNow.setFullYear(oneYearFromNow.getFullYear() + 1);
+      if (formattedDate > oneYearFromNow) {
+        setError("Date cannot be more than a year in the future.");
+        return;
+      }
+
+      if (
+        name === "givenDate" &&
+        newTask.dueDate &&
+        formattedDate > new Date(newTask.dueDate)
+      ) {
+        setError("Given date cannot be after due date.");
+        return;
+      }
+
+      if (
+        name === "dueDate" &&
+        newTask.givenDate &&
+        formattedDate < new Date(newTask.givenDate)
+      ) {
+        setError("Due date cannot be before given date.");
+        return;
+      }
+      setError("");
+    }
+    setNewTask({
+      ...newTask,
+      [name]: formattedDate.toISOString().split("T")[0],
+    });
   };
 
   const handleAddTask = () => {
@@ -103,6 +167,7 @@ const TeacherDashboard = ({ tasks, setTasks }) => {
         <div className="flex items-center mb-2">
           <label className="mr-2 w-24">Given Date</label>
           <input
+            type="date"
             name="givenDate"
             value={newTask.givenDate}
             onChange={handleInputChange}
@@ -113,6 +178,7 @@ const TeacherDashboard = ({ tasks, setTasks }) => {
         <div className="flex items-center mb-2">
           <label className="mr-2 w-24">Due Date</label>
           <input
+            type="date"
             name="dueDate"
             value={newTask.dueDate}
             onChange={handleInputChange}
