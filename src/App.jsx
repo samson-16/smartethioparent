@@ -18,6 +18,9 @@ import Admin from "./components/Admin.jsx";
 import Resources from "./pages/Admin/Resource/Resources.jsx";
 import TeacherData from "./pages/Admin/TeacherData/TeacherData.jsx";
 import Students from "./pages/Admin/Students/Students.jsx";
+// import Task from './Task.jsx'
+import TeacherDashboard from "./TeacherDashboard.jsx";
+// import Footer from "./Footer";
 
 function Logout() {
   localStorage.clear();
@@ -77,10 +80,20 @@ function App() {
         <Route path="/GradeData" element={<ManageData />} />
         <Route path="/StudentData" element={<ManageStudents />} />
         <Route path="/TeacherData" element={<ManageTeachers />} />
-        <Route path="/resources" element={<Resources />} />
-      </Routes>
+        <Route path="/resources" element={<Resources/>} />
+        <Route path="/" element={<Navigate to="/tasks" />} />
+          {/* <Route
+            path="/tasks/*"
+            element={<Task tasks={tasks} setTasks={setTasks} filter={filter} />}
+          /> */}
+          {/* <Route
+            path="/teacher/*"
+            element={<TeacherDashboard tasks={tasks} setTasks={setTasks} />}
+          /> */}
+        </Routes>
     </>
   );
 }
 
 export default App;
+

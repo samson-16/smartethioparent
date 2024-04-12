@@ -49,7 +49,7 @@ const Resources = () => {
     fetchGrades();
     fetchSubjects();
     fetchResources();
-  }, []);
+  }, [resources]);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -80,9 +80,13 @@ const Resources = () => {
         }
       );
       console.log("Resource created successfully:", response.data);
+      setShowModal(false)
     } catch (error) {
       console.error(error);
     }
+
+   
+    
   };
 
   const downloadResource = async (resourceId, resourceTitle) => {
@@ -130,7 +134,7 @@ const Resources = () => {
             <h2 className="text-xl font-bold mb-4 text-center text-blue-800">
               Add Resource
             </h2>
-            <form onSubmit={handleSubmit}>
+            <form>
               <div className="space-y-4">
                 <label
                   htmlFor="title"
@@ -219,8 +223,8 @@ const Resources = () => {
                   <button
                     type="submit"
                     className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-500 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-                    onClick={()=>setShowModal(false)}
-                 >
+                    onClick={handleSubmit}
+                  >
                     <AddIcon /> Add Resource
                   </button>
                 </div>
@@ -235,36 +239,44 @@ const Resources = () => {
       </h2>
 
       {resources.length > 0 ? (
-  <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-    {resources.map((resource) => (
-      <div key={resource.id} style={{ width: '240px',height:"200px", margin: '10px', border: '1px solid #ccc', borderRadius: '5px', padding: '4px', }}>
-        <h3 style={{  fontSize: '1rem' }}>{resource.title}</h3>
-        <p>Grade: {resource.grade}</p>
-        <p>Subject: {resource.subject}</p>
-        <button
-          style={{
-            backgroundColor: '#0349fc',
-            color: 'white',
-            border: 'none',
-            padding: '8px 15px',
-            borderRadius: '5px',
-            cursor: 'pointer',
-            display:'flex',
-            justifyContent:'center',
-            alignItems:'center'
-          }}
-          onClick={() => downloadResource(resource.id, resource.title)}
-        >
-          Download
-        </button>
-      </div>
-    ))}
-  </div>
-) : (
-  <p>No resources found.</p>
-)}
-
-
+        <div style={{ display: "flex", flexWrap: "wrap" }}>
+          {resources.map((resource) => (
+            <div
+              key={resource.id}
+              style={{
+                width: "240px",
+                height: "200px",
+                margin: "10px",
+                border: "1px solid #ccc",
+                borderRadius: "5px",
+                padding: "4px",
+              }}
+            >
+              <h3 style={{ fontSize: "1rem" }}>{resource.title}</h3>
+              <p>Grade: {resource.grade}</p>
+              <p>Subject: {resource.subject}</p>
+              <button
+                style={{
+                  backgroundColor: "#0349fc",
+                  color: "white",
+                  border: "none",
+                  padding: "8px 15px",
+                  borderRadius: "5px",
+                  cursor: "pointer",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+                onClick={() => downloadResource(resource.id, resource.title)}
+              >
+                Download
+              </button>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <p>No resources found.</p>
+      )}
     </div>
   );
 };
