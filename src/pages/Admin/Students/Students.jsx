@@ -5,27 +5,26 @@ import { Button, Box } from "@mui/material";
 import axios from "axios";
 
 const columns = [
-  { field: "id", headerName: "Parent ID", width: 50 ,},
+  { field: "id", headerName: "Parent ID", width: 90 },
   { field: "first_name", headerName: "Parent-First-Name", width: 150 },
   { field: "last_name", headerName: "Parent-Last-Name", width: 150 },
   { field: "email", headerName: "Parent-Email", width: 170 },
-  { field: "phone_number", headerName: "Parent-Phone-Number", width: 150 },
-  { field: "first_name_child", headerName: "Student-First-Name", width: 150 },
-  { field: "last_name_child", headerName: "Studen-Last-Name", width: 150 },
-  { field: "gender_child", headerName: "Gender", width: 70 },
-  { field: "grade_child", headerName: " Grade", width: 70 },
-  { field: "section_child", headerName: "Section", width: 70 },
-  { field: "roll_number_child", headerName: "Roll_number", width: 70 },
+  { field: "phone_number", headerName: "Phone-Number", width: 150 },
+  { field: "first_name_child", headerName: "First-Name", width: 130 },
+  { field: "last_name_child", headerName: "Last-Name", width: 130 },
+  { field: "gender_child", headerName: "Gender", width: 60 },
+  { field: "grade_child", headerName: " Grade", width: 60 },
+  { field: "section_child", headerName: "Section", width: 80 },
+  { field: "roll_number_child", headerName: "Roll_number", width: 80 },
 ];
 
 /**
  * Represents a component for managing student information.
- * 
+ *
  * @returns {JSX.Element} The Students component.
  */
 const Students = () => {
- 
-/**
+  /**
  * Represents a component for managing student information.
  *  const [rows, setRows] = useState([]);
   const [open, setOpen] = useState(false);
@@ -37,22 +36,24 @@ const Students = () => {
   const [rows, setRows] = useState([]);
   const [openStudentForm, setOpenStudentForm] = useState(false);
   const [openParentForm, setOpenParentForm] = useState(false);
+
   const handleOpenStudentForm = () => setOpenStudentForm(true);
   const handleOpenParentForm = () => setOpenParentForm(true);
+
   const handleClose = () => {
     setOpenStudentForm(false);
     setOpenParentForm(false);
   };
 
-  const [grades, setGrades]= useState([]);
-
+  const [grades, setGrades] = useState([]);
+  const initialGrade = grades.length > 0 ? grades[0].id : '';
 
   const [newStudent, setNewStudent] = useState({
     first_name: "",
     last_name: "",
     gender: "",
     roll_number: "",
-    grade: "",
+    grade: initialGrade,
     section: "",
   });
 
@@ -71,61 +72,61 @@ const Students = () => {
     const fetchGrades= async ()=>{
         try{
             const res=await axios.get("http://127.0.0.1:8000/api/grades/")
-            console.log(res.data)
+            console.log("Grades", res.data)
             setGrades(res.data)
-            
+
         }catch(error){
             console.error("Error", error)
         }
     };
 
-    /*}
     const fetchStudentIds = async () => {
       try {
-        const response = await axios.get("http://127.0.0.1:8000/api/students/");
+        const response = await axios.get("http://127.0.0.1:8000/api/student/");
+        console.log(response.data);
         const ids = response.data.map((student) => student.id);
         setStudentIds(ids);
+        // console.log( setStudentIds(response.data))
       } catch (error) {
         console.error("Error fetching student IDs:", error);
       }
     };
-    fetchStudentIds();*/
+    fetchStudentIds();
     fetchGrades();
-}, []);
+  }, []);
 
-const handleAddParentInfo=()=>{
+
+  const handleAddParentInfo = () => {
     if (
-        !parentInfo.first_name ||
-        !parentInfo.last_name ||
-        !parentInfo.email ||
-        !parentInfo.phone_number ||
-        !parentInfo.children
-      ) {
-        alert("Please fill all fields.");
-        return;
-      }
-}
+      !parentInfo.first_name ||
+      !parentInfo.last_name ||
+      !parentInfo.email ||
+      !parentInfo.phone_number ||
+      !parentInfo.children
+    ) {
+      alert("Please fill all fields.");
+      return;
+    }
+  };
 
-
-
+    //  console.log("New Student Info", newStudent)
   const handleAddStudent = () => {
     if (
-        !newStudent.first_name ||
-        !newStudent.last_name ||
-        !newStudent.gender ||
-        !newStudent.roll_number ||
-        !newStudent.grade ||
-        !newStudent.section
-      ) {
-        alert("Please fill all fields.");
-        return;
-      }
-    
-      
-      if (newStudent.roll_number <= 0) {
-        alert("Roll number should be a positive integer.");
-        return;
-      }
+      !newStudent.first_name ||
+      !newStudent.last_name ||
+      !newStudent.gender ||
+      !newStudent.roll_number ||
+      !newStudent.grade ||
+      !newStudent.section
+    ) {
+      alert("Please fill all fields.");
+      return;
+    }
+
+    if (newStudent.roll_number <= 0) {
+      alert("Roll number should be a positive integer.");
+      return;
+    }
     axios
       .post("http://127.0.0.1:8000/api/student/", newStudent)
       .then((response) => {
@@ -138,7 +139,6 @@ const handleAddParentInfo=()=>{
         alert("An error occurred while adding the student.");
       });
   };
-  
 
   useEffect(() => {
     axios
@@ -188,9 +188,6 @@ const handleAddParentInfo=()=>{
     return final;
   }
 
-
-
-
   return (
     <section className="flex flex-col items-center">
       <Box
@@ -202,13 +199,20 @@ const handleAddParentInfo=()=>{
         }}
       >
         <h1 className="text-center font-bold text-lg">Manage Student list</h1>
-        <Box sx={{width:"100%", display:"flex", justifyContent:"space-between" , alignItems:"center"}}>
-               <Button variant="contained" onClick={handleOpenStudentForm}>
-          Add Student
-        </Button>
-        <Button variant="contained" onClick={handleOpenParentForm} >
-          Add Parent
-        </Button>
+        <Box
+          sx={{
+            width: "100%",
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <Button variant="contained" onClick={handleOpenStudentForm}>
+            Add Student
+          </Button>
+          <Button variant="contained" onClick={handleOpenParentForm}>
+            Add Parent
+          </Button>
         </Box>
         <DataGrid
           rows={rows}
@@ -219,7 +223,6 @@ const handleAddParentInfo=()=>{
           pagination
         />
       </Box>
-
       {openStudentForm && (
         <div className="fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center ">
           <div className="bg-white rounded-2xl shadow-lg p-6 w-96 shadow-blue-900 ">
@@ -267,16 +270,19 @@ const handleAddParentInfo=()=>{
               Grade
               <select
                 name="grade"
+
                 id="grade"
                 className="border border-gray-300 rounded-md py-2 px-3 mt-1 ml-1 w-[100px] mr-2"
                 value={newStudent.grade}
                 onChange={(e) =>
                   setNewStudent({ ...newStudent, grade: e.target.value })
                 }
+                required
+                // defaultValue={1}
               >
-                {Array.from({ length: 5 }, (_, i) => i + 1).map((grade) => (
-                  <option key={grade} value={grade}>
-                    {grade}
+                {grades.map((g) => (
+                  <option key={g.id} value={g.id} >
+                    {g.grade}
                   </option>
                 ))}
               </select>
@@ -332,9 +338,9 @@ const handleAddParentInfo=()=>{
               <Button
                 variant="contained"
                 onClick={() => {
-                    handleAddStudent();
-                    handleClose();
-                  }}
+                  handleAddStudent();
+                  handleClose();
+                }}
                 sx={{ width: "120px", boxShadow: "0 0 3px 2px blue " }}
               >
                 Add
@@ -343,144 +349,126 @@ const handleAddParentInfo=()=>{
           </div>
         </div>
       )}
-
-      
-   ////////parent side/////////////////////
-
-<section>
-
-<div>
-      <h2>Add Parent Information</h2>
-      {openParentForm && (
-        <div className="fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center ">
-          <div className="bg-white rounded-2xl shadow-lg p-6 w-96 shadow-blue-900 ">
-            <h2 className="font-bold text-center text-lg">Student Form</h2>
-            <label htmlFor="first-name" className="block mb-2">
-              First Name
-              <input
-                type="text"
-                placeholder="First Name"
-                className="w-full border border-gray-300 rounded-md py-2 px-3 mt-1"
-                value={parentInfo.first_name}
-                onChange={(e) =>
-                  setParentInfo({ ...parentInfo, first_name: e.target.value })
-                }
-              />
-            </label>
-            <label htmlFor="last-name" className="mb-2">
-              Last Name
-              <input
-                type="text"
-                placeholder="Last Name"
-                className="w-[100%] border border-gray-300 rounded-md py-2 px-3 mt-1"
-                value={parentInfo.last_name}
-                onChange={(e) =>
-                  setParentInfo({ ...parentInfo, last_name: e.target.value })
-                }
-              />
-            </label>
+     
+      <section>
+        <div>
        
-            <label htmlFor="last-name" className="mb-2">
-                   Email
-              <input
-                type="text"
-                placeholder="Email"
-                className="w-[100%] border border-gray-300 rounded-md py-2 px-3 mt-1"
-                value={parentInfo.email}
-                onChange={(e) =>
-                  setParentInfo({ ...parentInfo, email: e.target.value })
-                }
-              />
-            </label>
+          {openParentForm && (
+            <div className="fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center ">
+              <div className="bg-white rounded-2xl shadow-2xl shadow-blue-800 p-6 w-96 ">
+                <h2 className="font-bold text-center text-blue-600 text-pretty shadow-xl mb-2">Parent Form</h2>
+                <label htmlFor="first-name" className="block mb-2">
+                  First Name
+                  <input
+                    type="text"
+                    placeholder="First Name"
+                    className="w-full border border-gray-300 rounded-md py-2 px-3 mt-1"
+                    value={parentInfo.first_name}
+                    onChange={(e) =>
+                      setParentInfo({
+                        ...parentInfo,
+                        first_name: e.target.value,
+                      })
+                    }
+                  />
+                </label>
+                <label htmlFor="last-name" className="mb-2">
+                  Last Name
+                  <input
+                    type="text"
+                    placeholder="Last Name"
+                    className="w-[100%] border border-gray-300 rounded-md py-2 px-3 mt-1"
+                    value={parentInfo.last_name}
+                    onChange={(e) =>
+                      setParentInfo({
+                        ...parentInfo,
+                        last_name: e.target.value,
+                      })
+                    }
+                  />
+                </label>
 
+                <label htmlFor="last-name" className="mb-2">
+                  Email
+                  <input
+                    type="text"
+                    placeholder="Email"
+                    className="w-[100%] border border-gray-300 rounded-md py-2 px-3 mt-1"
+                    value={parentInfo.email}
+                    onChange={(e) =>
+                      setParentInfo({ ...parentInfo, email: e.target.value })
+                    }
+                  />
+                </label>
+                <label htmlFor="last-name" className="mb-2">
+                  Phone number
+                  <input
+                    type="number"
+                    placeholder="Phone number"
+                    className="w-[100%] border border-gray-300 rounded-md py-2 px-3 mt-1"
+                    value={parentInfo.phone_number}
+                    onChange={(e) =>
+                      setParentInfo({
+                        ...parentInfo,
+                        phone_number: e.target.value,
+                      })
+                    }
+                  />
+                </label>
 
-           
-           {/* <label htmlFor="grade" className=" mb-2">
-              Grade
-              <select
-                name="grade"
-                id="grade"
-                className="border border-gray-300 rounded-md py-2 px-3 mt-1 ml-1 w-[100px] mr-2"
-                value={parentInfo.grade}
-                onChange={(e) =>
-                  setParentInfo({ ...parentInfo, grade: e.target.value })
-                }
-              >
-                {Array.from({ length: 5 }, (_, i) => i + 1).map((grade) => (
-                  <option key={grade} value={grade}>
-                    {grade}
-                  </option>
-                ))}
-              </select>
-            </label>*/}
+                <label htmlFor="section" className=" mb-2">
+                  Student_ID
+                  <select
+                    name="student_id"
+                    id="student_id"
+                    className=" border border-gray-300 rounded-md py-2 px-3 mt-3 w-[150px] ml-1"
+                    value={parentInfo.children}
+                    onChange={(e) =>
+                      setParentInfo({ ...parentInfo, children: e.target.value })
+                    }
+                  >
+                    {studentIds.map((ID) => (
+                      <option key={ID} value={ID}>
+                        {ID}
+                      </option>
+                    ))}
+                  </select>
+                </label>
 
-
-            <label htmlFor="section" className=" mb-2">
-              Section
-              <select
-                name="section"
-                id="section"
-                className=" border border-gray-300 rounded-md py-2 px-3 mt-1 w-[100px] ml-1"
-                value={parentInfo.section}
-                onChange={(e) =>
-                  setParentInfo({ ...parentInfo, section: e.target.value })
-                }
-              >
-                {["A", "B", "C", "D", "E"].map((section) => (
-                  <option key={section} value={section}>
-                    {section}
-                  </option>
-                ))}
-              </select>
-            </label>
-            <label htmlFor="roll-number" className="block mb-2">
-              Roll Number
-              <input
-                type="number"
-                placeholder="Roll Number"
-                className="w-[160px] border border-gray-300 rounded-md py-2 px-3 ml-2 mt-3"
-                value={parentInfo.roll_number}
-                onChange={(e) =>
-                  setParentInfo({ ...parentInfo, roll_number: e.target.value })
-                }
-              />
-            </label>
-            <div className="flex justify-between">
-              <Button
-                variant="contained"
-                onClick={() => {
-                  handleClose();
-                  setParentInfo({
-                    first_name: "",
-                    last_name: "",
-                    email: "",
-                    phone_number: "",
-                    id: "",
-                 
-                  });
-                }}
-                sx={{ width: "120px", boxShadow: "0 0 3px 2px blue " }}
-              >
-                Cancel
-              </Button>
-              <Button
-                variant="contained"
-                onClick={() => {
-                    handleAddParentInfo();
-                    handleClose();
-                  }}
-                sx={{ width: "120px", boxShadow: "0 0 3px 2px blue " }}
-              >
-                Add
-              </Button>
+                <div className="flex justify-between mt-5">
+                  <Button
+                    variant="contained"
+                    onClick={() => {
+                      handleClose();
+                      setParentInfo({
+                        first_name: "",
+                        last_name: "",
+                        email: "",
+                        phone_number: "",
+                        id: "",
+                      });
+                    }}
+                    sx={{ width: "120px", boxShadow: "0 0 3px 2px blue " }}
+                  >
+                    Cancel
+                  </Button>
+                  <Button
+                    variant="contained"
+                    onClick={() => {
+                      handleAddParentInfo();
+                      handleClose();
+                    }}
+                    sx={{ width: "120px", boxShadow: "0 0 3px 2px blue " }}
+                  >
+                    Add
+                  </Button>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>)}
-    </div>
-                
-</section>
+          )}
+        </div>
+      </section>
     </section>
-
   );
 };
 

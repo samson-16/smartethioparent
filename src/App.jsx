@@ -95,6 +95,7 @@ function App() {
             path="/teachers/*"
             element={<TeacherDashboard tasks={tasks} setTasks={setTasks} />}
           />
+        <Route path="/students" element={<Students/>} />
         </Routes>
     </>
   );
