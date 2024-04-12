@@ -18,8 +18,9 @@ import Admin from './components/Admin.jsx';
 import Resources from './pages/Admin/Resource/Resources.jsx'
 import TeacherData from "./pages/Admin/TeacherData/TeacherData.jsx";
 import Students from "./pages/Admin/Students/Students.jsx";
-// import Task from './Task.jsx'
+import Task from './Task.jsx'
 import TeacherDashboard from "./TeacherDashboard.jsx";
+import { useState } from "react";
 // import Footer from "./Footer";
 
 function Logout() {
@@ -33,6 +34,8 @@ function RegisterAndLogout() {
 }
 
 function App() {
+  const [tasks, setTasks] = useState([]);
+  const filter = "All";
   
   return (
     <>
@@ -84,14 +87,14 @@ function App() {
         <Route path="/TeacherData" element={<ManageTeachers />} />
         <Route path="/resources" element={<Resources/>} />
         <Route path="/" element={<Navigate to="/tasks" />} />
-          {/* <Route
+          <Route
             path="/tasks/*"
             element={<Task tasks={tasks} setTasks={setTasks} filter={filter} />}
-          /> */}
-          {/* <Route
-            path="/teacher/*"
+          />
+          <Route
+            path="/teachers/*"
             element={<TeacherDashboard tasks={tasks} setTasks={setTasks} />}
-          /> */}
+          />
         </Routes>
     </>
   );
