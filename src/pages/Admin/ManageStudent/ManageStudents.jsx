@@ -194,6 +194,11 @@ const ManageStudents = () => {
             open={open}
             onClose={handleClose}
             style={{ backgroundColor: "deepskyblue" }}
+            PaperProps={{
+              style: {
+                boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)", // Add box shadow here
+              },
+            }}
           >
             <DialogTitle className="text-lg font-extrabold text-center text-white ">
               Add New Student
