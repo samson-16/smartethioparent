@@ -107,6 +107,17 @@ const Students = () => {
       alert("Please fill all fields.");
       return;
     }
+    axios
+    .post("http://127.0.0.1:8000/api/student/", parentInfo)
+    .then((response) => {
+      console.log("parent added successfully:", response.data);
+      alert("New parent added successfully!");
+      handleClose();
+    })
+    .catch((error) => {
+      console.error("Error adding parent:", error);
+      alert("An error occurred while adding the parent.");
+    });
   };
 
     //  console.log("New Student Info", newStudent)
