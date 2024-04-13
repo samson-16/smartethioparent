@@ -17,6 +17,9 @@ import Parent from './components/Parent.jsx';
 import Teacher from './components/Teacher.jsx';
 import Admin from './components/Admin.jsx';
 import Resources from "./components/Resources.jsx";
+
+import { AuthProvider } from "./components/AuthContext.jsx";
+
 function Logout() {
   localStorage.clear();
   return <Navigate to="/login" />;
@@ -31,10 +34,9 @@ function App() {
   
   return (
     <>
+    <AuthProvider>
       <ResponsiveAppBar />
-     
       <Routes>
-
          <Route
         path="/"
         element={
@@ -80,6 +82,7 @@ function App() {
         <Route path="/TeacherData" element={<ManageTeachers />} />
         <Route path="/resources" element={<Resources/>} />
         </Routes>
+        </AuthProvider>
     </>
   );
 }

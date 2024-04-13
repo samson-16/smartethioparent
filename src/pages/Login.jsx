@@ -1,14 +1,11 @@
-import React, { useState } from 'react';
-import api from "../api"
-import { useNavigate } from 'react-router-dom';
-import { ACCESS_TOKEN , REFRESH_TOKEN } from '../constants';
-import  axios from 'axios';
+import React, { useState , useContext} from 'react';
+import { AuthContext } from '../components/AuthContext.jsx';
 function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [loading , setLoading] = useState(false);
     const [error, setError] = useState('');
-    const navigate = useNavigate();
+    const { login } = useContext(AuthContext);
 
     const handleEmailChange = (e) => {
         setEmail(e.target.value);
@@ -18,13 +15,6 @@ function Login() {
         setPassword(e.target.value);
     };
 
-    function getUserDataFromToken(accessToken) {
-        const tokenParts = accessToken.split('.');
-        const encodedPayload = tokenParts[1];
-        const decodedPayload = JSON.parse(atob(encodedPayload));
-        return decodedPayload;
-    }
-    
 
     const validateForm = () => {
         if (!email || !password) {
@@ -34,54 +24,15 @@ function Login() {
         return true;
     };
 
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-        if (!validateForm()) {
-            return;
-        }
-
-        setLoading(true); 
-
-        try {
-            const res = await api.post("/api/token/" , { email , password });
-            console.log("Successful")
-
-            localStorage.setItem(ACCESS_TOKEN , res.data.access);
-            localStorage.setItem(REFRESH_TOKEN , res.data.refresh);
-            
-            const accessToken = localStorage.getItem(ACCESS_TOKEN);
-            const userData = getUserDataFromToken(accessToken);
-            console.log(userData)
-            const id = userData.user_id;
-
-
-  const response = await api.get(`api/user/?id=${id}`);
-  console.log(response.data); 
-  const user = response.data[0]
-
-            
-            switch (user.role) {
-                case 'parent':
-                    navigate("/parent");
-                    break;
-                case 'teacher':
-                    navigate("/teacher");
-                    break;
-                case 'admin':
-                    navigate("/admin");
-                    break;
-                default:
-                    navigate("/");
-                    break;
-            }
-        } catch(error){
-            setError('Incorrect Username or Password');
-        }
-        finally {
-            setLoading(false);
-        }
+        if (!validateForm()){
+        return}
+        await login(email, password);
     };
+
+
 
     return (
         <section className='flex justify-center items-center mt-28'>

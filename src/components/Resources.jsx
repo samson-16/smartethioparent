@@ -1,5 +1,5 @@
-import React, { useState , useEffect} from 'react';
-import axios from 'axios'; // Assuming you're using Axios for API calls
+import { useState , useEffect} from 'react';
+import axios from 'axios'; 
 
 const Resources = () => {
   const [resource, setResource] = useState({
@@ -32,11 +32,11 @@ const Resources = () => {
     try {
       const response = await axios.get('http://127.0.0.1:8000/api/resource/');
       setResources(response.data);
+      console.log(response.data)
     } catch (error) {
       console.error(error);
     }
   };
-  // Fetch grades and subjects on component mount
   useEffect(() => {
     fetchGrades()
     fetchSubjects()
@@ -57,11 +57,11 @@ const Resources = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
   
-    const formData = new FormData(); // Use FormData for file uploads
+    const formData = new FormData(); 
     formData.append('title', resource.title);
     formData.append('grade', resource.grade);
     formData.append('subject', resource.subject);
-    formData.append('file', resource.file); // Ensure file is not null
+    formData.append('file', resource.file); 
   
     try {
       const response = await axios.post('http://127.0.0.1:8000/api/resource/', formData, {
@@ -70,10 +70,8 @@ const Resources = () => {
         },
       });
       console.log('Resource created successfully:', response.data);
-      // Optionally, clear the form after successful submission
     } catch (error) {
       console.error(error);
-      // Handle errors appropriately, e.g., display an error message to the user
     }
   };
 
@@ -81,20 +79,19 @@ const Resources = () => {
     try {
       const downloadUrl = `http://127.0.0.1:8000/api/resource/${resourceId}/download/`;
       const response = await axios.get(downloadUrl, {
-        responseType: 'blob', // Request the response as a blob (binary data)
+        responseType: 'blob', 
       });
 
-      const blob = new Blob([response.data], { type: response.data.type }); // Create a Blob object
-      const url = window.URL.createObjectURL(blob); // Create a temporary URL for the blob
+      const blob = new Blob([response.data], { type: response.data.type }); 
+      const url = window.URL.createObjectURL(blob); 
       const link = document.createElement('a');
       link.href = url;
-      link.setAttribute('download', `<span class="math-inline">\{resourceTitle\}\.</span>{/* Get file extension from response or resource data */}`); // Set download filename with title and potential extension
+      link.setAttribute('download', `<span class="math-inline">\{resourceTitle\}\.</span>{/* Get file extension from response or resource data */}`); 
       document.body.appendChild(link);
-      link.click(); // Simulate a click on the link to initiate download
-      document.body.removeChild(link); // Remove the temporary link after download
+      link.click(); 
+      document.body.removeChild(link); 
     } catch (error) {
       console.error(error);
-      // Handle download error, e.g., display an error message to the user
     }
   };
 
@@ -133,7 +130,6 @@ const Resources = () => {
   <ul>
     {resources.map((resource) => (
       <li key={resource.id}>
-        {/* Display resource details: title, grade, and subject */}
         {resource.title} <br />
         Grade: {resource.grade} <br /> Subject: {resource.subject} <br />
         <button onClick={() => downloadResource(resource.id, resource.title)}>Download</button>
