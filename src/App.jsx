@@ -140,7 +140,7 @@ function App() {
             element={<TeacherDashboard tasks={tasks} setTasks={setTasks} />}
           />
         <Route path="/students" element={<Students/>} />
-        <Route path="/Teacherhomepage" element={<TeacherHomePage/>
+        <Route path="/Teacherhomepage" element={<TeacherHomePage/>} />
 
         <Route path="/Parents" element={<Parents />} />
         </Routes>
