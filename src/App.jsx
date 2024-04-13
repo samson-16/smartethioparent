@@ -24,6 +24,8 @@ import Students from "./pages/Admin/Students/Students.jsx";
 import Task from './Task.jsx'
 import TeacherDashboard from "./TeacherDashboard.jsx";
 import { useState } from "react";
+import TeacherHomePage from "./pages/TeacherHomePage.jsx";
+
 // import Footer from "./Footer";
 import Parents from "./pages/Parent_dashbord/Parents.jsx";
 
@@ -138,6 +140,7 @@ function App() {
             element={<TeacherDashboard tasks={tasks} setTasks={setTasks} />}
           />
         <Route path="/students" element={<Students/>} />
+        <Route path="/Teacherhomepage" element={<TeacherHomePage/>} />
 
         <Route path="/Parents" element={<Parents />} />
         </Routes>
