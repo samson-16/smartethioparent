@@ -8,7 +8,7 @@ const RecentAssignments = () => {
   useEffect(() => {
     const fetchAssignments = async () => {
       try {
-        const response = await fetch('/assignments.json');
+        const response = await fetch('/http://127.0.0.1:8000/api/parent/');
         const data = await response.json();
         const sortedAssignments = data.sort((a, b) => new Date(b.dueDate) - new Date(a.dueDate));
         const recentAssignments = sortedAssignments.slice(0, 5); // Display only the first 5 assignments
