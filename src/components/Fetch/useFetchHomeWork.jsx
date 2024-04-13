@@ -8,15 +8,24 @@ const useFetchHomework = () => {
   useEffect(() => {
     const fetchHomework = async () => {
       try {
-        const response = await axios.get(`http://localhost:3001/homework`);
-        // ?teacher_id=${2}
-        const today = new Date().toISOString().split("T")[0]; // Current date in YYYY-MM-DD
+        const response = await axios.get(`http://localhost:8000/api/tasks/`);
+        const today = new Date().toISOString(); // Current date in ISO format
+        console.log("Today's date", today);
 
-        const activeHomework = response.data.filter((hw) => {
+        // Filter homework directly from the response data
+        const homeworkData = response.data.filter(
+          (hw) => hw.type === "homework"
+        );
+        console.log("All homework", homeworkData);
+
+        // Filter active homework based on today's date
+        const activeHomework = homeworkData.filter((hw) => {
           // Check if today's date falls within the homework's active period
-          return today >= hw.assigned_date && today <= hw.due_date;
+          return today >= hw.date && today <= hw.deadline;
         });
+        console.log("Active homework", activeHomework);
 
+        // Set both the filtered homework and activeHomework to state
         setHomework(activeHomework);
       } catch (error) {
         console.error("Error fetching homework:", error);
