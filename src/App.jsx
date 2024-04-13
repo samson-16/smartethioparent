@@ -16,6 +16,9 @@ import Parent from './components/Parent.jsx';
 import Teacher from './components/Teacher.jsx';
 import Admin from './components/Admin.jsx';
 import Resources from './pages/Admin/Resource/Resources.jsx'
+
+import { AuthProvider } from "./components/AuthContext.jsx";
+
 import TeacherData from "./pages/Admin/TeacherData/TeacherData.jsx";
 import Students from "./pages/Admin/Students/Students.jsx";
 import Task from './Task.jsx'
@@ -39,10 +42,9 @@ function App() {
   
   return (
     <>
+    <AuthProvider>
       <ResponsiveAppBar />
-     
       <Routes>
-
          <Route
         path="/"
         element={
@@ -97,6 +99,7 @@ function App() {
           />
         <Route path="/students" element={<Students/>} />
         </Routes>
+        </AuthProvider>
     </>
   );
 }
