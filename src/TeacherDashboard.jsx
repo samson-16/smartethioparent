@@ -1,119 +1,81 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
-import { v4 as uuidv4 } from "uuid";
 import Datetime from "react-datetime";
 import "react-datetime/css/react-datetime.css";
 import moment from "moment";
+import axios from "axios";
 
 const TeacherDashboard = ({ tasks, setTasks }) => {
   const [newTask, setNewTask] = useState({
-    id: "",
-    subject: "",
+    title: "",
     type: "",
-    dueDate: "",
-    givenDate: "",
+    deadline: "",
     description: "",
-    priority: "",
     status: "Incomplete",
+    details: 0,
   });
   const [editingId, setEditingId] = useState(null);
   const [error, setError] = useState("");
 
   const resetForm = () => {
     setNewTask({
-      id: "",
-      subject: "",
+      title: "",
       type: "",
-      dueDate: "",
-      givenDate: "",
+      deadline: "",
       description: "",
-      priority: "",
       status: "Incomplete",
+      details: 0,
     });
   };
 
+  const getCsrfToken = () => {};
+
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-
-    let finalValue = value;
-    if (name === "givenDate" || name === "dueDate") {
-      finalValue = value;
-    }
-
-    if (name === "subject") {
-      if (finalValue.length > 50) {
-        setError("Subject name cannot be more than 50 characters.");
-        return;
-      }
-
-      if (finalValue.length > 0 && !finalValue.match(/^[A-Z][a-zA-Z\s]*$/)) {
-        setError(
-          "Subject name must start with an uppercase letter and can only contain alphabet letters and spaces.",
-        );
-        return;
-      }
-    }
-
-    setNewTask({ ...newTask, [name]: finalValue });
+    setNewTask({ ...newTask, [name]: value });
   };
 
-  const handleAddTask = () => {
+  const handleAddTask = async () => {
+    const csrfToken = getCsrfToken();
+
     if (
-      !newTask.subject ||
+      !newTask.title ||
       !newTask.type ||
-      !newTask.dueDate ||
-      !newTask.givenDate ||
-      !newTask.description ||
-      !newTask.priority
+      !newTask.deadline ||
+      !newTask.description
     ) {
       setError("Please fill out all fields.");
       return;
     }
 
-    if (moment(newTask.dueDate).isBefore(newTask.givenDate)) {
-      setError("Due By date cannot be earlier than Assigned On date.");
-      return;
-    }
-
-    if (
-      moment(newTask.givenDate).isAfter(moment().add(9, "months")) ||
-      moment(newTask.dueDate).isAfter(moment().add(9, "months"))
-    ) {
-      setError(
-        "Assigned On and Due By dates cannot be more than 9 months in the future.",
-      );
-      return;
-    }
-
-    if (
-      moment(newTask.givenDate).isBefore(moment().subtract(9, "months")) ||
-      moment(newTask.dueDate).isBefore(moment().subtract(9, "months"))
-    ) {
-      setError(
-        "Assigned On and Due By dates cannot be more than 9 months in the past.",
-      );
-      return;
-    }
-
-    if (moment(newTask.dueDate).diff(newTask.givenDate, "days") < 1) {
-      setError(
-        "There must be at least a 1-day difference between the Assigned On and Due By dates.",
-      );
-      return;
-    }
-
     setError("");
-    if (editingId) {
-      setTasks(
-        tasks.map((task) =>
-          task.id === editingId ? { ...newTask, status: "Incomplete" } : task,
-        ),
+
+    const taskToAdd = {
+      ...newTask,
+      status: "Incomplete",
+      deadline: new Date(newTask.deadline).toISOString(),
+      details: parseInt(newTask.details),
+    };
+
+    try {
+      const response = await axios.post(
+        "http://127.0.0.1:8000/api/tasks/",
+        taskToAdd,
+        {
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            "X-CSRFToken": csrfToken,
+          },
+        },
       );
-      setEditingId(null);
-    } else {
-      setTasks([...tasks, { ...newTask, id: uuidv4(), status: "Incomplete" }]);
+
+      setTasks([...tasks, response.data]);
+
+      resetForm();
+    } catch (error) {
+      console.error("Error adding task:", error);
     }
-    resetForm();
   };
 
   const handleEditTask = (task) => {
@@ -155,16 +117,18 @@ const TeacherDashboard = ({ tasks, setTasks }) => {
           </div>
         )}
         <div className="flex items-center mb-2">
-          <label htmlFor="subject" className="mr-2 w-28">
-            Subject
+          <label htmlFor="title" className="mr-2 w-28">
+            Title
           </label>
           <input
-            id="subject"
-            name="subject"
-            value={newTask.subject}
+            id="title"
+            name="title"
+            value={newTask.title}
             onChange={handleInputChange}
-            placeholder="Subject"
+            placeholder="Title"
             className="border border-gray-300 rounded-md p-2 w-full"
+            maxLength={255}
+            minLength={1}
           />
         </div>
         <div className="flex items-center mb-2">
@@ -179,52 +143,22 @@ const TeacherDashboard = ({ tasks, setTasks }) => {
             className="border border-gray-300 rounded-md p-2 w-full"
           >
             <option value="">Select Type</option>
-            <option value="Homework">Homework</option>
-            <option value="Assignment">Assignment</option>
+            <option value="homework">Homework</option>
+            <option value="assignment">Assignment</option>
           </select>
-        </div>
-        <div className="flex items-center mb-2">
-          <label htmlFor="assignedOn" className="mr-2 w-28">
-            Assigned On
-          </label>
-          <Datetime
-            inputProps={{ id: "assignedOn", placeholder: "Assigned On" }}
-            value={newTask.givenDate}
-            onChange={(date) =>
-              handleInputChange({ target: { name: "givenDate", value: date } })
-            }
-            className="border border-gray-300 rounded-md p-2 w-full"
-          />
         </div>
         <div className="flex items-center mb-2">
           <label htmlFor="dueBy" className="mr-2 w-28">
-            Due By
+            Deadline
           </label>
           <Datetime
-            inputProps={{ id: "dueBy", placeholder: "Due By" }}
-            value={newTask.dueDate}
+            inputProps={{ id: "dueBy", placeholder: "Deadline" }}
+            value={newTask.deadline}
             onChange={(date) =>
-              handleInputChange({ target: { name: "dueDate", value: date } })
+              handleInputChange({ target: { name: "deadline", value: date } })
             }
             className="border border-gray-300 rounded-md p-2 w-full"
           />
-        </div>
-        <div className="flex items-center mb-2">
-          <label htmlFor="priority" className="mr-2 w-28">
-            Priority
-          </label>
-          <select
-            id="priority"
-            name="priority"
-            value={newTask.priority}
-            onChange={handleInputChange}
-            className="border border-gray-300 rounded-md p-2 w-full"
-          >
-            <option value="">Select Priority</option>
-            <option value="High">High</option>
-            <option value="Medium">Medium</option>
-            <option value="Low">Low</option>
-          </select>
         </div>
         <div className="flex items-center mb-2">
           <label htmlFor="description" className="mr-2 w-28">
@@ -237,7 +171,24 @@ const TeacherDashboard = ({ tasks, setTasks }) => {
             onChange={handleInputChange}
             placeholder="Description"
             className="border border-gray-300 rounded-md p-2 w-full"
+            minLength={1}
           />
+        </div>
+        <div className="flex items-center mb-2">
+          <label htmlFor="details" className="mr-2 w-28">
+            Details
+          </label>
+          <select
+            id="details"
+            name="details"
+            value={newTask.details}
+            onChange={handleInputChange}
+            className="border border-gray-300 rounded-md p-2 w-full"
+          >
+            <option value={0}>Low</option>
+            <option value={1}>Medium</option>
+            <option value={2}>High</option>
+          </select>
         </div>
         <button
           onClick={handleAddTask}
@@ -248,57 +199,65 @@ const TeacherDashboard = ({ tasks, setTasks }) => {
       </div>
       <div className="border border-gray-300 rounded-md p-4 mt-4 transition-colors duration-500 ease-in-out hover:bg-gray-100">
         <h2 className="text-xl font-bold mb-4">Tasks</h2>
-        {tasks.map((task) => (
-          <div
-            key={task.id}
-            className="mb-4 p-4 bg-gray-100 rounded-md shadow-lg transition-colors duration-500 ease-in-out hover:bg-gray-200 hover:shadow-xl"
-          >
-            <h3 className="text-lg font-bold mb-4 text-blue-600">
-              {task.subject}
-            </h3>
-            <p className="mb-2 flex">
-              <span className="font-semibold w-32 text-gray-700">Type:</span>{" "}
-              <span>{task.type}</span>
-            </p>
-            <p className="mb-2 flex">
-              <span className="font-semibold w-32">Assigned On:</span>{" "}
-              {task.givenDate.format("MM/DD/YYYY hh:mm A")}
-            </p>
-            <p className="mb-2 flex">
-              <span className="font-semibold w-32">Due By:</span>{" "}
-              {task.dueDate.format("MM/DD/YYYY hh:mm A")}
-            </p>
-            <p className="mb-2 flex">
-              <span className="font-semibold w-32">Status:</span>
+        {tasks.map((task) => {
+          const deadline = moment(task.deadline);
+          const assignedOn = moment(task.assignedOn);
+
+          return (
+            <div
+              key={task.id}
+              className="mb-4 p-4 bg-gray-100 rounded-md shadow-lg transition-colors duration-500 ease-in-out hover:bg-gray-200 hover:shadow-xl"
+            >
+              <h3 className="text-lg font-bold mb-4 text-blue-600">
+                {task.title}
+              </h3>
+              <p className="mb-2 flex">
+                <span className="font-semibold w-32">Type:</span> {task.type}
+              </p>
+              <p className="mb-2 flex">
+                <span className="font-semibold w-32">Date:</span>{" "}
+                {assignedOn.format("MM/DD/YYYY hh:mm A")}
+              </p>
+              <p className="mb-2 flex">
+                <span className="font-semibold w-32">Deadline:</span>{" "}
+                {deadline.format("MM/DD/YYYY hh:mm A")}
+              </p>
+              <p className="mb-2 flex">
+                <span className="font-semibold w-32">Status:</span>
+                <button
+                  onClick={() => handleToggleComplete(task.id)}
+                  className="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded w-28"
+                >
+                  {task.status === "Incomplete" ? "Incomplete" : "Complete"}
+                </button>
+              </p>
+              <p className="mb-2 flex">
+                <span className="font-semibold w-32">Description:</span>{" "}
+                {task.description}
+              </p>
+              <p className="mb-2 flex">
+                <span className="font-semibold w-32">Details:</span>{" "}
+                {task.details === 0
+                  ? "Low"
+                  : task.details === 1
+                    ? "Medium"
+                    : "High"}
+              </p>
               <button
-                onClick={() => handleToggleComplete(task.id)}
-                className="bg-blue-500 hover:bg-blue-700 text-white py-2 px-4 rounded w-28"
+                onClick={() => handleEditTask(task)}
+                className="bg-green-500 hover:bg-green-700 text-white rounded-md px-4 py-2 mt-3 transition-colors duration-500 ease-in-out w-24"
               >
-                {task.status === "Incomplete" ? "Incomplete" : "Complete"}
+                Edit
               </button>
-            </p>
-            <p className="mb-2 flex">
-              <span className="font-semibold w-32">Priority:</span>{" "}
-              {task.priority}
-            </p>
-            <p className="mb-2 flex">
-              <span className="font-semibold w-32">Description:</span>{" "}
-              {task.description}
-            </p>
-            <button
-              onClick={() => handleEditTask(task)}
-              className="bg-green-500 hover:bg-green-700 text-white rounded-md px-4 py-2 mt-3 transition-colors duration-500 ease-in-out w-24"
-            >
-              Edit
-            </button>
-            <button
-              onClick={() => handleRemoveTask(task.id)}
-              className="bg-red-500 hover:bg-red-700 text-white rounded-md px-4 py-2 mt-3 ml-3 transition-colors duration-500 ease-in-out w-24"
-            >
-              Remove
-            </button>
-          </div>
-        ))}
+              <button
+                onClick={() => handleRemoveTask(task.id)}
+                className="bg-red-500 hover:bg-red-700 text-white rounded-md px-4 py-2 mt-3 ml-3 transition-colors duration-500 ease-in-out w-24"
+              >
+                Remove
+              </button>
+            </div>
+          );
+        })}
       </div>
     </div>
   );
@@ -307,14 +266,13 @@ const TeacherDashboard = ({ tasks, setTasks }) => {
 TeacherDashboard.propTypes = {
   tasks: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.string,
-      subject: PropTypes.string,
-      type: PropTypes.string,
-      dueDate: PropTypes.instanceOf(moment),
-      givenDate: PropTypes.instanceOf(moment),
-      description: PropTypes.string,
-      status: PropTypes.string,
-      priority: PropTypes.string,
+      id: PropTypes.number.isRequired,
+      title: PropTypes.string.isRequired,
+      type: PropTypes.oneOf(["homework", "assignment"]).isRequired,
+      deadline: PropTypes.string.isRequired,
+      description: PropTypes.string.isRequired,
+      status: PropTypes.string.isRequired,
+      details: PropTypes.number.isRequired,
     }),
   ).isRequired,
   setTasks: PropTypes.func.isRequired,
