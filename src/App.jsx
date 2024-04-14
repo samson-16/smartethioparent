@@ -124,7 +124,7 @@ function App() {
         <Route path="/register" element={<RegisterAndLogout />} />
         <Route path="*" element={<NotFound />} />
         <Route path="/landingpage" element={<LandingPage />} />
-        <Route path="/Result" element={<Result />} />
+        <Route path="/Result/*" element={<Result />} />
         <Route path="/:Id" element={<ResultDetail />} />
         <Route path="/GradeData" element={<ManageData />} />
         <Route path="/StudentData" element={<ManageStudents />} />
