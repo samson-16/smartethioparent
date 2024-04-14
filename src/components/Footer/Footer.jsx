@@ -6,6 +6,7 @@ import {
   FaTwitter,
   FaYoutube,
 } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -13,7 +14,7 @@ const Footer = () => {
       <div className="container mx-auto">
         <div className="flex flex-wrap justify-center mt-4 md:mt-0">
           {[
-            "About",
+            { name: "About", link: "/src/About.jsx" },
             "Contact",
             "Support Center",
             "Community",
@@ -21,9 +22,15 @@ const Footer = () => {
             "Terms of Service",
           ].map((item, index, array) => (
             <span key={index} className="mr-4">
-              <a href="#" className="hover:text-gray-400">
-                {item}
-              </a>
+              {typeof item === "object" ? (
+                <Link to={item.link} className="hover:text-gray-400">
+                  {item.name}
+                </Link>
+              ) : (
+                <a href="#" className="hover:text-gray-400">
+                  {item}
+                </a>
+              )}
               {index !== array.length - 1 && <span className="ml-4">•</span>}
             </span>
           ))}
@@ -32,7 +39,7 @@ const Footer = () => {
           <div className="mr-2">
             <FaCopyright />
           </div>
-          <div>2024 SmartEthioParent. All rights reserved.</div>
+          <div>2024 SmartEthios. All rights reserved.</div>
           <div className="flex ml-8">
             {[
               { icon: FaFacebook, link: "#" },
