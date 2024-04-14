@@ -19,20 +19,21 @@ const Footer = () => {
             "Community",
             "Privacy Policy",
             "Terms of Service",
-          ].map((item, index, array) => (
-            <span key={index} className="mr-4">
-              <a href="#" className="hover:text-gray-400">
-                {item}
-              </a>
-              {index !== array.length - 1 && <span className="ml-4">•</span>}
+          ].map((item, index) => (
+            <span key={index} className="mb-2">
+              {typeof item === "string" ? (
+                <a href="#" className="hover:text-gray-400">
+                  {item}
+                </a>
+              ) : (
+                <Link to={item.link} className="hover:text-gray-400">
+                  {item.name}
+                </Link>
+              )}
             </span>
           ))}
         </div>
-        <div className="flex flex-wrap justify-center items-center mt-8">
-          <div className="mr-2">
-            <FaCopyright />
-          </div>
-          <div>2024 SmartEthioParent. All rights reserved.</div>
+        <div className="flex justify-center items-center mt-8">
           <div className="flex ml-8">
             {[
               { icon: FaFacebook, link: "#" },
@@ -47,6 +48,9 @@ const Footer = () => {
             ))}
           </div>
         </div>
+      </div>
+      <div className="mt-2 text-center">
+        <span>&copy;</span> 2024 SmartEthioParent. All rights reserved.
       </div>
     </footer>
   );
