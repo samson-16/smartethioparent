@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
+import moment from "moment";
 
 const TaskList = ({ tasks, filter }) => {
   const navigate = useNavigate();
@@ -12,14 +13,14 @@ const TaskList = ({ tasks, filter }) => {
     <table className="table-fixed w-full">
       <thead className="border-t-2 border-b-4 border-gray-300">
         <tr>
-          <th className="w-1/2 px-4 py-2 text-[#0F6CBF] text-left">Subject</th>
+          <th className="w-1/2 px-4 py-2 text-[#0F6CBF] text-left">Title</th>
           {filter === "All" && (
-            <th className="w-1/2 px-4 py-2 text-[#0F6CBF] text-left">Type</th>
+            <>
+              <th className="w-1/4 px-4 py-2 text-[#0F6CBF] text-left">Type</th>
+              <th className="w-1/4 px-4 py-2 text-[#0F6CBF] text-left">Date</th>
+            </>
           )}
-          <th className="w-1/2 px-4 py-2 text-[#0F6CBF] text-left">
-            Given Date
-          </th>
-          <th className="w-1/2 px-4 py-2 text-[#0F6CBF] text-left">Due Date</th>
+          <th className="w-1/4 px-4 py-2 text-[#0F6CBF] text-left">Deadline</th>
         </tr>
       </thead>
       <tbody>
@@ -27,12 +28,20 @@ const TaskList = ({ tasks, filter }) => {
           <tr
             key={task.id}
             className={`${index % 2 === 0 ? "bg-gray-100" : "bg-white"} hover:bg-gray-200 border-gray-300 border-t-2 cursor-pointer`}
-            onClick={() => navigate(`/tasks/${task.id}`)}
+            onClick={() => navigate(/tasks/`${task.id}`)}
           >
-            <td className="px-4 py-2">{task.subject}</td>
-            {filter === "All" && <td className="px-4 py-2">{task.type}</td>}
-            <td className="px-4 py-2">{task.givenDate}</td>
-            <td className="px-4 py-2">{task.dueDate}</td>
+            <td className="px-4 py-2">{task.title}</td>
+            {filter === "All" && (
+              <>
+                <td className="px-4 py-2">{task.type}</td>
+                <td className="px-4 py-2">
+                  {moment(task.date).format("YYYY-MM-DD")}
+                </td>
+              </>
+            )}
+            <td className="px-4 py-2">
+              {moment(task.deadline).format("YYYY-MM-DD hh:mm A")}
+            </td>
           </tr>
         ))}
       </tbody>
@@ -44,14 +53,10 @@ TaskList.propTypes = {
   tasks: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,
-      subject: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
       type: PropTypes.string.isRequired,
-      dueDate: PropTypes.string.isRequired,
-      givenDate: PropTypes.string.isRequired,
-      description: PropTypes.string.isRequired,
-      teacher: PropTypes.string.isRequired,
-      status: PropTypes.string.isRequired,
-      priority: PropTypes.string.isRequired,
+      date: PropTypes.string.isRequired,
+      deadline: PropTypes.string.isRequired,
     }),
   ).isRequired,
   filter: PropTypes.string.isRequired,

@@ -17,19 +17,24 @@ const useFetchAssignments = () => {
       const fetchAssignments = async () => {
         try {
           // Replace the URL with your actual endpoint and uncomment the teacherId part if needed
-          const response = await axios.get(`http://localhost:3001/assignments`);
+          const response = await axios.get(`http://localhost:8000/api/tasks/`);
           const today = new Date();
           const oneWeekAgo = new Date(today.setDate(today.getDate() - 7));
-
-          const recentAssignments = response.data.filter((assignment) => {
-            const dueDate = new Date(assignment.due_date);
+                 setAssignments(response.data);
+                 
+                 const assignmentData = response.data.filter(
+                  (assignments) => assignments.type === "assignment"
+                );
+                // console.log(assignmentData)
+          const recentAssignments = assignmentData.filter((assignmentData) => {
+            const dueDate = new Date(assignmentData.deadline);
             return dueDate >= oneWeekAgo;
           });
 
           const sortedAssignments = recentAssignments.sort(
-            (a, b) => new Date(b.due_date) - new Date(a.due_date)
+            (a, b) => new Date(b.deadline) - new Date(a.deadline)
           );
-
+            // console.log(sortedAssignments)
           setAssignments(sortedAssignments);
         } catch (error) {
           console.error("Error fetching assignments:", error);

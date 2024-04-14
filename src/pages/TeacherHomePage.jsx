@@ -1,9 +1,9 @@
-// import React from "react";
+import React from "react";
 import useFetchAssignments from "../components/Fetch/useFetchAssignments";
 import useFetchHomework from "../components/Fetch/useFetchHomeWork";
 import useFetchSections from "../components/Fetch/section";
 import WelcomeSection from "../components/Fetch/Welcome";
-import useFetchRecentMessages from "../components/Fetch/useFetchrecentMessages";
+// import useFetchRecentMessages from "../components/Fetch/useFetchrecentMessages";
 import Lottie from "lottie-react";
 import animationData from "../assets/teacher.json";
 
@@ -13,21 +13,21 @@ function TeacherHomePage() {
   const { homework, loading: loadingHomework } = useFetchHomework();
   const { sections, loading: loadingSections } = useFetchSections();
   const { name, loading: loadingName } = WelcomeSection();
-  const { messages, loading: loadingMessages } = useFetchRecentMessages();
+  // const { messages, loading: loadingMessages } = useFetchRecentMessages();
   // const { announcement, loading: loadingAnoucment } = Anouncment();
   if (
     loadingAssignments ||
     loadingHomework ||
     loadingSections ||
-    loadingName ||
-    loadingMessages
+    loadingName 
+    // loadingMessages
     // loadingAnoucment
   )
     return <div>loading...</div>;
   return (
     <div className="w-full h-full bg-gray-100 text-gray-800 text-customText font-sans">
       <div className="container grid grid-rows-4-auto gap-5 p-5 mx-auto max-w-none">
-        <div>{/* <Lottie animationData={animationData} /> */}</div>
+        <div><Lottie animationData={animationData} /></div>
         <nav className="nav"></nav>
         <div className="welcome-sec flex shadow-md border-b border-gray-300 bg-blue-800 rounded-lg">
           <div>
@@ -53,7 +53,7 @@ function TeacherHomePage() {
               </div>
             ))}
           </div>
-        </div>
+          </div>
 
         <div className="cont flex gap-20">
           <div className="section bg-white rounded-lg shadow p-5 w-[270px] h-fit">
@@ -75,7 +75,11 @@ function TeacherHomePage() {
             ) : (
               <p>No sections to display.</p>
             )}
+          </div> 
           </div>
+
+
+          
           <div className="assignment bg-white rounded-lg shadow p-5 w-[400px] h-fit">
             <h2 className="ass-title text-2xl font-semibold text-blue-500 mb-4">
               Assignmensts given
@@ -97,6 +101,7 @@ function TeacherHomePage() {
               <p>No recent assignments found.</p>
             )}
           </div>
+
           <div className="homework bg-white rounded-lg shadow p-5 w-[400px] h-fit">
             <h2 className="hw-title text-2xl font-semibold text-blue-500 mb-4">
               Todays Homework
@@ -111,7 +116,7 @@ function TeacherHomePage() {
                   >
                     <strong>{hw.title}</strong> - {hw.description}
                     <br />
-                    Assigned Date: {hw.assigned_date}, Due Date: {hw.due_date}
+                    {/* Assigned Date: {hw.assigned_date}, Due Date: {hw.due_date} */}
                   </li>
                 ))}
               </ul>
@@ -119,9 +124,10 @@ function TeacherHomePage() {
               <p>No homework for today.</p>
             )}
           </div>
-        </div>
-        <div className="contt flex justify-around">
-          {/* <div className="anoucment">
+        
+        
+       {/* <div className="contt flex justify-around"> 
+          <div className="anoucment">
          
           <h1>Announcements</h1>
           {announcement.map((announcement) => (
@@ -133,7 +139,7 @@ function TeacherHomePage() {
             </div>
           ))}
         </div> */}
-        </div>
+        {/* </div>
         <div className="conttt flex gap-20">
           <div className="result bg-white rounded-lg shadow p-5 w-[270px] border-l-4 border-blue-800 h-fit">
             <h2 className="result-title text-2xl font-semibold   text-blue-500 mb-4">
@@ -151,14 +157,15 @@ function TeacherHomePage() {
               messages.map((message) => (
                 <div key={message.message_id} className="rounded-md p-4 mb-1">
                   <p>{message.content}</p>
-                  {/* <span>{new Date(message.timestamp).toLocaleString()}</span> */}
+                  <span>{new Date(message.timestamp).toLocaleString()}</span>
                 </div>
               ))
             ) : (
               <p>No recent messages.</p>
             )}
-          </div>
-        </div>
+          </div> 
+          </div> */}
+          
       </div>
     </div>
   );
