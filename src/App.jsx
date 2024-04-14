@@ -16,6 +16,7 @@ import Register from './components/Register.jsx';
 import Parent from './components/Parent.jsx';
 import Teacher from './components/Teacher.jsx';
 import Admin from './components/Admin.jsx';
+import Parents from "./pages/Parent_dashbord/Parents.jsx";
 
 function Logout() {
   localStorage.clear();
@@ -78,6 +79,8 @@ function App() {
         <Route path="/GradeData" element={<ManageData />} />
         <Route path="/StudentData" element={<ManageStudents />} />
         <Route path="/TeacherData" element={<ManageTeachers />} />
+
+        <Route path="/Parents" element={<Parents />} />
         </Routes>
     </>
   );
