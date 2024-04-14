@@ -78,16 +78,13 @@ const Resources = () => {
           headers: {
             "Content-Type": "multipart/form-data",
           },
-        }
+        },
       );
       console.log("Resource created successfully:", response.data);
-      setShowModal(false)
+      setShowModal(false);
     } catch (error) {
       console.error(error);
     }
-
-   
-    
   };
 
   const downloadResource = async (resourceId, resourceTitle) => {
