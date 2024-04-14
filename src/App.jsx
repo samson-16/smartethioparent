@@ -5,7 +5,7 @@ import Login from "./pages/Login.jsx";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Result from "./pages/Teacher/Result/Result.jsx";
 import ResultDetail from "./pages/Teacher/Result/ResultDetail/ResultDetail.jsx";
-// import ManageTeachers from "./pages/Admin/ManageTeacher/ManageTeachers.jsx";
+import ManageTeachers from "./pages/Admin/ManageTeacher/ManageTeachers.jsx";
 import Teachers from './pages/Admin/ManageTeacher/Teacher.jsx'
 import ManageData from "./pages/Admin/ManageGrade/ManageGrade";
 import ManageStudents from "./pages/Admin/ManageStudent/ManageStudents.jsx";
@@ -16,10 +16,6 @@ import Register from "./components/Register.jsx";
 import Teacher from "./components/Teacher.jsx";
 import Admin from "./components/Admin.jsx";
 import Resources from "./pages/Admin/Resource/Resources.jsx";
-
-
-
-
 import { AuthProvider } from "./components/AuthContext.jsx";
 
 // import TeacherData from "./pages/Admin/TeacherData/TeacherData.jsx";
@@ -33,11 +29,13 @@ import Parents from "./pages/Parent_dashbord/Parents.jsx";
 import TasksPage from "./pages/Parent_dashbord/TasksPage.jsx";
 import Assignments from "./pages/Parent_dashbord/Assignments.jsx";
 import AllMessages from "./pages/Parent_dashbord/AllMessages.jsx";
-import Profile from "./pages/Parent_dashbord/Profile.jsx";
+import Profile from "./pages/Parent_dashbord/profile.jsx";
 import TeacherProfile from "./pages/Teacher/TeacherProfile.jsx";
 
 import Chat from "./pages/Teacher/Chat.jsx";
 import TeacherHomePage from "./pages/Teacher/Home/TeacherHomePage.jsx";
+import ResourceTeacher from "./pages/Teacher/ResourceTeacher.jsx";
+
 
 
 function Logout() {
@@ -137,7 +135,7 @@ function App() {
         <Route path="/parent/profile" element={<Profile/>} />
         <Route path="/teacher/profile" element={<TeacherProfile/>} />
         <Route path="/teacher/chat" element={<Chat/>} />
-
+        <Route path="/teacher/resources" element={<ResourceTeacher/>} />
 
 
         <Route path="/" element={<Navigate to="/tasks" />} />

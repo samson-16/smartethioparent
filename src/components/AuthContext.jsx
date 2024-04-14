@@ -26,8 +26,7 @@ const AuthProvider = ({ children }) => {
       return null;
     }
   }
-    const [user, setUser] = useState(null);
-    const navigate = useNavigate();
+   
 
 
     async function fetchParentInfo(id) {
