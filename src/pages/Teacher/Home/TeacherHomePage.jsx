@@ -1,4 +1,4 @@
-import React,{useContext} from "react";
+import React,{useContext, useState, useEffect} from "react";
 import useFetchAssignments from "../../../components/Fetch/useFetchAssignments";
 import useFetchHomework from "../../../components/Fetch/useFetchHomeWork";
 // import useFetchSections from "../../../components/Fetch/section";
@@ -7,20 +7,36 @@ import WelcomeSection from "../../../components/Fetch/Welcome";
 import Lottie from "lottie-react";
 import animationData from "../../../assets/teacher.json";
 import { AuthContext } from "../../../components/AuthContext";
-
+import FadeLoader from 'react-spinners/FadeLoader'
 
 
 // import Anouncment from "./anoucment page";
 function TeacherHomePage() {
-
+  const [loading, setLoading] = useState(true);
   const {user}= useContext(AuthContext)
-  if (!user) {
-    // Render a loading state or redirect the user to the login page
-    return <div>Loading...</div>;
+  
+
+useEffect(() => {
+  if (user !== null) {
+    setLoading(false);
+  }
+}, [user]);
+
+console.log("user",user);
+
+if (loading) {
+  return (
+    <>
+    <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-100 z-50">
+    <FadeLoader color="#36d7b7" />;
+  </div>
+    </>
+  )
 }
   console.log("user",user);
     
-  const account=user.user;
+  // const account=user.user;
+  const { user: account, classes } = user;
 
   // const { assignments, loading: loadingAssignments } = useFetchAssignments();
   // const { homework, loading: loadingHomework } = useFetchHomework();
@@ -65,32 +81,34 @@ function TeacherHomePage() {
           </div>
 
        
-          {/* </div> */}
+          </div>
 
           {/* <div>Homepage</div> */}
 
-        {/* <div className="cont flex gap-20">
+          <div className="cont flex gap-20">
           <div className="section bg-white rounded-lg shadow p-5 w-[270px] h-fit">
             <h2 className="sec-title text-2xl font-semibold text-blue-500 mb-4">
               Sections Taught
             </h2>
-            {sections.length > 0 ? (
+            {classes.length > 0 ? (
               <ul>
-                {sections.map((section) => (
+                {classes.map((cls) => (
                   <li
-                    key={section.section_id}
-                    // className="card"
+                    key={cls.id}
                     className="bg-gray-100 mb-2 p-4 rounded-md border-l-4 border-blue-800"
                   >
-                    Class:{section.section}
+                    Grade: {cls.grade.grade}, Section: {cls.section.section},{" "}
+                    Subject: {cls.subject.subject}
                   </li>
                 ))}
               </ul>
             ) : (
               <p>No sections to display.</p>
             )}
-          </div> 
-          </div> */}
+          </div>
+        </div>
+
+          <div>
 
 
 {/*           

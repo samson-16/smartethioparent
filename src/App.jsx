@@ -3,8 +3,8 @@ import LandingPage from "./pages/LandingPage";
 // import ResponsiveAppBar from "./components/NabBar.jsx";
 import Login from "./pages/Login.jsx";
 import { Routes, Route, Navigate } from "react-router-dom";
-import Result from "./pages/Teacher/Result/Result.jsx";
-import ResultDetail from "./pages/Teacher/Result/ResultDetail/ResultDetail.jsx";
+// import Result from "./pages/Teacher/Result/Result.jsx";
+// import ResultDetail from "./pages/Teacher/Result/ResultDetail/ResultDetail.jsx";
 // import ManageTeachers from "./pages/Admin/ManageTeacher/ManageTeachers.jsx";
 import Teachers from './pages/Admin/ManageTeacher/Teacher.jsx'
 import ManageData from "./pages/Admin/ManageGrade/ManageGrade";
@@ -74,14 +74,15 @@ function App() {
               </ProtectedRoute>
             }
           />
-          <Route
+    
+          {/* <Route
             path="/parent"
             element={
               <ProtectedRoute>
                 <Parent />
               </ProtectedRoute>
             }
-          />
+          /> */}
           <Route
             path="/teacher"
             element={
@@ -92,52 +93,16 @@ function App() {
           />
           <Route path="/login" element={<Login />} />
           <Route path="/logout" element={<Logout />} />
-          <Route path="/register" element={<RegisterAndLogout />} />
-          <Route path="*" element={<NotFound />} />
-          <Route
-            path="/"
-            element={
-              <ProtectedRoute>
-                <Home />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/admin"
-            element={
-              <ProtectedRoute>
-                <Admin />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/parent"
-            element={
-              <ProtectedRoute>
-                <Parent />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/teacher"
-            element={
-              <ProtectedRoute>
-                <Teacher />
-              </ProtectedRoute>
-            }
-          />
-          <Route path="/login" element={<Login />} />
-          <Route path="/logout" element={<Logout />} />
-          <Route path="/register" element={<RegisterAndLogout />} />
+          {/* <Route path="/register" element={<RegisterAndLogout />} /> */}
           <Route path="*" element={<NotFound />} />
           <Route path="/landingpage" element={<LandingPage />} />
-          <Route path="/Result" element={<Result />} />
-          <Route path="/:Id" element={<ResultDetail />} />
-          <Route path="/GradeData" element={<ManageData />} />
-          <Route path="/StudentData" element={<ManageStudents />} />
+          {/* <Route path="/Result" element={<Result />} /> */}
+          {/* <Route path="/:Id" element={<ResultDetail />} /> */}
+          {/* <Route path="/GradeData" element={<ManageData />} /> */}
+          {/* <Route path="/StudentData" element={<ManageStudents />} /> */}
           {/* <Route path="/TeacherData" element={<ManageTeachers />} /> */}
-          <Route path="/resources" element={<Resources />} />
-          <Route path="/" element={<Navigate to="/tasks" />} />
+          {/* <Route path="/resources" element={<Resources />} /> */}
+          {/* <Route path="/" element={<Navigate to="/tasks" />} /> */}
           <Route
             path="/tasks/*"
             element={<Task tasks={tasks} setTasks={setTasks} filter={filter} />}
@@ -146,7 +111,7 @@ function App() {
             path="/teachers/*"
             element={<TeacherDashboard tasks={tasks} setTasks={setTasks} />}
           />
-          <Route path="/students" element={<Students />} />
+          {/* <Route path="/students" element={<Students />} /> */}
           <Route path="/Teacherhomepage" element={<TeacherHomePage />} />
 
           <Route path="/Parents" element={<Parents />} />
