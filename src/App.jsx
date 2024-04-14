@@ -16,7 +16,6 @@ import Parent from "./components/Parent.jsx";
 import Teacher from "./components/Teacher.jsx";
 import Admin from "./components/Admin.jsx";
 import Resources from "./pages/Admin/Resource/Resources.jsx";
-import TeacherData from "./pages/Admin/TeacherData/TeacherData.jsx";
 import Students from "./pages/Admin/Students/Students.jsx";
 import Task from './Task.jsx'
 import TeacherDashboard from "./TeacherDashboard.jsx";
@@ -81,7 +80,7 @@ function App() {
         <Route path="/register" element={<RegisterAndLogout />} />
         <Route path="*" element={<NotFound />} />
         <Route path="/landingpage" element={<LandingPage />} />
-        <Route path="/Result" element={<Result />} />
+        <Route path="/Result/*" element={<Result />} />
         <Route path="/:Id" element={<ResultDetail />} />
         <Route path="/GradeData" element={<ManageData />} />
         <Route path="/StudentData" element={<ManageStudents />} />
