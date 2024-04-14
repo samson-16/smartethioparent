@@ -8,7 +8,9 @@ const useFetchSections = () => {
   useEffect(() => {
     const fetchSections = async () => {
       try {
-        const response = await axios.get(`http://localhost:3001/sections`);
+        // const response = await axios.get(`http://localhost:8000/api/class-subjects/?teacher=${id}`);
+        const response = await axios.get(`http://localhost:8000/api/class-subjects/`);
+
         setSections(response.data);
       } catch (error) {
         console.error("Error fetching sections:", error);

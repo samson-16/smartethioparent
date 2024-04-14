@@ -1,0 +1,28 @@
+[
+    {
+      "id": 1,
+      "title": "Assignment 1",
+      "course": "Math",
+      "dueDate": "2024-04-10"
+    },
+    {
+      "id": 2,
+      "title": "Assignment 2",
+      "course": "Science",
+      "dueDate": "2024-04-15"
+    },
+    
+    {
+        "id": 4,
+        "title": "Assignment 4",
+        "course": "History",
+        "dueDate": "2024-06-1"
+      },
+      {
+        "id": 5,
+        "title": "Assignment 5",
+        "course": "History",
+        "dueDate": "2024-06-3"
+      }
+   
+  ]

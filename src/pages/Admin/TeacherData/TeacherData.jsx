@@ -3,12 +3,6 @@ import React,{useState, useEffect} from 'react'
 import { DataGrid } from "@mui/x-data-grid";
 import {
   Button,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
-  TextField,
-  MenuItem,
   Box,
 } from "@mui/material";
 
@@ -21,23 +15,8 @@ const columns = [
 
     ];
 const TeacherData = () => {
-    const [data, setData] = useState([
-        {
-          id: 1,
-          first_name: "Grade 1",
-          last_name: ["A", "B", "C", "D"],
-          email: ["English", "Math", "Science"],
-          phone: ["English", "Math", "Science"],
-
-        },
-        {
-          id: 2,
-          grade: "Grade 2",
-          sections: ["A", "B", "C"],
-          subjects: ["Social Studies", "Art"],
-        },
-      ]);
-     const [open, setOpen] = React.useState(false);
+    const [rows, setRows] = useState([]);
+     const [open, setOpen] = useState(false);
 
         const [newTeacher, setNewTeacher] = useState({
         id: "",
