@@ -3,7 +3,8 @@ import React, { useState, useEffect } from "react";
 //components
 import RecentAssignments from './recentAssignment';
 import Profile from "./profile";
-
+import RecentResult from "./recentResult";
+import RecentHomework from "./recentHomework";
 //react-icons
 import { FaUser } from "react-icons/fa";
 import { AiOutlineMessage } from "react-icons/ai";
@@ -196,7 +197,7 @@ export default function Parents() {
      
         <div className="flex-grow bg-white p-4">
           {activeTab === "messages" && (
-            <div className="border border-solid h-32 w-auto">
+            <div className="border border-solid h-auto w-auto">
              <div className="flex justify-between">
                 <h1 className="text-xl font-bold ml-3">Messages</h1>
                 <a href="#" className="text-blue-500 hover:underline">
@@ -206,22 +207,25 @@ export default function Parents() {
             </div>
           )}
           {activeTab === "profile" && (
-            <div className="border border-solid h-32">
+            <div className="border border-solid h-auto">
               <div>
                 <h1 className="text-xl font-bold ml-3">Profile</h1>
               </div>
-              <div>
+              <div className="m-3 p-3">
                 <Profile></Profile>
               </div>
             </div>
           )}
            {activeTab === "homework" && (
-            <div className="border border-solid h-32">
+            <div className="border border-solid h-auto">
              <div className="flex justify-between">
                 <h1 className="text-xl font-bold ml-3">Homework</h1>
                 <a href="#" className="text-blue-500 hover:underline">
                   See all
                 </a>
+              </div>
+              <div className="m-3 p-3">
+                <RecentHomework />
               </div>
             </div>
           )}
@@ -239,12 +243,16 @@ export default function Parents() {
             </div>
           )}
           {activeTab === "result" && (
-            <div className="border border-solid h-32">
+            <div className="border border-solid h-auto">
              <div className="flex justify-between">
                 <h1 className="text-xl font-bold ml-3">Result</h1>
                 <a href="#" className="text-blue-500 hover:underline">
                   See all
                 </a>
+              </div>
+              <div className="m-3 p-3">
+              <RecentResult />
+                
               </div>
             </div>
           )}

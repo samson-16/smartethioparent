@@ -8,14 +8,16 @@ const RecentAssignments = () => {
   useEffect(() => {
     const fetchAssignments = async () => {
       try {
-        const response = await fetch('/assignments.json');
+        const response = await fetch('http://127.0.0.1:8000/api/tasks/');
         const data = await response.json();
-        const sortedAssignments = data.sort((a, b) => new Date(b.dueDate) - new Date(a.dueDate));
+        const filteredTasks = data.filter((task) => task.type === 'Assignment');
+        const sortedAssignments = filteredTasks.sort((a, b) => new Date(b.deadline) - new Date(a.deadline));
         const recentAssignments = sortedAssignments.slice(0, 5); // Display only the first 5 assignments
         setAssignments(recentAssignments);
-        setLoading(false);
+        // setLoading(false);
       } catch (error) {
         setError('Error fetching assignments');
+        console.error('Error fetching asss tasks:', error);
         setLoading(false);
       }
     };
@@ -23,13 +25,13 @@ const RecentAssignments = () => {
     fetchAssignments();
   }, []);
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+  // if (loading) {
+  //   return <div>Loading...</div>;
+  // }
 
-  if (error) {
-    return <div>{error}</div>;
-  }
+  // if (error) {
+  //   return <div>{error}</div>;
+  // }
 
   const currentDate = new Date();
 
@@ -37,7 +39,7 @@ const RecentAssignments = () => {
     <div>
     <div className="block ">
       {assignments.map((assignment) => {
-        const dueDate = new Date(assignment.dueDate);
+        const dueDate = new Date(assignment.deadline);
         if (dueDate < currentDate) {
           return null;
         }
@@ -46,7 +48,7 @@ const RecentAssignments = () => {
             <div className='flex justify-between '>
               <h3 className="text-lg font-bold  ">{assignment.title}</h3>
               <p className="text-gray-600 ">Course: {assignment.course}</p>
-              <p className="text-gray-600">Due Date: {assignment.dueDate}</p>
+              <p className="text-gray-600">Due Date: {assignment.deadline}</p>
             </div>
           </div>
         );
