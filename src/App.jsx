@@ -12,7 +12,6 @@ import NotFound from "./components/NotFound.jsx";
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
 import Home from "./components/Home.jsx";
 import Register from "./components/Register.jsx";
-import Parent from "./components/Parent.jsx";
 import Teacher from "./components/Teacher.jsx";
 import Admin from "./components/Admin.jsx";
 import Resources from "./pages/Admin/Resource/Resources.jsx";
@@ -28,6 +27,13 @@ import TeacherHomePage from "./pages/TeacherHomePage.jsx";
 
 // import Footer from "./Footer";
 import Parents from "./pages/Parent_dashbord/Parents.jsx";
+import TasksPage from "./pages/Parent_dashbord/TasksPage.jsx";
+import Assignments from "./pages/Parent_dashbord/Assignments.jsx";
+import AllMessages from "./pages/Parent_dashbord/AllMessages.jsx";
+import Profile from "./pages/Parent_dashbord/Profile.jsx";
+import TeacherProfile from "./pages/Teacher/TeacherProfile.jsx";
+
+import Chat from "./pages/Teacher/Chat.jsx";
 
 function Logout() {
   localStorage.clear();
@@ -48,7 +54,6 @@ function App() {
   return (
     <>
     <AuthProvider>
-      <ResponsiveAppBar />
 
       <Routes>
          <Route
@@ -68,10 +73,10 @@ function App() {
         }
       />
       <Route
-        path="/parent"
+        path="/parents"
         element={
           <ProtectedRoute>
-            <Parent />
+            <Parents />
           </ProtectedRoute>
         }
       />
@@ -104,14 +109,6 @@ function App() {
           }
         />
         <Route
-          path="/parent"
-          element={
-            <ProtectedRoute>
-              <Parent />
-            </ProtectedRoute>
-          }
-        />
-        <Route
           path="/teacher"
           element={
             <ProtectedRoute>
@@ -130,6 +127,16 @@ function App() {
         <Route path="/StudentData" element={<ManageStudents />} />
         <Route path="/TeacherData" element={<ManageTeachers />} />
         <Route path="/resources" element={<Resources/>} />
+        <Route path="/resources" element={<Resources/>} />
+        <Route path="/student/assignments" element={<Assignments/>} />
+        <Route path="/student/homeworks" element={<TasksPage/>} />
+        <Route path="/parent/messages" element={<AllMessages/>} />
+        <Route path="/parent/profile" element={<Profile/>} />
+        <Route path="/teacher/profile" element={<TeacherProfile/>} />
+        <Route path="/teacher/chat" element={<Chat/>} />
+
+
+
         <Route path="/" element={<Navigate to="/tasks" />} />
           <Route
             path="/tasks/*"
@@ -142,7 +149,7 @@ function App() {
         <Route path="/students" element={<Students/>} />
         <Route path="/Teacherhomepage" element={<TeacherHomePage/>} />
 
-        <Route path="/Parents" element={<Parents />} />
+        {/* <Route path="/Parents" element={<Parents />} /> */}
         </Routes>
         </AuthProvider>
     </>

@@ -16,9 +16,11 @@ function getUserDataFromToken(accessToken) {
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const navigate = useNavigate();
+
+
     async function fetchParentInfo(id) {
         try {
-            const response = await api.get(`/api/parent/?id=${id}`);
+            const response = await api.get(`/api/parent/${id}/dashboard/`);
             return response.data;
         } catch (error) {
             console.error('Error fetching parent info:', error);
@@ -37,6 +39,34 @@ const AuthProvider = ({ children }) => {
             return null;
         }
     }
+
+    async function fetchRecentMessages(id) {
+        try {
+            const response = await api.get(`/messages/?receiver_id=${id}`);
+            console.log(response.data)
+            return response.data;
+
+
+        } catch (error) {
+            console.error('Error fetching messages', error);
+            return null;
+        }
+    }
+
+    async function fetchClasses(id){
+        try {
+            const response = await api.get(`/api/class-subjects/?teacher=${id}`
+            );
+            console.log(response.data);
+            return response.data;
+          } catch (error) {
+            console.error("Error fetching class-subjects:", error);
+            return [];
+
+    }
+
+}
+
 
     const login = async (email, password) => {
         const URL = import.meta.env.VITE_API_URL
@@ -60,7 +90,7 @@ const AuthProvider = ({ children }) => {
             setUser(user);
             switch (user.role) {
                 case 'parent':
-                    navigate("/parent");
+                    navigate("/parents");
                     break;
                 case 'teacher':
                     navigate("/teacher");
@@ -88,6 +118,7 @@ const AuthProvider = ({ children }) => {
         if (accessToken) {
             const userData = getUserDataFromToken(accessToken);
             const id = userData.user_id;
+            console.log(userData)
             const fetchData = async () => {
                 try {
                     const response = await axios.get(`http://127.0.0.1:8000/api/user/?id=${id}`);
@@ -96,11 +127,14 @@ const AuthProvider = ({ children }) => {
                     let user = { user_id: id, role: userInfo.role, user: userInfo };
                     if (userInfo.role === 'parent') {
                         const parentInfo = await fetchParentInfo(id);
-                        user = { ...user, parentInfo };
+                        const recentMessages = await fetchRecentMessages(id);
+                        user = { ...user, parentInfo , recentMessages};
                         console.log(user)
                     } else if (userInfo.role === 'teacher') {
                         const teacherInfo = await fetchTeacherInfo(id);
-                        user = { ...user, teacherInfo };
+                        const teacher_id = teacherInfo[0].id
+                        const classes = await fetchClasses(teacher_id)
+                        user = { ...user, teacherInfo , classes };
                         console.log(user)
                     }
                     setUser(user);

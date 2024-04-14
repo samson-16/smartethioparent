@@ -1,5 +1,4 @@
 import {
-  FaCopyright,
   FaFacebook,
   FaInstagram,
   FaTiktok,
@@ -9,9 +8,9 @@ import {
 
 const Footer = () => {
   return (
-    <footer className="bg-[#0052B4] text-white py-8">
+    <footer className="bg-[#0052B4] text-white py-8 w-full">
       <div className="container mx-auto">
-        <div className="flex flex-wrap justify-center mt-4 md:mt-0">
+        <div className="grid grid-cols-2 md:grid-cols-6 gap-x-4 gap-y-2 md:gap-y-0 justify-center items-center mt-4 md:mt-0 text-center">
           {[
             "About",
             "Contact",
@@ -19,20 +18,15 @@ const Footer = () => {
             "Community",
             "Privacy Policy",
             "Terms of Service",
-          ].map((item, index, array) => (
-            <span key={index} className="mr-4">
+          ].map((item, index) => (
+            <span key={index} className="mb-2">
               <a href="#" className="hover:text-gray-400">
                 {item}
               </a>
-              {index !== array.length - 1 && <span className="ml-4">•</span>}
             </span>
           ))}
         </div>
-        <div className="flex flex-wrap justify-center items-center mt-8">
-          <div className="mr-2">
-            <FaCopyright />
-          </div>
-          <div>2024 SmartEthioParent. All rights reserved.</div>
+        <div className="flex justify-center items-center mt-8">
           <div className="flex ml-8">
             {[
               { icon: FaFacebook, link: "#" },
@@ -48,6 +42,9 @@ const Footer = () => {
           </div>
         </div>
       </div>
+      <div className="mt-2 text-center">
+            <span>&copy;</span> 2024 SmartEthioParent. All rights reserved.
+          </div>
     </footer>
   );
 };
