@@ -5,7 +5,7 @@ import Login from "./pages/Login.jsx";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Result from "./pages/Teacher/Result/Result.jsx";
 import ResultDetail from "./pages/Teacher/Result/ResultDetail/ResultDetail.jsx";
-import ManageTeachers from "./pages/Admin/ManageTeacher/ManageTeachers.jsx";
+// import ManageTeachers from "./pages/Admin/ManageTeacher/ManageTeachers.jsx";
 import Teachers from './pages/Admin/ManageTeacher/Teacher.jsx'
 import ManageData from "./pages/Admin/ManageGrade/ManageGrade";
 import ManageStudents from "./pages/Admin/ManageStudent/ManageStudents.jsx";
@@ -16,6 +16,7 @@ import Register from "./components/Register.jsx";
 import Teacher from "./components/Teacher.jsx";
 import Admin from "./components/Admin.jsx";
 import Resources from "./pages/Admin/Resource/Resources.jsx";
+
 import { AuthProvider } from "./components/AuthContext.jsx";
 
 // import TeacherData from "./pages/Admin/TeacherData/TeacherData.jsx";
@@ -56,89 +57,87 @@ function App() {
     <>
     <AuthProvider>
 
-      <Routes>
-         <Route
-        path="/"
-        element={
-          <ProtectedRoute>
-            <Home />
-          </ProtectedRoute>
-        }
-      />
-      <Route
-        path="/admin"
-        element={
-          <ProtectedRoute>
-            <Admin />
-          </ProtectedRoute>
-        }
-      />
-      <Route
-        path="/parents"
-        element={
-          <ProtectedRoute>
-            <Parents />
-          </ProtectedRoute>
-        }
-      />
-      <Route
-        path="/teacher"
-        element={
-          <ProtectedRoute>
-            <Teacher />
-          </ProtectedRoute>
-        }
-      />
-      <Route path="/login" element={<Login />} />
-      <Route path="/logout" element={<Logout />} />
-      <Route path="/register" element={<RegisterAndLogout />} />
-      <Route path="*" element={<NotFound />} />
-        <Route
-          path="/"
-          element={
-            <ProtectedRoute>
-              <Home />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/admin"
-          element={
-            <ProtectedRoute>
-              <Admin />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/teacher"
-          element={
-            <ProtectedRoute>
-              <Teacher />
-            </ProtectedRoute>
-          }
-        />
-        <Route path="/login" element={<Login />} />
-        <Route path="/logout" element={<Logout />} />
-        <Route path="/register" element={<RegisterAndLogout />} />
-        <Route path="*" element={<NotFound />} />
-        <Route path="/landingpage" element={<LandingPage />} />
-        <Route path="/Result/*" element={<Result />} />
-        <Route path="/:Id" element={<ResultDetail />} />
-        <Route path="/GradeData" element={<ManageData />} />
-        <Route path="/StudentData" element={<ManageStudents />} />
-        <Route path="/TeacherData" element={<ManageTeachers />} />
-        <Route path="/resources" element={<Resources/>} />
-        <Route path="/resources" element={<Resources/>} />
-        <Route path="/student/assignments" element={<Assignments/>} />
-        <Route path="/student/homeworks" element={<TasksPage/>} />
-        <Route path="/parent/messages" element={<AllMessages/>} />
-        <Route path="/parent/profile" element={<Profile/>} />
-        <Route path="/teacher/profile" element={<TeacherProfile/>} />
-        <Route path="/teacher/chat" element={<Chat/>} />
-        <Route path="/teacher/resources" element={<ResourceTeacher/>} />
-
-
-        <Route path="/" element={<Navigate to="/tasks" />} />
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <ProtectedRoute>
+                <Home />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin"
+            element={
+              <ProtectedRoute>
+                <Admin />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/parent"
+            element={
+              <ProtectedRoute>
+                <Parent />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/teacher"
+            element={
+              <ProtectedRoute>
+                <Teacher />
+              </ProtectedRoute>
+            }
+          />
+          <Route path="/login" element={<Login />} />
+          <Route path="/logout" element={<Logout />} />
+          <Route path="/register" element={<RegisterAndLogout />} />
+          <Route path="*" element={<NotFound />} />
+          <Route
+            path="/"
+            element={
+              <ProtectedRoute>
+                <Home />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin"
+            element={
+              <ProtectedRoute>
+                <Admin />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/parent"
+            element={
+              <ProtectedRoute>
+                <Parent />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/teacher"
+            element={
+              <ProtectedRoute>
+                <Teacher />
+              </ProtectedRoute>
+            }
+          />
+          <Route path="/login" element={<Login />} />
+          <Route path="/logout" element={<Logout />} />
+          <Route path="/register" element={<RegisterAndLogout />} />
+          <Route path="*" element={<NotFound />} />
+          <Route path="/landingpage" element={<LandingPage />} />
+          <Route path="/Result" element={<Result />} />
+          <Route path="/:Id" element={<ResultDetail />} />
+          <Route path="/GradeData" element={<ManageData />} />
+          <Route path="/StudentData" element={<ManageStudents />} />
+          {/* <Route path="/TeacherData" element={<ManageTeachers />} /> */}
+          <Route path="/resources" element={<Resources />} />
+          <Route path="/" element={<Navigate to="/tasks" />} />
           <Route
             path="/tasks/*"
             element={<Task tasks={tasks} setTasks={setTasks} filter={filter} />}

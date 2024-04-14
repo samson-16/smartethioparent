@@ -4,9 +4,18 @@ import axios from "axios";
 import { ACCESS_TOKEN, REFRESH_TOKEN } from "../constants.jsx";
 import { useNavigate } from "react-router-dom";
 import api from "../api.jsx";
+import React, { createContext, useState, useEffect, useContext } from "react";
+import axios from "axios";
+import { ACCESS_TOKEN, REFRESH_TOKEN } from "../constants.jsx";
+import { useNavigate } from "react-router-dom";
+import api from "../api.jsx";
 const AuthContext = createContext();
 
 function getUserDataFromToken(accessToken) {
+  const tokenParts = accessToken.split(".");
+  const encodedPayload = tokenParts[1];
+  const decodedPayload = JSON.parse(atob(encodedPayload));
+  return decodedPayload;
   const tokenParts = accessToken.split(".");
   const encodedPayload = tokenParts[1];
   const decodedPayload = JSON.parse(atob(encodedPayload));
@@ -135,6 +144,11 @@ const AuthProvider = ({ children }) => {
     setUser(null);
     navigate("/login");
   };
+  const logout = () => {
+    localStorage.removeItem(ACCESS_TOKEN);
+    setUser(null);
+    navigate("/login");
+  };
 
     useEffect(() => {
         const accessToken = localStorage.getItem(ACCESS_TOKEN);
@@ -169,6 +183,11 @@ const AuthProvider = ({ children }) => {
         }
     }, []);
 
+  return (
+    <AuthContext.Provider value={{ user, login, logout }}>
+      {children}
+    </AuthContext.Provider>
+  );
   return (
     <AuthContext.Provider value={{ user, login, logout }}>
       {children}
