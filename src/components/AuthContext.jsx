@@ -1,19 +1,31 @@
 // AuthContext.js
-import React, { createContext, useState, useEffect, useContext } from 'react';
-import axios from 'axios';
-import { ACCESS_TOKEN, REFRESH_TOKEN } from '../constants.jsx';
-import { useNavigate } from 'react-router-dom';
-import api from '../api.jsx';
+import React, { createContext, useState, useEffect, useContext } from "react";
+import axios from "axios";
+import { ACCESS_TOKEN, REFRESH_TOKEN } from "../constants.jsx";
+import { useNavigate } from "react-router-dom";
+import api from "../api.jsx";
 const AuthContext = createContext();
 
 function getUserDataFromToken(accessToken) {
-    const tokenParts = accessToken.split('.');
-    const encodedPayload = tokenParts[1];
-    const decodedPayload = JSON.parse(atob(encodedPayload));
-    return decodedPayload;
+  const tokenParts = accessToken.split(".");
+  const encodedPayload = tokenParts[1];
+  const decodedPayload = JSON.parse(atob(encodedPayload));
+  return decodedPayload;
 }
 
 const AuthProvider = ({ children }) => {
+  const [user, setUser] = useState(null);
+  // const [teach, setTeach] = useState(null);
+  const navigate = useNavigate();
+  async function fetchParentInfo(id) {
+    try {
+      const response = await api.get(`/api/parent/?id=${id}`);
+      return response.data;
+    } catch (error) {
+      console.error("Error fetching parent info:", error);
+      return null;
+    }
+  }
     const [user, setUser] = useState(null);
     const navigate = useNavigate();
 
@@ -28,17 +40,16 @@ const AuthProvider = ({ children }) => {
         }
     }
 
-    async function fetchTeacherInfo(id) {
-        try {
-            const response = await api.get(`/api/teachers/?id=${id}`);
-            console.log(response.data)
-            return response.data;
-
-        } catch (error) {
-            console.error('Error fetching teacher info:', error);
-            return null;
-        }
+  async function fetchTeacherInfo(id) {
+    try {
+      const response = await api.get(`/api/teachers/?id=${id}`);
+      console.log(response.data);
+      return response.data;
+    } catch (error) {
+      console.error("Error fetching teacher info:", error);
+      return null;
     }
+  }
 
     async function fetchRecentMessages(id) {
         try {
@@ -67,6 +78,19 @@ const AuthProvider = ({ children }) => {
 
 }
 
+
+  const fetchClassSubjects = async (teacherId) => {
+    try {
+      const response = await api.get(
+        `/api/class-subjects/?teacher=${teacherId}`
+      );
+      console.log(response.data);
+      return response.data;
+    } catch (error) {
+      console.error("Error fetching class-subjects:", error);
+      return [];
+    }
+  };
 
     const login = async (email, password) => {
         const URL = import.meta.env.VITE_API_URL
@@ -107,11 +131,11 @@ const AuthProvider = ({ children }) => {
         }
     };
 
-    const logout = () => {
-        localStorage.removeItem(ACCESS_TOKEN);
-        setUser(null);
-        navigate('/login');
-    };
+  const logout = () => {
+    localStorage.removeItem(ACCESS_TOKEN);
+    setUser(null);
+    navigate("/login");
+  };
 
     useEffect(() => {
         const accessToken = localStorage.getItem(ACCESS_TOKEN);
@@ -146,11 +170,11 @@ const AuthProvider = ({ children }) => {
         }
     }, []);
 
-    return (
-        <AuthContext.Provider value={{ user, login, logout }}>
-            {children}
-        </AuthContext.Provider>
-    );
+  return (
+    <AuthContext.Provider value={{ user, login, logout }}>
+      {children}
+    </AuthContext.Provider>
+  );
 };
 
 export { AuthContext, AuthProvider };

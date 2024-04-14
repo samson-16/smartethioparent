@@ -1,11 +1,12 @@
 import "./App.css";
 import LandingPage from "./pages/LandingPage";
-import ResponsiveAppBar from "./components/NabBar.jsx";
+// import ResponsiveAppBar from "./components/NabBar.jsx";
 import Login from "./pages/Login.jsx";
 import { Routes, Route, Navigate } from "react-router-dom";
 import Result from "./pages/Teacher/Result/Result.jsx";
 import ResultDetail from "./pages/Teacher/Result/ResultDetail/ResultDetail.jsx";
-import ManageTeachers from "./pages/Admin/ManageTeacher/ManageTeachers.jsx";
+// import ManageTeachers from "./pages/Admin/ManageTeacher/ManageTeachers.jsx";
+import Teachers from './pages/Admin/ManageTeacher/Teacher.jsx'
 import ManageData from "./pages/Admin/ManageGrade/ManageGrade";
 import ManageStudents from "./pages/Admin/ManageStudent/ManageStudents.jsx";
 import NotFound from "./components/NotFound.jsx";
@@ -16,14 +17,16 @@ import Teacher from "./components/Teacher.jsx";
 import Admin from "./components/Admin.jsx";
 import Resources from "./pages/Admin/Resource/Resources.jsx";
 
+
+
+
 import { AuthProvider } from "./components/AuthContext.jsx";
 
-import TeacherData from "./pages/Admin/TeacherData/TeacherData.jsx";
+// import TeacherData from "./pages/Admin/TeacherData/TeacherData.jsx";
 import Students from "./pages/Admin/Students/Students.jsx";
-import Task from './Task.jsx'
-import TeacherDashboard from "./TeacherDashboard.jsx";
+import Task from "./Task.jsx";
+import TeacherDashboard from "./pages/Teacher/Task/TeacherDashboard.jsx";
 import { useState } from "react";
-import TeacherHomePage from "./pages/TeacherHomePage.jsx";
 
 // import Footer from "./Footer";
 import Parents from "./pages/Parent_dashbord/Parents.jsx";
@@ -34,6 +37,8 @@ import Profile from "./pages/Parent_dashbord/Profile.jsx";
 import TeacherProfile from "./pages/Teacher/TeacherProfile.jsx";
 
 import Chat from "./pages/Teacher/Chat.jsx";
+import TeacherHomePage from "./pages/Teacher/Home/TeacherHomePage.jsx";
+
 
 function Logout() {
   localStorage.clear();
@@ -46,10 +51,8 @@ function RegisterAndLogout() {
 }
 
 function App() {
-
   const [tasks, setTasks] = useState([]);
   const filter = "All";
-  
 
   return (
     <>
@@ -146,15 +149,15 @@ function App() {
             path="/teachers/*"
             element={<TeacherDashboard tasks={tasks} setTasks={setTasks} />}
           />
-        <Route path="/students" element={<Students/>} />
-        <Route path="/Teacherhomepage" element={<TeacherHomePage/>} />
+          <Route path="/students" element={<Students />} />
+          <Route path="/Teacherhomepage" element={<TeacherHomePage />} />
 
-        {/* <Route path="/Parents" element={<Parents />} /> */}
+          <Route path="/Parents" element={<Parents />} />
+          <Route path="/teacherData" element={<Teachers/>} />
         </Routes>
-        </AuthProvider>
+      </AuthProvider>
     </>
   );
 }
 
 export default App;
-
