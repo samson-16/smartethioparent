@@ -22,13 +22,14 @@
     "framer-motion": "^11.0.25",
     "jwt-decode": "^4.0.0",
     "lottie-react": "^2.4.0",
+    "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^5.0.1",
     "react-intersection-observer": "^9.8.1",
     "react-router-dom": "^6.22.3",
+    "react-spinners": "^0.13.8",
     "swiper": "^11.1.0",
-    "prop-types": "^15.8.1",
     "uuid": "^9.0.1"
   },
   "devDependencies": {
