@@ -16,31 +16,18 @@ const columns = [
   { field: "name", headerName: "Grade", width: 200, editable: true },
   { field: "email", headerName: "Sections", width: 200, editable: true },
   { field: "phone", headerName: "phone", width: 200, editable: true },
-  { field: "Grade", headerName: "Grade", width: 100, editable: true },
-  { field: "Section", headerName: "Section", width: 100, editable: true },
-  { field: "Subject", headerName: "Subject", width: 200, editable: true },
+
 ];
 
 const ManageTeachers = () => {
-  const [rows, setRows] = React.useState([
-    {
-      id: 1,
-      name: "Teacher 1",
-      email: "Teacher1@gmail.com",
-      phone: "1234567890",
-      Grade: "Grade 1",
-      Section: "B",
-      Subject: "Math",
-    },
-  ]);
+  const [rows, setRows] = React.useState([]);
+
   const [open, setOpen] = React.useState(false);
   const [newData, setNewData] = React.useState({
     name: "",
     email: "",
     phone: "",
-    Grade: "",
-    Section: "",
-    Subject: "",
+
   });
   const handleClose = () => {
     setOpen(false);
@@ -48,9 +35,7 @@ const ManageTeachers = () => {
       name: "",
       email: "",
       phone: "",
-      Grade: "",
-      Section: "",
-      Subject: "",
+      
     });
   };
 

@@ -71,6 +71,8 @@ const Students = () => {
           roll_number: "",
           grade: "",
           section: "",
+
+  
         }));
       })
       .catch((error) => {
@@ -185,40 +187,45 @@ const Students = () => {
         </Box>
       </Box>
       {openStudentForm && (
-        <div className="fixed inset-0 bg-gray-900 bg-opacity-50 flex justify-center items-center">
+        <div className="fixed inset-0 bg-gray-900 flex justify-center items-center">
           <div className="bg-white rounded-2xl shadow-lg p-6 w-96 shadow-blue-900">
             <FormControl>
-              <h2 className="font-bold text-center text-lg">Student Form</h2>
-              <label htmlFor="first-name" className="block mb-2">
+              <h2 className="font-bold text-center text-lg text-sky-600">Student Form</h2>
+              <label htmlFor="first-name"  className="block mb-2 text-sky-800 font-medium">
                 First Name
                 <input
                   type="text"
                   placeholder="First Name"
-                  className="w-full border border-gray-300 rounded-md py-2 px-3 mt-1"
+                  className="w-full border border-gray-300 rounded-md py-2 px-3 mt-1
+                  focus:outline-none focus:border-blue-500 placeholder-sky-500"
                   value={newStudent.first_name}
                   onChange={(e) =>
                     setNewStudent({ ...newStudent, first_name: e.target.value })
                   }
                 />
               </label>
-              <label htmlFor="last_name" className="block mb-2">
+              <label htmlFor="last_name" 
+           className="block mb-2 text-sky-800 font-medium">
                 Last Name
                 <input
                   type="text"
                   placeholder="Last Name"
-                  className="w-full border border-gray-300 rounded-md py-2 px-3 mt-1"
+                  className="w-full border border-gray-300 rounded-md py-2 px-3 mt-1
+                  focus:outline-none focus:border-blue-500 placeholder-sky-500"
                   value={newStudent.last_name}
                   onChange={(e) =>
                     setNewStudent({ ...newStudent, last_name: e.target.value })
                   }
                 />
               </label>
-              <label htmlFor="gender" className="block mb-2 mt-3">
+              <label htmlFor="gender" 
+             className="block mb-2 text-sky-800 font-medium">
                 Gender
                 <select
                   name="gender"
                   id="gender"
-                  className=" w-[100px] border border-gray-300 rounded-md py-2 px-3 mt-1 ml-1"
+                  className=" w-[200px] border border-gray-300 rounded-md py-2 px-3 mt-1 ml-1
+                  focus:outline-none focus:border-blue-500 placeholder-sky-500"
                   value={newStudent.gender}
                   onChange={(e) =>
                     setNewStudent({ ...newStudent, gender: e.target.value })
@@ -230,12 +237,15 @@ const Students = () => {
                 </select>
               </label>
 
-              <label htmlFor="grade" className=" mb-2">
+              <label htmlFor="grade" 
+               className="block mb-2 text-sky-800 font-medium"
+              >
                 Grade
                 <select
                   name="grade"
                   id="grade"
-                  className="border border-gray-300 rounded-md py-2 px-3 mt-1 ml-1 w-[100px] mr-2"
+                  className="border border-gray-300 rounded-md py-2 px-3 mt-1 ml-[12px] w-[200px] mr-2
+                    focus:outline-none focus:border-blue-500 placeholder-sky-500"
                   value={newStudent.grade}
                   onChange={(e) =>
                     setNewStudent({ ...newStudent, grade: e.target.value })
@@ -251,12 +261,15 @@ const Students = () => {
                   ))}
                 </select>
               </label>
-              <label htmlFor="section" className=" mb-2">
+              <label htmlFor="section" 
+               className="block mb-2 text-sky-800 font-medium mr-1"
+              >
                 Section
                 <select
                   name="section"
                   id="section"
-                  className=" border border-gray-300 rounded-md py-2 px-3 mt-1 w-[100px] ml-1"
+                  className=" border border-gray-300 rounded-md py-2 px-3 mt-1 w-[200px]
+                  focus:outline-none focus:border-blue-500 placeholder-sky-500 ml-1"
                   value={newStudent.section}
                   onChange={(e) =>
                     setNewStudent({ ...newStudent, section: e.target.value })
@@ -270,12 +283,15 @@ const Students = () => {
                   ))}
                 </select>
               </label>
-              <label htmlFor="roll_number" className="block mb-2">
+              <label htmlFor="roll_number"
+               className="block mb-2 text-sky-800 font-medium"
+              >
                 Roll Number
                 <input
                   type="number"
                   placeholder="Roll Number"
-                  className="w-full border border-gray-300 rounded-md py-2 px-3 mt-1"
+                  className="border border-gray-300 rounded-md py-2 px-3 mt-1 w-[200px]
+                  focus:outline-none focus:border-blue-500 placeholder-sky-500 ml-1"
                   value={newStudent.roll_number}
                   onChange={(e) =>
                     setNewStudent({
@@ -287,7 +303,7 @@ const Students = () => {
               </label>
 
               {/* Add other form fields similarly */}
-              <div className="flex justify-between">
+              <div className="flex justify-between mb-2 mt-2">
                 <Button
                   variant="contained"
                   onClick={() => {

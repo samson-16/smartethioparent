@@ -1,122 +1,154 @@
 // AuthContext.js
-import React, { createContext, useState, useEffect, useContext } from 'react';
-import axios from 'axios';
-import { ACCESS_TOKEN, REFRESH_TOKEN } from '../constants.jsx';
-import { useNavigate } from 'react-router-dom';
-import api from '../api.jsx';
+import React, { createContext, useState, useEffect, useContext } from "react";
+import axios from "axios";
+import { ACCESS_TOKEN, REFRESH_TOKEN } from "../constants.jsx";
+import { useNavigate } from "react-router-dom";
+import api from "../api.jsx";
 const AuthContext = createContext();
 
 function getUserDataFromToken(accessToken) {
-    const tokenParts = accessToken.split('.');
-    const encodedPayload = tokenParts[1];
-    const decodedPayload = JSON.parse(atob(encodedPayload));
-    return decodedPayload;
+  const tokenParts = accessToken.split(".");
+  const encodedPayload = tokenParts[1];
+  const decodedPayload = JSON.parse(atob(encodedPayload));
+  return decodedPayload;
 }
 
 const AuthProvider = ({ children }) => {
-    const [user, setUser] = useState(null);
-    const navigate = useNavigate();
-    async function fetchParentInfo(id) {
-        try {
-            const response = await api.get(`/api/parent/?id=${id}`);
-            return response.data;
-        } catch (error) {
-            console.error('Error fetching parent info:', error);
-            return null;
-        }
+  const [user, setUser] = useState(null);
+  // const [teach, setTeach] = useState(null);
+  const navigate = useNavigate();
+  async function fetchParentInfo(id) {
+    try {
+      const response = await api.get(`/api/parent/?id=${id}`);
+      return response.data;
+    } catch (error) {
+      console.error("Error fetching parent info:", error);
+      return null;
     }
+  }
 
-    async function fetchTeacherInfo(id) {
-        try {
-            const response = await api.get(`/api/teachers/?id=${id}`);
-            console.log(response.data)
-            return response.data;
-
-        } catch (error) {
-            console.error('Error fetching teacher info:', error);
-            return null;
-        }
+  async function fetchTeacherInfo(id) {
+    try {
+      const response = await api.get(`/api/teachers/?id=${id}`);
+      console.log(response.data);
+      return response.data;
+    } catch (error) {
+      console.error("Error fetching teacher info:", error);
+      return null;
     }
+  }
 
-    const login = async (email, password) => {
-        const URL = import.meta.env.VITE_API_URL
+  const fetchClassSubjects = async (teacherId) => {
+    try {
+      const response = await api.get(
+        `/api/class-subjects/?teacher=${teacherId}`
+      );
+      console.log(response.data);
+      return response.data;
+    } catch (error) {
+      console.error("Error fetching class-subjects:", error);
+      return [];
+    }
+  };
+
+  const login = async (email, password) => {
+    const URL = import.meta.env.VITE_API_URL;
+    try {
+      const res = await axios.post(`${URL}/api/token/`, { email, password });
+      const accessToken = res.data.access;
+      localStorage.setItem(ACCESS_TOKEN, accessToken);
+      const userData = getUserDataFromToken(accessToken);
+      const id = userData.user_id;
+      console.log(id);
+      const response = await api.get(`/api/user/?id=${id}`);
+      const userInfo = response.data[0];
+      console.log(userInfo);
+      let user = { user_id: id, role: userInfo.role, user: userInfo };
+      console.log(userInfo.role);
+      if (userInfo.role === "parent") {
+        const parentInfo = await fetchParentInfo(id);
+        user = { ...user, parentInfo };
+      } else if (userInfo.role === "teacher") {
+        // const teacherInfo = await fetchTeacherInfo(id);
+        // console.log("teacher" + teacherInfo);
+        // console.log(teacherInfo.teacherInfo);
+        // user = { ...user, teacherInfo };
+        // // user = { ...user, teach };
+        // if (teacherInfo) {
+        //   const classSubjects = await fetchClassSubjects(teacherInfo.id);
+        //   user = { ...user, teacherInfo, classSubjects };
+        // }
+      }
+
+      // Store user data in local storage
+      localStorage.setItem("user", JSON.stringify(user));
+
+      setUser(user);
+      switch (user.role) {
+        case "parent":
+          navigate("/parent");
+          break;
+        case "teacher":
+          navigate("/teacher");
+          break;
+        case "admin":
+          navigate("/admin");
+          break;
+        default:
+          navigate("/");
+          break;
+      }
+    } catch (error) {
+      console.error("Login failed:", error);
+    }
+  };
+
+  const logout = () => {
+    localStorage.removeItem(ACCESS_TOKEN);
+    setUser(null);
+    navigate("/login");
+  };
+
+  useEffect(() => {
+    const accessToken = localStorage.getItem(ACCESS_TOKEN);
+    if (accessToken) {
+      const userData = getUserDataFromToken(accessToken);
+      const id = userData.user_id;
+      const fetchData = async () => {
         try {
-            const res = await axios.post(`${URL}/api/token/`, { email, password });
-            const accessToken = res.data.access;
-            localStorage.setItem(ACCESS_TOKEN, accessToken);
-            const userData = getUserDataFromToken(accessToken);
-            const id = userData.user_id;
-            const response = await api.get(`/api/user/?id=${id}`);
-            const userInfo = response.data[0];
-            let user = { user_id: id, role: userInfo.role, user: userInfo };
-            console.log(userInfo.role)
-            if (userInfo.role === 'parent') {
-                const parentInfo = await fetchParentInfo(id);
-                user = { ...user, parentInfo };
-            } else if (userInfo.role === 'teacher') {
-                const teacherInfo = await fetchTeacherInfo(id);
-                user = { ...user, teacherInfo };
+          const response = await axios.get(
+            `http://127.0.0.1:8000/api/user/?id=${id}`
+          );
+          const userInfo = response.data[0];
+          console.log(userData);
+          let user = { user_id: id, role: userInfo.role, user: userInfo };
+          if (userInfo.role === "parent") {
+            const parentInfo = await fetchParentInfo(id);
+            user = { ...user, parentInfo };
+            console.log(user);
+          } else if (userInfo.role === "teacher") {
+            // const teacherInfo = await fetchTeacherInfo(id);
+            // user = { ...user, teacherInfo };
+            if (teacherInfo) {
+              const classSubjects = await fetchClassSubjects(teacherInfo.id);
+              user = { ...user, teacherInfo, classSubjects };
             }
-            setUser(user);
-            switch (user.role) {
-                case 'parent':
-                    navigate("/parent");
-                    break;
-                case 'teacher':
-                    navigate("/teacher");
-                    break;
-                case 'admin':
-                    navigate("/admin");
-                    break;
-                default:
-                    navigate("/");
-                    break;
-            }
+            console.log("user infoooo", teacherInfo);
+          }
+          setUser(user);
         } catch (error) {
-            console.error('Login failed:', error);
+          console.error("Error fetching user info:", error);
         }
-    };
+      };
+      fetchData();
+    }
+  }, []);
 
-    const logout = () => {
-        localStorage.removeItem(ACCESS_TOKEN);
-        setUser(null);
-        navigate('/login');
-    };
-
-    useEffect(() => {
-        const accessToken = localStorage.getItem(ACCESS_TOKEN);
-        if (accessToken) {
-            const userData = getUserDataFromToken(accessToken);
-            const id = userData.user_id;
-            const fetchData = async () => {
-                try {
-                    const response = await axios.get(`http://127.0.0.1:8000/api/user/?id=${id}`);
-                    const userInfo = response.data[0];
-                    console.log(userData)
-                    let user = { user_id: id, role: userInfo.role, user: userInfo };
-                    if (userInfo.role === 'parent') {
-                        const parentInfo = await fetchParentInfo(id);
-                        user = { ...user, parentInfo };
-                        console.log(user)
-                    } else if (userInfo.role === 'teacher') {
-                        const teacherInfo = await fetchTeacherInfo(id);
-                        user = { ...user, teacherInfo };
-                        console.log(user)
-                    }
-                    setUser(user);
-                } catch (error) {
-                    console.error('Error fetching user info:', error);
-                }
-            };
-            fetchData();
-        }
-    }, []);
-
-    return (
-        <AuthContext.Provider value={{ user, login, logout }}>
-            {children}
-        </AuthContext.Provider>
-    );
+  return (
+    <AuthContext.Provider value={{ user, login, logout }}>
+      {children}
+    </AuthContext.Provider>
+  );
 };
 
 export { AuthContext, AuthProvider };

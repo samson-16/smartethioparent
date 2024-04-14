@@ -1,8 +1,12 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import axios from "axios";
+import { AuthContext } from "../AuthContext";
 // import useCurrentTeacherId from "./useCurrentTeacherId";
 
 const useFetchAssignments = () => {
+      const {user}= useContext(AuthContext);
+      console.log("user in as",user);
+      
   const [assignments, setAssignments] = useState([]);
   const [loading, setLoading] = useState(true);
   // const teacherId = useCurrentTeacherId();
@@ -13,6 +17,7 @@ const useFetchAssignments = () => {
       //   setLoading(false);
       //   return;
       // }
+
 
       const fetchAssignments = async () => {
         try {

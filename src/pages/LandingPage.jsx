@@ -16,8 +16,11 @@ import AnimateText from "../components/AnimateText/AnimateText";
 import AnimateFeature from '../components/Animate/AnimateFeature'
 import Testimony from "./tesimony";
 const LandingPage = () => {
+         <NavBar />
   return (
+
     <>
+    <NavBar />
       <div></div>
       <nav className="bg-[#F0F7FF] w-full sm:w-[99%] ml-1 rounded-md">
         <ul className="flex justify-between mx-3 sm:mx-0 mb-3 items-center h-12">
