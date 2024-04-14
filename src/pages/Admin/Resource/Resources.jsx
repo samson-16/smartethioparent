@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import  { useState, useEffect } from "react";
 import axios from "axios";
 import AddIcon from "@mui/icons-material/Add";
 import CancelIcon from "@mui/icons-material/Cancel";
 import { Button } from "@mui/material";
+import ResourceCard from "./ResourceCard";
 
 const Resources = () => {
   const [resource, setResource] = useState({
@@ -107,7 +108,8 @@ const Resources = () => {
   };
 
   return (
-    <div>
+    <div className="w-full h-auto bg-gray-100 min-h-screen text-gray-800 text-customText font-sans " >
+        <div className="shadow mb-5">
       <Button
         onClick={() => setShowModal(true)}
         aria-label="medium sizes"
@@ -123,7 +125,7 @@ const Resources = () => {
         }}
       >
         Add Resource
-      </Button>
+      </Button> *
 
       {showModal && (
         <div className="fixed inset-0 flex justify-center items-center bg-gray-900 bg-opacity-50">
@@ -229,48 +231,19 @@ const Resources = () => {
             </form>
           </div>
         </div>
-      )}
+      )} 
 
-      <h2 className="text-center font-bold shadow-md text-2xl text-blue-600 shadow-blue-200">
+      <h2 className="text-center font-bold text-2xl text-blue-600 pb-4    ">
         Resources
       </h2>
+    </div> 
 
       {resources.length > 0 ? (
-        <div style={{ display: "flex", flexWrap: "wrap" }}>
-          {resources.map((resource) => (
-            <div
-              key={resource.id}
-              style={{
-                width: "240px",
-                height: "200px",
-                margin: "10px",
-                border: "1px solid #ccc",
-                borderRadius: "5px",
-                padding: "4px",
-              }}
-            >
-              <h3 style={{ fontSize: "1rem" }}>{resource.title}</h3>
-              <p>Grade: {resource.grade}</p>
-              <p>Subject: {resource.subject}</p>
-              <button
-                style={{
-                  backgroundColor: "#0349fc",
-                  color: "white",
-                  border: "none",
-                  padding: "8px 15px",
-                  borderRadius: "5px",
-                  cursor: "pointer",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-                onClick={() => downloadResource(resource.id, resource.title)}
-              >
-                Download
-              </button>
-            </div>
-          ))}
+        <div>
+            <ResourceCard resources={resources} downloadResource={downloadResource} />
+        
         </div>
+      
       ) : (
         <p>No resources found.</p>
       )}
