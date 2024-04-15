@@ -53,7 +53,7 @@ export default function Parents() {
           <div className="flex gap-8 justify-around items-center">
             <img src={parent} alt="profile" className="  9-80" />
             <div className=" h-full">
-              <h1 className="font-bold mb-4 text-blue-800 md:text-4xl text-center mb-4">Welcome {parentInfo.first_name} {parentInfo.last_name}</h1>
+              <h1 className="font-bold mb-4 text-blue-800 md:text-4xl text-center ">Welcome {parentInfo.first_name} {parentInfo.last_name}</h1>
               <label className="text-center text-2xl ">Join the Expedition: Partnering in Your Child's Learning Adventure !!!</label>
             </div>
           </div>

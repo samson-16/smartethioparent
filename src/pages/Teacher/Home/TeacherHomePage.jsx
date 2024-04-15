@@ -1,5 +1,5 @@
 import React,{useContext, useState, useEffect} from "react";
-import useFetchAssignments from "../../../components/Fetch/useFetchAssignments";
+// import useFetchAssignments from "../../../components/Fetch/useFetchAssignments";
 import useFetchHomework from "../../../components/Fetch/useFetchHomeWork";
 // import useFetchSections from "../../../components/Fetch/section";
 import WelcomeSection from "../../../components/Fetch/Welcome";
@@ -40,12 +40,12 @@ if (loading) {
 
   // const { assignments, loading: loadingAssignments } = useFetchAssignments();
   // const { homework, loading: loadingHomework } = useFetchHomework();
-  // const { sections, loading: loadingSections } = useFetchSections();
+  
   // const { name, loading: loadingName } = WelcomeSection();
   // const { messages, loading: loadingMessages } = useFetchRecentMessages();
   // const { announcement, loading: loadingAnoucment } = Anouncment();
   // if (
-  // //   loadingAssignments ||
+  // //   loadingAssignments 
   // //   // loadingHomework 
   // //   // loadingName 
   // //   // loadingMessages
@@ -55,7 +55,7 @@ if (loading) {
   return (
     <div className="w-full h-full text-gray-800 text-customText font-sans">
       <div className="container grid grid-rows-4-auto gap-5 p-5 mx-auto max-w-none">
-       {/* <div><Lottie animationData={animationData} /></div> */}
+     
        <nav className="nav"></nav>
         <div className="welcome-sec flex shadow-md border-b border-gray-300 bg-[#008DDA] rounded-lg">
           <div>

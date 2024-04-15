@@ -128,11 +128,14 @@ const LandingPage = () => {
             
           
             <div className="flex flex-col sm:flex-row w-full justify-center items-center h">
-  <div className="flex flex-col sm:flex-row justify-center items-center">
+  <div className="flex flex-col sm:flex-row justify-center items-center gap-4 flex-wrap">
     <AnimateFeature item="homework" />
     <AnimateFeature item="connect" />
     <AnimateFeature item="resource" />
     <AnimateFeature item="resource" />
+    <AnimateFeature item="resource" />
+    <AnimateFeature item="resource" />
+
 
   </div>
 </div> 
