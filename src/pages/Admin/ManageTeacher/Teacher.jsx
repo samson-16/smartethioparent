@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { Button, Box, Typography, FormControl } from "@mui/material";
 import axios from "axios";
+import AdminNav from "../../../components/AdminNav";
 
 const columns = [
   { field: "id", headerName: "ID", width: 100, editable: true },
@@ -73,7 +74,10 @@ const Teachers = () => {
 
   return (
     <>
+  <AdminNav/>
+
       <div className="flex flex-col items-center">
+
         <Box
           margin="7px"
           height="calc(100vh - 40px)"

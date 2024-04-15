@@ -10,6 +10,7 @@ import {
   MenuItem,
   Box,
 } from "@mui/material";
+import AdminNav from "../../../components/AdminNav";
 
 
 const columns = [
@@ -66,7 +67,7 @@ export default function ManageData() {
 
   return (
     <>
-      
+      <AdminNav/>
       <section className="h-lvh bg-blue-600">
         <Box
           margin="10px"

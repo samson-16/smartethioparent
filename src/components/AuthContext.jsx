@@ -95,7 +95,7 @@ const AuthProvider = ({ children }) => {
                     navigate("/parents");
                     break;
                 case 'teacher':
-                    navigate("/teacher");
+                    navigate("/teacherhomepage");
                     break;
                 case 'admin':
                     navigate("/admin");

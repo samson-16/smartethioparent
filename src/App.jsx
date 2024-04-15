@@ -3,7 +3,7 @@ import LandingPage from "./pages/LandingPage";
 // import ResponsiveAppBar from "./components/NabBar.jsx";
 import Login from "./pages/Login.jsx";
 import { Routes, Route, Navigate } from "react-router-dom";
-// import Result from "./pages/Teacher/Result/Result.jsx";
+import Result from "./pages/Teacher/Result/Result.jsx";
 // import ResultDetail from "./pages/Teacher/Result/ResultDetail/ResultDetail.jsx";
 // import ManageTeachers from "./pages/Admin/ManageTeacher/ManageTeachers.jsx";
 import Teachers from "./pages/Admin/ManageTeacher/Teacher.jsx";
@@ -32,7 +32,6 @@ import Assignments from "./pages/Parent_dashbord/Assignments.jsx";
 import AllMessages from "./pages/Parent_dashbord/AllMessages.jsx";
 import Profile from "./pages/Parent_dashbord/profile.jsx";
 import TeacherProfile from "./pages/Teacher/TeacherProfile.jsx";
-
 import Chat from "./pages/Teacher/Chat.jsx";
 import TeacherHomePage from "./pages/Teacher/Home/TeacherHomePage.jsx";
 import ResourceTeacher from "./pages/Teacher/ResourceTeacher.jsx";
@@ -55,15 +54,16 @@ function App() {
   return (
     <>
       <AuthProvider>
+
         <Routes>
-          <Route
+          {/* <Route
             path="/"
             element={
               <ProtectedRoute>
                 <Home />
               </ProtectedRoute>
             }
-          />
+          /> */}
           <Route
             path="/admin"
             element={
@@ -73,14 +73,6 @@ function App() {
             }
           />
     
-          {/* <Route
-            path="/parent"
-            element={
-              <ProtectedRoute>
-                <Parent />
-              </ProtectedRoute>
-            }
-          /> */}
           <Route
             path="/teacher"
             element={
@@ -93,12 +85,11 @@ function App() {
           <Route path="/logout" element={<Logout />} />
           {/* <Route path="/register" element={<RegisterAndLogout />} /> */}
           <Route path="*" element={<NotFound />} />
-          <Route path="/landingpage" element={<LandingPage />} />
-          {/* <Route path="/Result" element={<Result />} /> */}
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/result" element={<Result />} />
           {/* <Route path="/:Id" element={<ResultDetail />} /> */}
-          {/* <Route path="/GradeData" element={<ManageData />} /> */}
-          {/* <Route path="/StudentData" element={<ManageStudents />} /> */}
-          {/* <Route path="/TeacherData" element={<ManageTeachers />} /> */}
+          <Route path="/gradedata" element={<ManageData />} />
+          <Route path="/parentdata" element={<ManageStudents />} />
           {/* <Route path="/resources" element={<Resources />} /> */}
           {/* <Route path="/" element={<Navigate to="/tasks" />} /> */}
           <Route
@@ -106,13 +97,12 @@ function App() {
             element={<Task tasks={tasks} setTasks={setTasks} filter={filter} />}
           />
           <Route
-            path="/teachers/*"
+            path="/teachertask"
             element={<TeacherDashboard tasks={tasks} setTasks={setTasks} />}
           />
-          {/* <Route path="/students" element={<Students />} /> */}
+          <Route path="/students" element={<Students />} />
           <Route path="/Teacherhomepage" element={<TeacherHomePage />} />
-
-          <Route path="/Parents" element={<Parents />} />
+          <Route path="/parents" element={<Parents />} />
           <Route path="/teacherData" element={<Teachers />} />
           <Route path="/about" element={<About />} />
         </Routes>
