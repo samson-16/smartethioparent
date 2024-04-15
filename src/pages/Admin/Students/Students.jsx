@@ -3,6 +3,7 @@ import { DataGrid } from "@mui/x-data-grid";
 import { Button, Box, Typography, FormControl } from "@mui/material"; // Import Typography component from MUI
 
 import axios from "axios";
+import AdminNav from "../../../components/AdminNav";
 
 const columns = [
   { field: "id", headerName: "ID", width: 90 },
@@ -120,6 +121,8 @@ const Students = () => {
 
   return (
     <section className="flex flex-col items-center">
+  <AdminNav/>
+
       <Box
         margin="20px"
         height="calc(100vh - 40px)"

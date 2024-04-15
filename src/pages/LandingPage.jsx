@@ -5,9 +5,9 @@ import homework from "../assets/Homework.jpg";
 import { FaPlayCircle } from "react-icons/fa";
 import logo from "../assets/Logo.jpg";
 import p1 from "../assets/p1.png";
-import stud1 from "../assets/stud1.jpg";
-import connect from "../assets/connect.png";
-import resource from "../assets/resource.png";
+// import stud1 from "../assets/stud1.jpg";
+// import connect from "../assets/connect.png";
+// import resource from "../assets/resource.png";
 import { Link } from "react-router-dom";
 import NavBar from "../components/NabBar";
 import Footer from "../components/Footer/Footer";  
@@ -16,15 +16,16 @@ import AnimateText from "../components/AnimateText/AnimateText";
 import AnimateFeature from '../components/Animate/AnimateFeature'
 import Testimony from "./tesimony";
 
+import About from "../About";
 
 
 
 const LandingPage = () => {
-         <NavBar />
+        //  <NavBar />
   return (
 
     <>
-    <NavBar />
+    {/* <NavBar /> */}
       <div></div>
       <nav className="bg-[#F0F7FF] w-full sm:w-[99%] ml-1 rounded-md">
         <ul className="flex justify-between mx-3 sm:mx-0 mb-3 items-center h-12">
@@ -36,7 +37,7 @@ const LandingPage = () => {
             />
           </li>
           <li>
-            <Link to={"/logging"}>
+            <Link to={"/login"}>
               <button className="rounded-xl bg-blue-800 hover:bg-white hover:text-blue-600 w-28 h-8 text-center text-white font-bold">
                 Join now
               </button>
@@ -60,7 +61,7 @@ const LandingPage = () => {
             Stay Connected with Your Child's Education
           </p>
           <div className="flex flex-col justify-center">
-            <Link to="/logging">
+            <Link to="/login">
               <Button
                 variant="contained"
                 color="primary"
@@ -121,7 +122,7 @@ const LandingPage = () => {
 
       {/*  ************ key Features************* */}
 
-      <section className="mt-7 mb-auto ">
+      {/* <section className="mt-7 mb-auto ">
         <div >
           <div className="text-center font-semibold mt-3">
             <h1 className="my-2">Key features</h1>
@@ -132,20 +133,40 @@ const LandingPage = () => {
             
           
             <div className="flex flex-col sm:flex-row w-full justify-center items-center h">
-  <div className="flex flex-col sm:flex-row justify-center items-center">
-    <AnimateFeature item="homework" />
+  <div className="flex flex-col md:flex-row justify-center items-center gap-4 flex-wrap">
+    <AnimateFeature item="Tasks" />
     <AnimateFeature item="connect" />
-    <AnimateFeature item="resource" />
-    <AnimateFeature item="resource" />
+    <AnimateFeature item="resource" /> */}
+    {/* <AnimateFeature item="resource" /> */}
+    {/* <AnimateFeature item="resource" /> */}
+    {/* <AnimateFeature item="resource" /> */}
+  {/* </div> */}
+{/* // </div> */}
 
+          {/* </div> */}
+        {/* </div> */}
+      {/* </section> */}
+      {/* <section className="mt-7 mb-auto">
+  <div className="text-center font-semibold mt-3">
+    <h1 className="my-2">Key features</h1>
+    <p>
+      Our platform is designed to provide parents with the tools and
+      resources needed to support their child's academic journey.
+    </p>
   </div>
-</div> 
-          </div>
-        </div>
-      </section>
+
+  <div className="flex flex-col sm:flex-row w-full justify-center items-center">
+    <div className="flex flex-col md:flex-row justify-center items-center gap-4 flex-wrap">
+      <AnimateFeature item="Tasks" />
+      <AnimateFeature item="connect" />
+      <AnimateFeature item="resource" />
+
+    </div>
+  </div>
+</section> */}
 
 
-      <section className="block">
+      {/* <section className="block">
         <div className="h-[500px] my-4">
           <h1 className="text-center font-semibold">Our welcoming video</h1>
         </div>
@@ -153,15 +174,31 @@ const LandingPage = () => {
 
       <section>
           <div className=" bg-sky-600">
-            <h1 className="text-lg text-center">Testimonies</h1>
+            <h1 className="text-lg text-center">What user says about us</h1>
             <div>
             <Testimony/>
             </div>
-          </div>
-        </section>
+          </div> */}
 
+
+        {/* </section> */}
+
+
+               <section>
+                <About/>
+               </section>
+
+               <section>
+              
+            <h1 className="text-lg text-center">What user says about us</h1>
+            <div>
+            <Testimony/>
+            </div>
+               </section>
       <footer>
+        <div className="mt-4">
         <Footer />
+        </div>
       </footer>
     </>
   );
