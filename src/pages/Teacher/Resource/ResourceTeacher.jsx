@@ -1,12 +1,9 @@
-import  { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
-import ResourceCard from "../Admin/Resource/ResourceCard";
-
+import ResourceCard from "../../Admin/Resource/ResourceCard";
 
 export const ResourceTeacher = () => {
-
   const [resources, setResources] = useState([]);
- 
 
   const fetchResources = async () => {
     try {
@@ -17,9 +14,7 @@ export const ResourceTeacher = () => {
     }
   };
 
-
   useEffect(() => {
-   
     fetchResources();
   }, [resources]);
   const downloadResource = async (resourceId, resourceTitle) => {
@@ -42,17 +37,18 @@ export const ResourceTeacher = () => {
     }
   };
   return (
-    <div className="w-full h-auto bg-gray-100 min-h-screen text-gray-800 text-customText font-sans " >
-       {resources.length > 0 ? (
+    <div className="w-full h-auto bg-gray-100 min-h-screen text-gray-800 text-customText font-sans ">
+      {resources.length > 0 ? (
         <div>
-            <ResourceCard resources={resources} downloadResource={downloadResource} />
-        
+          <ResourceCard
+            resources={resources}
+            downloadResource={downloadResource}
+          />
         </div>
-      
       ) : (
         <p>No resources found.</p>
       )}
     </div>
-  )
-}
+  );
+};
 export default ResourceTeacher;

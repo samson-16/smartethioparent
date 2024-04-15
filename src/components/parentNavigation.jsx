@@ -77,10 +77,7 @@ function ParentNavigation(props) {
           </Box>
         </Toolbar>
       </AppBar>
-      <Box sx={{ flexGrow: 1, mt: 1 }}>
-        <Toolbar />
-        {/* Your content goes here */}
-      </Box>
+     
       <nav>
         <Drawer
           container={container}

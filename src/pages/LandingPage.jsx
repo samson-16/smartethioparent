@@ -10,22 +10,19 @@ import p1 from "../assets/p1.png";
 // import resource from "../assets/resource.png";
 import { Link } from "react-router-dom";
 import NavBar from "../components/NabBar";
-import Footer from "../components/Footer/Footer";  
+import Footer from "../components/Footer/Footer";
 import ScrollAppearImage from "../components/ScrollImage/ScrollAppearImage";
 import AnimateText from "../components/AnimateText/AnimateText";
-import AnimateFeature from '../components/Animate/AnimateFeature'
-import Testimony from "./tesimony";
+import AnimateFeature from "../components/Animate/AnimateFeature";
+import Testimony from "../components/Testimonies/tesimony";
 
-import About from "../About";
-
-
+import About from "../components/About";
 
 const LandingPage = () => {
-        //  <NavBar />
+  //  <NavBar />
   return (
-
     <>
-    {/* <NavBar /> */}
+      {/* <NavBar /> */}
       <div></div>
       <nav className="bg-[#F0F7FF] w-full sm:w-[99%] ml-1 rounded-md">
         <ul className="flex justify-between mx-3 sm:mx-0 mb-3 items-center h-12">
@@ -137,14 +134,14 @@ const LandingPage = () => {
     <AnimateFeature item="Tasks" />
     <AnimateFeature item="connect" />
     <AnimateFeature item="resource" /> */}
-    {/* <AnimateFeature item="resource" /> */}
-    {/* <AnimateFeature item="resource" /> */}
-    {/* <AnimateFeature item="resource" /> */}
-  {/* </div> */}
-{/* // </div> */}
+      {/* <AnimateFeature item="resource" /> */}
+      {/* <AnimateFeature item="resource" /> */}
+      {/* <AnimateFeature item="resource" /> */}
+      {/* </div> */}
+      {/* // </div> */}
 
-          {/* </div> */}
-        {/* </div> */}
+      {/* </div> */}
+      {/* </div> */}
       {/* </section> */}
       {/* <section className="mt-7 mb-auto">
   <div className="text-center font-semibold mt-3">
@@ -165,7 +162,6 @@ const LandingPage = () => {
   </div>
 </section> */}
 
-
       {/* <section className="block">
         <div className="h-[500px] my-4">
           <h1 className="text-center font-semibold">Our welcoming video</h1>
@@ -180,24 +176,21 @@ const LandingPage = () => {
             </div>
           </div> */}
 
+      {/* </section> */}
 
-        {/* </section> */}
+      <section>
+        <About />
+      </section>
 
-
-               <section>
-                <About/>
-               </section>
-
-               <section>
-              
-            <h1 className="text-lg text-center">What user says about us</h1>
-            <div>
-            <Testimony/>
-            </div>
-               </section>
+      <section>
+        <h1 className="text-lg text-center">What user says about us</h1>
+        <div>
+          <Testimony />
+        </div>
+      </section>
       <footer>
         <div className="mt-4">
-        <Footer />
+          <Footer />
         </div>
       </footer>
     </>

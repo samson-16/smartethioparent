@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { Route, Routes, useNavigate, useParams } from "react-router-dom";
 import TaskDetail from "./TaskDetail";
 import TaskList from "./TaskList";
-import TeacherDashboard from "./pages/Teacher/Task/TeacherDashboard";
+import TeacherTask from "../../Teacher/Task/TeacherTask";
 
 const Task = ({ tasks, setTasks }) => {
   const [filter, setFilter] = useState("All");
@@ -45,7 +45,7 @@ const Task = ({ tasks, setTasks }) => {
         <Route path=":taskId" element={<TaskDetail tasks={tasks} />} />
         <Route
           path="/teacher/*"
-          element={<TeacherDashboard tasks={tasks} setTasks={setTasks} />}
+          element={<TeacherTask tasks={tasks} setTasks={setTasks} />}
         />
       </Routes>
     </div>

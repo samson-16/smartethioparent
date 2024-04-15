@@ -2,9 +2,9 @@ import { useContext, useState, useEffect } from "react";
 import Datetime from "react-datetime";
 import "react-datetime/css/react-datetime.css";
 import FadeLoader from 'react-spinners/FadeLoader'
-import { AuthContext } from "../../components/AuthContext";
+import { AuthContext } from "../../../components/AuthContext";
 import axios from "axios";
-import api from "../../api";
+import api from "../../../api";
 
 
 function TeacherTask () {

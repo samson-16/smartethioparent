@@ -11,12 +11,12 @@ import "./styles.css";
 // import required modules
 import { Pagination } from "swiper/modules";
 
-import profil1 from "../assets/ava1jpg.jpg";
-import profil2 from "../assets/ava2.jpg";
-import profil3 from "../assets/ava3.jpg";
-import profil4 from "../assets/ava4.jpg";
-import profil5 from "../assets/ava5.jpg";
-import profil6 from "../assets/ava6.jpg";
+import profil1 from "../../assets/ava1jpg.jpg";
+import profil2 from "../../assets/ava2.jpg";
+import profil3 from "../../assets/ava3.jpg";
+import profil4 from "../../assets/ava4.jpg";
+import profil5 from "../../assets/ava5.jpg";
+import profil6 from "../../assets/ava6.jpg";
 
 export default function Testimony() {
   return (
@@ -37,8 +37,11 @@ export default function Testimony() {
       >
         <SwiperSlide>
           <div className="main">
-            <img src={profil1} alt="" 
-            className="w-full h-48 object-cover rounded-t-lg" />
+            <img
+              src={profil1}
+              alt=""
+              className="w-full h-48 object-cover rounded-t-lg"
+            />
             <h3>
               Aiyne Abebe
               <br />

@@ -1,6 +1,6 @@
 import  { useState, useEffect } from "react";
 import axios from "axios";
-import ResourceCard from "../Admin/Resource/ResourceCard";
+import ResourceCard from "../../Admin/Resource/ResourceCard";
 
 
 export const ResourceParent = () => {
