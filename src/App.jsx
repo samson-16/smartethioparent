@@ -6,7 +6,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 // import Result from "./pages/Teacher/Result/Result.jsx";
 // import ResultDetail from "./pages/Teacher/Result/ResultDetail/ResultDetail.jsx";
 // import ManageTeachers from "./pages/Admin/ManageTeacher/ManageTeachers.jsx";
-import Teachers from './pages/Admin/ManageTeacher/Teacher.jsx'
+import Teachers from "./pages/Admin/ManageTeacher/Teacher.jsx";
 import ManageData from "./pages/Admin/ManageGrade/ManageGrade";
 import ManageStudents from "./pages/Admin/ManageStudent/ManageStudents.jsx";
 import NotFound from "./components/NotFound.jsx";
@@ -36,8 +36,7 @@ import TeacherProfile from "./pages/Teacher/TeacherProfile.jsx";
 import Chat from "./pages/Teacher/Chat.jsx";
 import TeacherHomePage from "./pages/Teacher/Home/TeacherHomePage.jsx";
 import ResourceTeacher from "./pages/Teacher/ResourceTeacher.jsx";
-
-
+import About from "./About.jsx";
 
 function Logout() {
   localStorage.clear();
@@ -55,8 +54,7 @@ function App() {
 
   return (
     <>
-    <AuthProvider>
-
+      <AuthProvider>
         <Routes>
           <Route
             path="/"
@@ -115,7 +113,8 @@ function App() {
           <Route path="/Teacherhomepage" element={<TeacherHomePage />} />
 
           <Route path="/Parents" element={<Parents />} />
-          <Route path="/teacherData" element={<Teachers/>} />
+          <Route path="/teacherData" element={<Teachers />} />
+          <Route path="/about" element={<About />} />
         </Routes>
       </AuthProvider>
     </>
