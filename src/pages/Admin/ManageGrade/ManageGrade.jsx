@@ -12,16 +12,14 @@ import {
 } from "@mui/material";
 import AdminNav from "../../../components/AdminNav";
 
-
 const columns = [
   { field: "id", headerName: "ID", width: 100, editable: true },
   { field: "grade", headerName: "Grade", width: 150, editable: true },
-  { field: "sections", headerName: "sections", width: 150, editable: true },
-  { field: "subjects", headerName: "subjects", width: 200, editable: true },
+  { field: "sections", headerName: "Sections", width: 150, editable: true },
+  { field: "subjects", headerName: "Subjects", width: 200, editable: true },
 ];
 
 export default function ManageData() {
-
   const [data, setData] = React.useState([
     {
       id: 1,
@@ -37,7 +35,6 @@ export default function ManageData() {
     },
   ]);
 
-  
   const [open, setOpen] = React.useState(false);
   const [newData, setNewData] = React.useState({
     grade: "",
@@ -47,38 +44,24 @@ export default function ManageData() {
 
   const handleClose = () => {
     setOpen(false);
-    setNewData({
-      grade: "",
-      sections: [],
-      subjects: [],
-    });
+    setNewData({ grade: "", sections: [], subjects: [] });
   };
 
   const handleAddData = () => {
     setData((prevData) => [
       ...prevData,
-      {
-        id: prevData.length + 1,
-        ...newData,
-      },
+      { id: prevData.length + 1, ...newData },
     ]);
     handleClose();
   };
 
   return (
     <>
-      <AdminNav/>
-      <section className="h-lvh bg-blue-600">
-        <Box
-          margin="10px"
-          height="calc(100vh - 40px)"
-          style={{
-            // backgroundColor: "#5c7ff7",
-            color: "#494f63",
-            fontWeight: "bold",
-            fontSize: "15px",
-          }}
-        >
+      <AdminNav />
+      <section className="h-lvh mt-2">
+
+        <Box margin="10px" height="calc(100vh - 40px)" sx={{ fontWeight: 600 }}>
+        <h1 className="text-center font-bold text-lg ">Manage Grade list</h1>
           <Button variant="contained" onClick={() => setOpen(true)}>
             Add Data
           </Button>
@@ -90,24 +73,16 @@ export default function ManageData() {
             checkboxSelection
           />
         </Box>
-        <Dialog
-          open={open}
-          onClose={handleClose}
-          style={{ backgroundColor: "deepskyblue" }}
-        >
-          <DialogTitle className="text-lg font-extrabold text-center text-white bg-sky-500">
-            Add New Data
-          </DialogTitle>
-          <DialogContent className="bg-sky-500 ">
+        <Dialog open={open} onClose={handleClose}>
+          <DialogTitle>Add New Data</DialogTitle>
+          <DialogContent>
             <TextField
               autoFocus
               margin="dense"
               label="Grade"
               fullWidth
               value={newData.grade}
-              onChange={(e) =>
-                setNewData({ ...newData, grade: e.target.value })
-              }
+              onChange={(e) => setNewData({ ...newData, grade: e.target.value })}
             />
             <TextField
               select
@@ -124,11 +99,7 @@ export default function ManageData() {
             >
               {["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L"].map(
                 (section) => (
-                  <MenuItem
-                    key={section}
-                    value={section}
-                    style={{ color: "white", backgroundColor: "#0EA5E9" }}
-                  >
+                  <MenuItem key={section} value={section}>
                     {section}
                   </MenuItem>
                 )
@@ -149,40 +120,16 @@ export default function ManageData() {
             >
               {["English", "Math", "Science", "Social Studies", "Art"].map(
                 (subject) => (
-                  <MenuItem
-                    key={subject}
-                    value={subject}
-                    style={{ color: "white", backgroundColor: "#0EA5E9" }}
-                  >
+                  <MenuItem key={subject} value={subject}>
                     {subject}
                   </MenuItem>
                 )
               )}
             </TextField>
           </DialogContent>
-          <DialogActions className="bg-sky-500">
-            <Button
-              onClick={handleClose}
-              style={{
-                width: "100px",
-                backgroundColor: "blue",
-                color: "white",
-                fontWeight: "500",
-              }}
-            >
-              Cancel
-            </Button>
-            <Button
-              onClick={handleAddData}
-              style={{
-                width: "100px",
-                backgroundColor: "blue",
-                color: "white",
-                fontWeight: "500",
-              }}
-            >
-              Add
-            </Button>
+          <DialogActions>
+            <Button onClick={handleClose}>Cancel</Button>
+            <Button onClick={handleAddData}>Add</Button>
           </DialogActions>
         </Dialog>
       </section>

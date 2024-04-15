@@ -3,7 +3,7 @@ import { DataGrid } from "@mui/x-data-grid";
 import { Button, Box, Typography, FormControl } from "@mui/material";
 import axios from "axios";
 import AdminNav from "../../../components/AdminNav";
-
+import api from "../../../api";
 const columns = [
   { field: "id", headerName: "ID", width: 100, editable: true },
   { field: "first_name", headerName: "First-name", width: 200, editable: true },
@@ -61,8 +61,7 @@ const Teachers = () => {
 
   // Fetch Teacher data when component mounts
   useEffect(() => {
-    axios
-      .get("http://127.0.0.1:8000/api/add-teacher/")
+    api.get("/api/teachers/")
       .then((res) => {
         console.log(res.data);
         setRows(res.data);

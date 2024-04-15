@@ -4,6 +4,7 @@ import AddIcon from "@mui/icons-material/Add";
 import CancelIcon from "@mui/icons-material/Cancel";
 import { Button } from "@mui/material";
 import ResourceCard from "./ResourceCard";
+import AdminNav from "../../../components/AdminNav";
 
 const Resources = () => {
   const [resource, setResource] = useState({
@@ -108,6 +109,8 @@ const Resources = () => {
   };
 
   return (
+    <>
+    <AdminNav/>
     <div className="w-full h-auto bg-gray-100 min-h-screen text-gray-800 text-customText font-sans " >
         <div className="shadow mb-5">
       <Button
@@ -248,6 +251,7 @@ const Resources = () => {
         <p>No resources found.</p>
       )}
     </div>
+    </>
   );
 };
 

@@ -110,9 +110,25 @@ if (loading) {
               <p>No sections to display.</p>
             )}
           </div>
+          <section>
+        <div className="resources bg-white rounded-lg shadow p-5 w-[400px]">
+   <div className="flex justify-between">
+   <h2 className="text-2xl font-semibold text-blue-500 mb-4">Resource Links</h2>
+    <p>See all</p>
+   </div>
+  <ul className="resource-list">
+    <li><a href="#">Educational Websites</a></li>
+    <li><a href="#">Teaching Materials</a></li>
+  </ul>
+</div>
+
+        </section>
         </div>
+       
 
           <div>
+
+
 
 
 {/*           

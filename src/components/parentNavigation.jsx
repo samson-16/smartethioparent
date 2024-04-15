@@ -1,5 +1,6 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -16,8 +17,14 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 
 const drawerWidth = 240;
-const navItems = ['Home', 'Task', 'Result', 'Resource', 'Chat','Profile'];
-const parentnav = ['parenthome', 'parenttask', 'parentprofiile', 'Chat', 'Resource', 'parentprofile'];
+const navItems = [
+  { name: 'Home', link: '/' },
+  { name: 'Assignment', link: '/parent/assignment' },
+  { name: 'Homework', link: '/parent/homework' },
+  { name: 'Resource', link: '/parent/resource' },
+  { name: 'Message', link: '/parent/message' },
+  { name: 'Profile', link: '/parent/profile' }
+];
 
 function ParentNavigation(props) {
   const { window } = props;
@@ -30,14 +37,14 @@ function ParentNavigation(props) {
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
       <Typography variant="h6" sx={{ my: 2 }}>
-        MUI
+        Majestic Academy
       </Typography>
       <Divider />
       <List>
         {navItems.map((item) => (
-          <ListItem key={item} disablePadding>
+          <ListItem key={item.name} disablePadding>
             <ListItemButton sx={{ textAlign: 'center' }}>
-              <ListItemText primary={item} />
+              <ListItemText primary={item.name} />
             </ListItemButton>
           </ListItem>
         ))}
@@ -70,8 +77,8 @@ function ParentNavigation(props) {
           </Typography>
           <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
             {navItems.map((item) => (
-              <Button key={item} sx={{ color: '#000' }}>
-                {item}
+              <Button key={item.name} sx={{ color: '#000' }}>
+                <Link to={item.link} style={{ textDecoration: 'none', color: 'inherit' }}>{item.name}</Link>
               </Button>
             ))}
           </Box>
@@ -99,7 +106,7 @@ function ParentNavigation(props) {
   );
 }
 
-NavBar.propTypes = {
+ParentNavigation.propTypes = {
   window: PropTypes.func,
 };
 

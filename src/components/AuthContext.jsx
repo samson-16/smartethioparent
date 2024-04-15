@@ -136,7 +136,9 @@ useEffect(() => {
                         user = { ...user, parentInfo , recentMessages};
                         console.log(user)
                     } else if (userInfo.role === 'teacher') {
+                        console.log(user.user_id)
                         const teacherInfo = await fetchTeacherInfo(user.user_id);
+                        console.log(teacherInfo)
                         const teacher_id = teacherInfo[0].id
                         const classes = await fetchClasses(teacher_id)
                         user = { ...user, teacherInfo , classes };

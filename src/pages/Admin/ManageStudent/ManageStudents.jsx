@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { Button, Box, Typography, FormControl } from "@mui/material";
 import axios from "axios";
+import AdminNav from "../../../components/AdminNav";
 
 const columns = [
   { field: "id", headerName: "Parent ID", width: 90 },
@@ -117,6 +118,8 @@ const Students = () => {
   };
 
   return (
+    <>
+    <AdminNav/>
     <section className="flex flex-col items-center">
       <Box margin="20px" height="calc(100vh - 40px)" width="calc(100vw - 40px)" sx={{ fontWeight: 600 }}>
         <h1 className="text-center font-bold text-lg ">Manage parent list</h1>
@@ -241,6 +244,7 @@ const Students = () => {
         </div>
       </section>
     </section>
+    </>
   );
 };
 

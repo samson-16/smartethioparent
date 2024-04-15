@@ -15,80 +15,82 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 const drawerWidth = 240;
-const navItems = ['Managegrade', 'Managestudents', 'Manageparents', 'Manageteachers', ];
-const TeacherNav = ['parentdata', 'teacherdata', 'students', 'grades', ];
+const navItems = [
+  { name: 'Student Data', link: '/Admin/students' },
+  { name: 'Parent Data', link: '/Admin/parents' },
+  { name: 'Grade Data', link: '/Admin/grade' },
+  { name: 'Teacher Data', link: '/Admin/teachers' },
+  { name: 'School-Resources', link: '/Admin/resources' },
+
+];
 
 function AdminNav(props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
   const handleDrawerToggle = () => {
-    setMobileOpen((prevState) => !prevState);
+    setMobileOpen(!mobileOpen);
   };
 
-  const container = window !== undefined ? () => window().document.body : undefined;
+  const handleLinkClick = () => {
+    if (window.innerWidth <= 600) {
+      setMobileOpen(false);
+    }
+  };
 
   const drawer = (
     <Box sx={{ textAlign: 'center' }}>
-      <Typography variant="h6" sx={{ my: 2 }}>
+      <Typography variant="h6" sx={{ my: 2, color: 'black' }}>
         Majestic Academy
       </Typography>
       <Divider />
       <List>
-        {navItems.map((item, index) => (
-          <ListItem key={item} disablePadding>
-            <Link to={`/${TeacherNav[index]}`} style={{ textDecoration: 'none', color: 'inherit' }}>
-              <ListItemButton sx={{ textAlign: 'center' }}>
-                <ListItemText primary={<Typography fontWeight="bold">{item}</Typography>} />
-              </ListItemButton>
-            </Link>
+        {navItems.map((item) => (
+          <ListItem key={item.name} disablePadding>
+            <ListItemButton sx={{ textAlign: 'center' }} component={Link} to={item.link} onClick={handleLinkClick}>
+              <ListItemText primary={item.name} />
+            </ListItemButton>
           </ListItem>
         ))}
       </List>
     </Box>
-  
-  
-
-
   );
 
+  const container = window !== undefined ? () => window().document.body : undefined;
+
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: 'flex', margin: '30px' }}>
       <CssBaseline />
-      <AppBar position="fixed" sx={{ backgroundColor: '#fff', color: '#000', zIndex: (theme) => theme.zIndex.drawer + 1 }}>
+      <AppBar position="fixed" sx={{ backgroundColor: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}>
         <Toolbar>
           <IconButton
             color="inherit"
             aria-label="open drawer"
             edge="start"
             onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { sm: 'none' } }}
+            sx={{ mr: 2, display: { sm: 'none' }, color: 'black' }}
           >
             <MenuIcon />
           </IconButton>
           <Typography
             variant="h6"
             component="div"
-            sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
+            sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' }, fontWeight: 'bold' }}
           >
-            Majestic Academy
+            MUI
           </Typography>
           <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
             {navItems.map((item) => (
-              <Button key={item} sx={{ color: '#000', fontWeight: 'bold' }}>
-                {item}
+              <Button key={item.name} sx={{ color: '#000' }} component={Link} to={item.link} onClick={handleLinkClick}>
+                {item.name}
               </Button>
             ))}
           </Box>
         </Toolbar>
       </AppBar>
-      <Box sx={{ flexGrow: 1, mt: 1 }}>
-        <Toolbar />
-     
-      </Box>
+
       <nav>
         <Drawer
           container={container}

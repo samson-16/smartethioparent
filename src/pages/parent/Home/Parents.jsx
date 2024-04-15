@@ -8,7 +8,7 @@ import Task from "../../../components/Task";
 import ExamCard from "../../../components/ExamCard";
 import FadeLoader from "react-spinners/FadeLoader";
 import Footer from "../../../components/Footer/Footer";
-import Navbar from "../../../components/NabBar";
+import AdminNav from "../../../components/AdminNav";
 
 export default function Parents() {
   const [loading, setLoading] = useState(true);
@@ -45,7 +45,7 @@ export default function Parents() {
 
   return (
     <>
-      <Navbar />
+      <AdminNav />
       <div className="flex flex-wrap gap-4 md:h-screen ">
         <div className="bg-gradient-to-br from-blue-50 to-blue-100 border border-solid rounded-lg shadow-md p-6  w-[100%] mx-auto">
           {loading ? (

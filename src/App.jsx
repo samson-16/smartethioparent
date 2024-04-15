@@ -29,6 +29,9 @@ import TeacherProfile from "./pages/Teacher/TeacherProfile.jsx";
 import TeacherHomePage from "./pages/Teacher/Home/TeacherHomePage.jsx";
 import ResourceTeacher from "./pages/Teacher/Resource/ResourceTeacher.jsx";
 import About from "./components/About.jsx";
+import TeacherTask from "./pages/Teacher/Task/TeacherTask.jsx";
+
+
 
 
 function Logout() {
@@ -72,9 +75,9 @@ function App() {
           <Route path="/" element={<LandingPage />} />
           <Route path="/result" element={<Result />} />
           {/* <Route path="/:Id" element={<ResultDetail />} /> */}
-          <Route path="/gradedata" element={<ManageData />} />
-          <Route path="/parentdata" element={<ManageStudents />} />
-          {/* <Route path="/resources" element={<Resources />} /> */}
+          <Route path="/admin/grade" element={<ManageData />} />
+          <Route path="/admin/parents" element={<ManageStudents />} />
+          <Route path="/admin/resources" element={<Resources />} />
           {/* <Route path="/" element={<Navigate to="/tasks" />} /> */}
           <Route
             path="/tasks/*"
@@ -84,9 +87,10 @@ function App() {
             path="/teachertask"
             element={<TeacherDashboard tasks={tasks} setTasks={setTasks} />}
           /> */}
-          <Route path="/students" element={<Students />} />
+          <Route path="/teacher/task" element={<TeacherTask />} />  
+          <Route path="/admin/students" element={<Students />} />
           <Route path="/parents" element={<Parents />} />
-          <Route path="/teacherData" element={<Teachers />} />
+          <Route path="/admin/teachers" element={<Teachers />} />
           <Route path="/about" element={<About />} />
         </Routes>
       </AuthProvider>
