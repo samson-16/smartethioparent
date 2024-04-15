@@ -8,11 +8,16 @@ import Message from "../../components/Message";
 import Task from "../../components/Task";
 import ExamCard from "../../components/ExamCard";
 import FadeLoader from 'react-spinners/FadeLoader'
-import ResponsiveAppBar from "../../components/NabBar";
+import Footer from "../../components/Footer/Footer"
+import Navbar from "../../components/NabBar";
+
+
 export default function Parents() {
   const [loading, setLoading] = useState(true);
   const { user } = useContext(AuthContext);
    console.log(user)
+  
+
   useEffect(() => {
     if (user !== null) {
       setLoading(false);
@@ -29,8 +34,7 @@ export default function Parents() {
     )
   }
 
-  // Once loading is finished, display the user data
-  const parentInfo = user.user;
+  const parentInfo = user.parentInfo
   const recentMessage = user.recentMessages;
   const tasks = user.parentInfo.children_data[0].tasks;
   const exams = user.parentInfo.children_data[0].exams;
@@ -44,16 +48,16 @@ export default function Parents() {
 
   return (
     <>
-    <ResponsiveAppBar />
+    <Navbar />
     <div className="flex flex-wrap gap-4 md:h-screen ">
       <div className="bg-gradient-to-br from-blue-50 to-blue-100 border border-solid rounded-lg shadow-md p-6  w-[100%] mx-auto">
         {loading ? (
           <Loading />
         ) : (
           <div className="flex gap-8 justify-around items-center">
-            <img src={parent} alt="profile" className="  9-80" />
+            <img src={parent} alt="profile" className="  9-80 hidden md:block" />
             <div className=" h-full">
-              <h1 className="font-bold mb-4 text-blue-800 md:text-4xl text-center ">Welcome {parentInfo.first_name} {parentInfo.last_name}</h1>
+              <h1 className="font-bold mb-4 text-blue-800 text-2xl md:text-4xl text-center mb-4">Welcome {parentInfo.first_name} {parentInfo.last_name}</h1>
               <label className="text-center text-2xl ">Join the Expedition: Partnering in Your Child's Learning Adventure !!!</label>
             </div>
           </div>
@@ -64,7 +68,7 @@ export default function Parents() {
       <div className="bg-gradient-to-br from-blue-50 to-blue-100 border border-solid rounded-lg shadow-md p-6 w-full md:w-[calc(66%-16px)] mx-auto">
         <div className="flex justify-around ">
           <h1 className="text-xl font-bold mb-4 text-green-800">Recent Messages</h1>
-          <a href="#" className="text-blue-500 hover:underline">See more</a>
+          {/* <a href="#" className="text-blue-500 hover:underline">See more</a> */}
         </div>
         <div>
           {recentMessage && recentMessage.length > 0 ? (
@@ -89,14 +93,14 @@ export default function Parents() {
           )}
         </div>
         <div className="text-right">
-          <a href="#" className="text-blue-500 hover:underline">See more</a>
+          {/* <a href="#" className="text-blue-500 hover:underline">See more</a> */}
         </div>
       </div>
 
       {/* Recent Assignments card */}
-      <div className="bg-gradient-to-br from-blue-50 to-blue-100 border border-solid rounded-lg shadow-md p-6 w-full md:w-[calc(50%-16px)] mx-auto">
+      <div className="bg-gradient-to-br from-blue-50 to-blue-100 border border-solid rounded-lg shadow-md p-6 w-full md:w-[calc(50%-16px)] mx-auto  ">
         <h1 className="text-xl font-bold mb-4 text-purple-800">Recent Tasks</h1>
-        <div>
+        <div className="md:flex md: gap-6">
           {tasks && tasks.length > 0 ? (
             tasks.slice(0, 3).map((task, index) => (
               <Task key={index} task={task} />
@@ -105,20 +109,18 @@ export default function Parents() {
             <p className="text-gray-500">No Tasks</p>
           )}
         </div>
-        <div className="text-right">
-          <a href="#" className="text-blue-500 hover:underline">See more</a>
-        </div>
       </div>
 
-      {/* Results card */}
-      <div className="bg-gradient-to-br from-red-200 to-red-300 border border-solid rounded-lg shadow-md p-6 w-full md:w-[calc(50%-16px)]">
+      
+      {/* <div className="bg-gradient-to-br from-red-200 to-red-300 border border-solid rounded-lg shadow-md p-6 w-full md:w-[calc(50%-16px)]">
         <h1 className="text-xl font-bold mb-4 text-red-800">Results</h1>
-        {/* Add content for results here */}
         <div className="text-right">
           <a href="#" className="text-blue-500 hover:underline">See more</a>
         </div>
-      </div>
+      </div> */}
     </div>
+
+    < Footer />
     </>
   );
 }

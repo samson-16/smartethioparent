@@ -16,7 +16,7 @@ import Register from "./components/Register.jsx";
 import Teacher from "./components/Teacher.jsx";
 import Admin from "./components/Admin.jsx";
 import Resources from "./pages/Admin/Resource/Resources.jsx";
-
+import StudentList from "./pages/Teacher/StudentList.jsx";
 import { AuthProvider } from "./components/AuthContext.jsx";
 
 // import TeacherData from "./pages/Admin/TeacherData/TeacherData.jsx";
@@ -97,6 +97,7 @@ function App() {
             element={<Task tasks={tasks} setTasks={setTasks} filter={filter} />}
           />
           <Route
+
             path="/teachertask"
             element={<TeacherDashboard tasks={tasks} setTasks={setTasks} />}
           />

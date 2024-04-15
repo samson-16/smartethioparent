@@ -15,7 +15,9 @@ import ScrollAppearImage from "../components/ScrollImage/ScrollAppearImage";
 import AnimateText from "../components/AnimateText/AnimateText";
 import AnimateFeature from '../components/Animate/AnimateFeature'
 import Testimony from "./tesimony";
+
 import About from "../About";
+
 
 
 const LandingPage = () => {
