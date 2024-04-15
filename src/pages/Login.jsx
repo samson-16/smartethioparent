@@ -1,5 +1,6 @@
 import { useState, useContext } from "react";
 import { AuthContext } from "../components/AuthContext.jsx";
+
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -32,9 +33,9 @@ function Login() {
   };
 
   return (
-    <section className="h-screen flex mt-20 justify-center gap-6 flex-wrap ">
-      <div className="flex flex-col rounded-lg ml-24 w-80 h-64 mt-6" >
-        <h2 className="text-black text-2xl font-bold mb-9 pl-0">Login</h2>
+    <section className="flex flex-col md:flex-row justify-center mt-20">
+      <div className="flex flex-col rounded-lg w-full md:w-96 md:h-64 mb-8 md:mb-0 md:mr-8">
+        <h2 className="text-black text-2xl font-bold mb-4 md:mb-9 pl-0">Login</h2>
         <form onSubmit={handleSubmit} className="flex flex-col space-y-3">
           <div className="mb-4">
             <label htmlFor="email" className="block font-semibold">
@@ -46,7 +47,7 @@ function Login() {
               value={email}
               onChange={handleEmailChange}
               placeholder="Enter your email"
-              className="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-400 mt-4 w-80"
+              className="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-400 mt-2 md:mt-4 w-full"
             />
           </div>
           <div className="mb-3 flex justify-between items-center">
@@ -67,13 +68,13 @@ function Login() {
               value={password}
               onChange={handlePasswordChange}
               placeholder="Enter your password"
-              className="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-400 mt-1 w-80 mb-8"
+              className="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-400 mt-1 w-full mb-8"
             />
           </div>
           <div className="flex">
             <button
               type="submit"
-              className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition duration-300 w-80 flex justify-center font-bold"
+              className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition duration-300 w-full flex justify-center font-bold"
             >
               LOGIN
             </button>
@@ -81,11 +82,13 @@ function Login() {
           {error && <p className="text-red-500">{error}</p>}
         </form>
       </div>
-      <img
-        src="/src/assets/kidStudying.png"
-        alt="Kid studying with parent"
-        className="w-[530px] h-[420px] mr-28  hidden md:block lg:block"
-      />
+      <div className="hidden md:block">
+        <img
+          src="/src/assets/kidStudying.png"
+          alt="Kid studying with parent"
+          className="w-[250px] h-[200px] md:w-[530px] md:h-[420px] mr-8"
+        />
+      </div>
     </section>
   );
 }

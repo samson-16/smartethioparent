@@ -1,5 +1,6 @@
 import { useContext, useState, useEffect } from "react";
-import Profile from "./Profile";
+import RecentAssignments from './recentAssignment';
+// import Profile from "./Profile";
 import { Gif } from "@mui/icons-material";
 import parent from '../../assets/Parents.gif';
 import { AuthContext } from "../../components/AuthContext";

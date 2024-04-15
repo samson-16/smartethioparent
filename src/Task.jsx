@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { Route, Routes, useNavigate, useParams } from "react-router-dom";
 import TaskDetail from "./TaskDetail";
 import TaskList from "./TaskList";
-import TeacherDashboard from "./pages/Teacher/TeacherTask";
+import TeacherDashboard from "./pages/Teacher/Task/TeacherDashboard";
 
 const Task = ({ tasks, setTasks }) => {
   const [filter, setFilter] = useState("All");

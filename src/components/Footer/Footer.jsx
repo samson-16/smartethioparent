@@ -5,6 +5,7 @@ import {
   FaTwitter,
   FaYoutube,
 } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -12,7 +13,7 @@ const Footer = () => {
       <div className="container mx-auto">
         <div className="grid grid-cols-2 md:grid-cols-6 gap-x-4 gap-y-2 md:gap-y-0 justify-center items-center mt-4 md:mt-0 text-center">
           {[
-            "About",
+            { name: "About", link: "/src/About.jsx" },
             "Contact",
             "Support Center",
             "Community",
@@ -20,9 +21,15 @@ const Footer = () => {
             "Terms of Service",
           ].map((item, index) => (
             <span key={index} className="mb-2">
-              <a href="#" className="hover:text-gray-400">
-                {item}
-              </a>
+              {typeof item === "string" ? (
+                <a href="#" className="hover:text-gray-400">
+                  {item}
+                </a>
+              ) : (
+                <Link to={item.link} className="hover:text-gray-400">
+                  {item.name}
+                </Link>
+              )}
             </span>
           ))}
         </div>

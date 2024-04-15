@@ -1,3 +1,4 @@
+
 // AuthContext.js
 import React, { createContext, useState, useEffect, useContext } from 'react';
 import axios from 'axios';
@@ -31,8 +32,9 @@ const AuthProvider = ({ children }) => {
     }
 
     async function fetchTeacherInfo(id) {
+      const URL = import.meta.env.VITE_API_URL
         try {
-            const response = await api.get(`/api/teachers/?id=${id}`);
+            const response = await axios.get(`${URL}/api/teachers/?id=${id}`);
             console.log(response.data)
             return response.data;
 
@@ -56,9 +58,9 @@ const AuthProvider = ({ children }) => {
     }
 
     async function fetchClasses(id){
+      const URL = import.meta.env.VITE_API_URL
         try {
-            const response = await api.get(`/api/class-subjects/?teacher=${id}`
-            );
+            const response = await axios.get(`${URL}/api/class-subjects/?teacher=${id}`);
             console.log(response.data);
             return response.data;
           } catch (error) {
@@ -115,7 +117,7 @@ const AuthProvider = ({ children }) => {
         navigate('/login');
     };
 
-    useEffect(() => {
+useEffect(() => {
         const accessToken = localStorage.getItem(ACCESS_TOKEN);
         if (accessToken) {
             const userData = getUserDataFromToken(accessToken);
@@ -127,13 +129,14 @@ const AuthProvider = ({ children }) => {
                     const userInfo = response.data[0];
                     console.log(userData)
                     let user = { user_id: id, role: userInfo.role, user: userInfo };
+                    console.log(user)
                     if (userInfo.role === 'parent') {
                         const parentInfo = await fetchParentInfo(id);
                         const recentMessages = await fetchRecentMessages(id);
                         user = { ...user, parentInfo , recentMessages};
                         console.log(user)
                     } else if (userInfo.role === 'teacher') {
-                        const teacherInfo = await fetchTeacherInfo(id);
+                        const teacherInfo = await fetchTeacherInfo(user.user_id);
                         const teacher_id = teacherInfo[0].id
                         const classes = await fetchClasses(teacher_id)
                         user = { ...user, teacherInfo , classes };
