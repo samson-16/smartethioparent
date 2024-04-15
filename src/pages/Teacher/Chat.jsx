@@ -5,16 +5,19 @@ import Message from "../../components/Message";
 import { AccountCircle } from '@mui/icons-material';
 import api from "../../api";
 import PropTypes from 'prop-types';
-
-function Chat({ parentid }) {
+import { useParams } from 'react-router-dom';
+function Chat() {
+  const { parentId } = useParams();
    const [loading, setLoading] = useState(true);
    const { user } = useContext(AuthContext);
    const [messages , setMessages] = useState(null)
+   console.log(parentId)
+   console.log(user)
    
    useEffect(() => {
        const fetchMessages = async () => {
            try {
-            const response = await api.get(`/messages/?sender_id=${user.user_id}&receiver_id=${parentid}`);
+            const response = await api.get(`/messages/?sender_id=${user.user_id}&receiver_id=${parentId}`);
                console.log(response.data);
                console.log(user)
                setMessages(response.data);
@@ -28,7 +31,7 @@ function Chat({ parentid }) {
        if (user !== null ) {
            fetchMessages();
        }
-   }, [user, parentid]);
+   }, [user, parentId]);
 
   if (loading) {
     return (
@@ -39,7 +42,9 @@ function Chat({ parentid }) {
   }
 
   return (
-    <div className="chat-container flex flex-col space-y-4 p-4 bg-gray-100 h-[90%] overflow-y-auto w-[70%] mx-auto ">
+    <>
+    <h1 className="md:text-3xl sm:text-2xl text-center font-bold text-blue-900 my-10">  Messages </h1>
+    <div className="chat-container flex flex-col space-y-4 p-4 bg-gray-100 h-screen [90%] overflow-y-auto md:w-[40%] sm:w-[95%] mx-auto ">
       {messages.map((message) => {
         const isUserSender = message.sender.user_id === user.user_id;
         return (
@@ -58,10 +63,11 @@ function Chat({ parentid }) {
         );
       })}
     </div>
+    </>
   );
 }
 
 Chat.propTypes = {
-    parentid: PropTypes.any.isRequired,
+    parentId: PropTypes.any.isRequired,
   };
 export default Chat;

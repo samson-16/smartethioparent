@@ -32,8 +32,8 @@ function Login() {
   };
 
   return (
-    <section className="flex mt-20 justify-between flex-wrap">
-      <div className="flex flex-col rounded-lg ml-24 w-80 h-64">
+    <section className="h-screen flex mt-20 justify-center gap-6 flex-wrap ">
+      <div className="flex flex-col rounded-lg ml-24 w-80 h-64 mt-6" >
         <h2 className="text-black text-2xl font-bold mb-9 pl-0">Login</h2>
         <form onSubmit={handleSubmit} className="flex flex-col space-y-3">
           <div className="mb-4">
@@ -84,7 +84,7 @@ function Login() {
       <img
         src="/src/assets/kidStudying.png"
         alt="Kid studying with parent"
-        className="w-[530px] h-[420px] mr-28"
+        className="w-[530px] h-[420px] mr-28  hidden md:block lg:block"
       />
     </section>
   );

@@ -19,8 +19,10 @@ const AuthProvider = ({ children }) => {
 
 
     async function fetchParentInfo(id) {
+        const URL = import.meta.env.VITE_API_URL
         try {
-            const response = await api.get(`/api/parent/${id}/dashboard/`);
+            const response = await axios.get(`${URL}/api/parent/${id}/dashboard/`);
+            console.log(response.data)
             return response.data;
         } catch (error) {
             console.error('Error fetching parent info:', error);
@@ -90,7 +92,7 @@ const AuthProvider = ({ children }) => {
             setUser(user);
             switch (user.role) {
                 case 'parent':
-                    navigate("/parents");
+                    navigate("/parent/home");
                     break;
                 case 'teacher':
                     navigate("/teacher");

@@ -43,8 +43,8 @@ const Footer = () => {
         </div>
       </div>
       <div className="mt-2 text-center">
-            <span>&copy;</span> 2024 SmartEthioParent. All rights reserved.
-          </div>
+        <span>&copy;</span> 2024 SmartEthioParent. All rights reserved.
+      </div>
     </footer>
   );
 };

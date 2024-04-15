@@ -15,16 +15,16 @@ import Register from "./components/Register.jsx";
 import Teacher from "./components/Teacher.jsx";
 import Admin from "./components/Admin.jsx";
 import Resources from "./pages/Admin/Resource/Resources.jsx";
-
+import StudentList from "./pages/Teacher/StudentList.jsx";
 import { AuthProvider } from "./components/AuthContext.jsx";
 
 import TeacherData from "./pages/Admin/TeacherData/TeacherData.jsx";
 import Students from "./pages/Admin/Students/Students.jsx";
 import Task from './Task.jsx'
-import TeacherDashboard from "./TeacherDashboard.jsx";
+import TeacherTask from "./pages/Teacher/TeacherTask.jsx";
 import { useState } from "react";
 import TeacherHomePage from "./pages/TeacherHomePage.jsx";
-
+import Chat from "./pages/Teacher/Chat.jsx";
 // import Footer from "./Footer";
 import Parents from "./pages/Parent_dashbord/Parents.jsx";
 import TasksPage from "./pages/Parent_dashbord/TasksPage.jsx";
@@ -33,7 +33,6 @@ import AllMessages from "./pages/Parent_dashbord/AllMessages.jsx";
 import Profile from "./pages/Parent_dashbord/Profile.jsx";
 import TeacherProfile from "./pages/Teacher/TeacherProfile.jsx";
 
-import Chat from "./pages/Teacher/Chat.jsx";
 
 function Logout() {
   localStorage.clear();
@@ -54,7 +53,6 @@ function App() {
   return (
     <>
     <AuthProvider>
-
       <Routes>
          <Route
         path="/"
@@ -73,7 +71,7 @@ function App() {
         }
       />
       <Route
-        path="/parents"
+        path="/parent/home"
         element={
           <ProtectedRoute>
             <Parents />
@@ -133,7 +131,11 @@ function App() {
         <Route path="/parent/messages" element={<AllMessages/>} />
         <Route path="/parent/profile" element={<Profile/>} />
         <Route path="/teacher/profile" element={<TeacherProfile/>} />
-        <Route path="/teacher/chat" element={<Chat/>} />
+        {/* <Route path="/teacher/chat" element={<Chat/>} /> */}
+        <Route path="/teacher/tasks" element={<TeacherTask/>} />
+        <Route path="/teacher/student-list" element={<StudentList grade={2} section="B" />} />
+        <Route path="/chat/:parentId" element={<Chat />} />
+
 
 
 
@@ -144,7 +146,7 @@ function App() {
           />
           <Route
             path="/teachers/*"
-            element={<TeacherDashboard tasks={tasks} setTasks={setTasks} />}
+            element={<TeacherTask tasks={tasks} setTasks={setTasks} />}
           />
         <Route path="/students" element={<Students/>} />
         <Route path="/Teacherhomepage" element={<TeacherHomePage/>} />
